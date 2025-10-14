@@ -1,0 +1,48 @@
+name: 'Upstream Sync'
+
+permissions:
+  contents: write
+
+on:
+  schedule:
+    - cron: "0 0 * * *" # 每天执行一次
+  workflow_dispatch:
+
+jobs:
+  sync_branches:
+    runs-on: ubuntu-latest
+    name: Sync branches from upstream
+    strategy:
+      matrix:
+        branch: [master, dev]  # 所有要同步的分支
+
+    steps:
+      - name: Checkout target repo
+        uses: actions/checkout@v5
+        with:
+          ref: ${{ matrix.branch }}
+
+      - name: Sync upstream changes
+        id: sync
+        uses: aormsby/Fork-Sync-With-Upstream-action@v3.4.1
+        with:
+          target_sync_branch: ${{ matrix.branch }}
+          upstream_sync_branch: ${{ matrix.branch }}
+          target_repo_token: ${{ secrets.GITHUB_TOKEN }}
+          upstream_sync_repo: runhey/OnmyojiAutoScript
+
+      - name: New commits found
+        if: steps.sync.outputs.has_new_commits == 'true'
+        run: echo "✅ Branch ${{ matrix.branch }} has new commits."
+
+      - name: No new commits
+        if: steps.sync.outputs.has_new_commits == 'false'
+        run: echo "🔹 Branch ${{ matrix.branch }} is already up-to-date."
+
+      - name: Sync check
+        if: failure()
+        run: |
+          echo "[Error] Sync failed on branch ${{ matrix.branch }}."
+          echo "Due to a change in the workflow file of the upstream repository, GitHub has automatically suspended the scheduled automatic update."
+          echo "You need to manually sync your fork."
+          exit 1
