@@ -47,24 +47,30 @@ class ScriptTask(GameUi, GuildBanquetAssets):
         
         self.ui_get_current_page()
         self.ui_goto(page_guild)
-        
-        if self.appear(self.I_FLAG):
-            wait_count = 0
-            wait_timer = Timer(230)
-            wait_timer.start()
-            logger.info("Start guild banquet!")
-            self.device.stuck_record_add('BATTLE_STATUS_S')
-        else:
-            # 如果没有找到FLAG，并且没超过晚上10点，可能是宴会时间没开始，5分钟后尝试再次查找，超过10点则直接退出
-            if self.check_runtime():
-                time_now = datetime.now()
-                time_later = time_now + timedelta(minutes=5)
-                self.set_next_run(task='GuildBanquet',
-                              finish=True,
-                              target=time_later)
+
+        def guild_start() -> bool:
+            self.screenshot()
+            self.ui_get_current_page()
+            self.ui_goto(page_guild)
+            if self.appear(self.I_FLAG):
+                return True
+            self.ui_goto(page_main)
+            logger.info('Waiting for guild banquet start')
+            return False
+
+        if not self.wait_until(guild_start, timeout=self.config.guild_banquet.scheduler.max_wait_time * 60,
+                               interval=(50, 70)):
+            logger.warning('Wait for guild banquet start timeout')
             self.ui_get_current_page()
             self.ui_goto(page_main)
+            self.plan_next_run()
             raise TaskEnd
+
+        wait_count = 0
+        wait_timer = Timer(230)
+        wait_timer.start()
+        logger.info("Start guild banquet!")
+        self.device.stuck_record_add('BATTLE_STATUS_S')
 
         last_check_time = 0  # 记录上次实际检测时间
         last_log_time = 0  # 记录上次日志输出时间
