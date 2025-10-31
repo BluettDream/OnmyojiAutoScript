@@ -304,5 +304,23 @@
     "method": "Template matching",
     "threshold": 0.8,
     "description": "红标主怪"
+  },
+  {
+    "itemName": "check_shenshe",
+    "imageName": "res_check_shenshe.png",
+    "roiFront": "72,76,45,115",
+    "roiBack": "31,27,119,207",
+    "method": "Template matching",
+    "threshold": 0.8,
+    "description": "神社页面标志"
+  },
+  {
+    "itemName": "check_abyss",
+    "imageName": "res_check_abyss.png",
+    "roiFront": "1082,14,52,50",
+    "roiBack": "992,0,247,80",
+    "method": "Template matching",
+    "threshold": 0.8,
+    "description": "狭间暗域页面标志"
   }
 ]

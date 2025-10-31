@@ -118,6 +118,10 @@ class AbyssShadowsAssets:
 	I_ABYSS_ENEMY_FIRE = RuleImage(roi_front=(1100,560,130,130), roi_back=(1100,560,130,130), threshold=0.8, method="Template matching", file="./tasks/AbyssShadows/res/res_abyss_enemy_fire.png")
 	# 红标主怪 
 	I_MARK_MAIN = RuleImage(roi_front=(375,40,60,30), roi_back=(375,40,60,30), threshold=0.8, method="Template matching", file="./tasks/AbyssShadows/res/res_mark_main.png")
+	# 神社页面标志 
+	I_CHECK_SHENSHE = RuleImage(roi_front=(72,76,45,115), roi_back=(31,27,119,207), threshold=0.8, method="Template matching", file="./tasks/AbyssShadows/res/res_check_shenshe.png")
+	# 狭间暗域页面标志 
+	I_CHECK_ABYSS = RuleImage(roi_front=(1082,14,52,50), roi_back=(992,0,247,80), threshold=0.8, method="Template matching", file="./tasks/AbyssShadows/res/res_check_abyss.png")
 
 
 	# List Rule Assets
@@ -137,6 +141,12 @@ class AbyssShadowsAssets:
 	O_FOX_DONE = RuleOcr(roi=(680,160,180,360), area=(680,160,180,360), mode="Single", method="CF_RGB(CCCCCC,FFFFFF)", keyword="封印", name="fox_done")
 	# 黑豹暗域已完成 
 	O_LEOPARD_DONE = RuleOcr(roi=(1000,160,180,360), area=(1000,160,180,360), mode="Single", method="CF_RGB(CCCCCC,FFFFFF)", keyword="封印", name="leopard_done")
+
+
+	# List Rule Assets
+	# 神社进入狭间暗域列表 
+	L_SHENSHE_TO_ABYSS = RuleList(folder="./tasks/AbyssShadows/res", direction="vertical", mode="image", roi_back=(125,66,1029.6,629), size=(132, 125), 
+					 array=["abyss_in_shenshe"])
 
 
 	# Swipe Rule Assets

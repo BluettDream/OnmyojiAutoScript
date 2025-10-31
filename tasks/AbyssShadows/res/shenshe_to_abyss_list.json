@@ -1,0 +1,13 @@
+{
+  "name": "shenshe_to_abyss",
+  "direction": "vertical",
+  "type": "image",
+  "roiBack": "125,66,1029.6,629",
+  "description": "神社进入狭间暗域列表",
+  "list": [
+    {
+      "itemName": "abyss_in_shenshe",
+      "roiFront": "700,480,132,125"
+    }
+  ]
+}
