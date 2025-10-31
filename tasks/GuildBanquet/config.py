@@ -25,17 +25,10 @@ class GuildBanquetTime(BaseModel):
         default=Weekday.Wednesday,
         description="每周第1次运行时间设置，注意第一次时间要比第二次时间早",
     )
-    run_time_1: Time = Field(default=Time(hour=19, minute=0, second=0))
     day_2: Weekday = Field(
         default=Weekday.Saturday,
         description="每周第2次运行时间设置",
     )
-    run_time_2: Time = Field(
-        default=Time(hour=19, minute=0, second=0), 
-        description="每周第2次运行时间设置"
-    )
-
-    hide_fileds = dynamic_hide('run_time_1', 'run_time_2')
 
 
 class GuildBanquet(ConfigBase):
