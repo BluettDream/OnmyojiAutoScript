@@ -1,4 +1,5 @@
 from datetime import datetime, timedelta
+from pydantic_core.core_schema import SerializationInfo, SerializerFunctionWrapHandler
 from typing import Any, Dict
 
 from pydantic import Field, BaseModel, model_validator, model_serializer, ValidationError
@@ -138,22 +139,16 @@ class FindJade(ConfigBase):
 
         return v
 
-    @model_serializer()
-    def serializer_model(self, value: Any) -> Dict[str, Any]:
-        properties = self.__dict__
-        data = {}
-
-        def v_dump(v):
-            try:
-                return v.model_dump()
-            except AttributeError as e:
-                logger.error(e)
-                return v
-
-        for key, value in properties.items():
-            if isinstance(value, list):
-                for index, v in enumerate(value):
-                    data[f'{key}_{index + 1}'] = v_dump(v)
+    @model_serializer(mode='wrap')
+    def serializer_model(self, handler: SerializerFunctionWrapHandler) -> Dict[str, Any]:
+        serialized_data = handler(self)
+        final_data = {}
+        fields = ['invite_info_list', 'sup_account_list']
+        for key, value in serialized_data.items():
+            if key in fields:
+                if isinstance(value, list):
+                    for index, item in enumerate(value):
+                        final_data[f'{key}_{index + 1}'] = item
             else:
-                data[key] = v_dump(value)
-        return data
+                final_data[key] = value
+        return final_data
