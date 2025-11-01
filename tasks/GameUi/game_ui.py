@@ -23,7 +23,7 @@ from module.exception import (GameNotRunningError, GamePageUnknownError)
 from module.logger import logger
 from tasks.Component.GeneralBattle.assets import GeneralBattleAssets
 from tasks.GameUi.assets import GameUiAssets
-from tasks.GameUi.page import Page, PageRegistry, page_main
+from tasks.GameUi.page import Page, PageRegistry, page_main, random_click
 from tasks.Restart.assets import RestartAssets
 from tasks.SixRealms.assets import SixRealmsAssets
 from tasks.base_task import BaseTask
@@ -65,34 +65,6 @@ class GameUi(BaseTask, GameUiAssets):
     def ui_pages(self) -> list[Page]:
         return PageRegistry.all()
 
-    def home_explore(self) -> bool:
-        """
-        使用ocr识别到探索按钮并点击
-        :return:
-        """
-        while 1:
-            self.screenshot()
-            if self.ocr_appear_click(self.O_HOME_EXPLORE, interval=2):
-                continue
-            if self.appear(self.I_BACK_BLUE, threshold=0.6):
-                break
-        logger.info(f'Click {self.O_HOME_EXPLORE.name}')
-        return True
-
-    def explore_home(self) -> bool:
-        """
-
-        :return:
-        """
-        while 1:
-            self.screenshot()
-            if self.appear_then_click(self.I_BACK_BLUE, threshold=0.6, interval=2):
-                continue
-            if self.appear(self.I_HOME_SHIKIKAMI, threshold=0.6):
-                break
-        logger.info(f'Click {self.I_HOME_SHIKIKAMI.name}')
-        return True
-
     def ui_page_appear(self, page: Page, skip_first_screenshot: bool = True, interval: float = None):
         """
         判断当前页面是否为page
@@ -122,23 +94,6 @@ class GameUi(BaseTask, GameUiAssets):
                 return True
             skip_first_screenshot = False
         return False
-
-    def ensure_scroll_open(self):
-        """
-        判断庭院界面卷轴是否打开
-        """
-        return self.appear(RestartAssets.I_LOGIN_SCROOLL_CLOSE)
-
-    def ensure_button_execute(self, button):
-        """
-        确保button执行
-        """
-        if isinstance(button, RuleImage) and self.appear(button):
-            return True
-        elif callable(button) and button():
-            return True
-        else:
-            return False
 
     def ui_get_current_page(self, skip_first_screenshot=True) -> Page:
         """
@@ -180,6 +135,9 @@ class GameUi(BaseTask, GameUiAssets):
             # Try to close unknown page
             if self.try_close_unknown_page():
                 timeout = Timer(10, count=20).start()
+            else:
+                # entirely unknown page, click safe random
+                self.click(random_click(), interval=3)
             # wait to ui
             sleep(0.3)
             app_check()
@@ -194,16 +152,6 @@ class GameUi(BaseTask, GameUiAssets):
         logger.warning('Supported page: Any page with a "HOME" button on the upper-right')
         logger.critical("Please switch to a supported page before starting oas")
         raise GamePageUnknownError
-
-    def ui_button_interval_reset(self, button):
-        """
-        Reset interval of some button to avoid mistaken clicks
-
-        Args:
-            button (Button):
-        """
-        if getattr(button, 'name', None) and button.name in self.interval_timer:
-            self.interval_timer[button.name].reset()
 
     def build_reverse_path_dict(self, destination: Page) -> dict[Page, list[Page]]:
         """
