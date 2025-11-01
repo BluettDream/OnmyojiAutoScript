@@ -66,6 +66,8 @@ class SwitchSoulAssets:
 	I_SOU_CLICK_PRESENT = RuleImage(roi_front=(967,305,43,22), roi_back=(965,142,48,480), threshold=0.9, method="Template matching", file="./tasks/Component/SwitchSoul/ss/ss_sou_click_present.png")
 	# 误触点到式神检查 
 	I_CHECK_BLOCK = RuleImage(roi_front=(572,408,137,49), roi_back=(572,408,137,49), threshold=0.8, method="Template matching", file="./tasks/Component/SwitchSoul/ss/ss_check_block.png")
+	# 选择队伍按钮 
+	I_SELECT_TEAM = RuleImage(roi_front=(972,300,28,30), roi_back=(512,134,508,492), threshold=0.8, method="Template matching", file="./tasks/Component/SwitchSoul/ss/ss_select_team.png")
 
 
 	# Ocr Rule Assets

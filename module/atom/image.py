@@ -10,6 +10,7 @@ from pathlib import Path
 from module.base.decorator import cached_property
 from module.logger import logger
 from module.base.utils import is_approx_rectangle
+from typing import Tuple
 
 
 class RuleImage:
@@ -229,6 +230,38 @@ class RuleImage:
             return filtered_matches
         return matches
 
+    def match_all_any_new(self, image: np.array, threshold: float = None, roi: list = None, nms_threshold: float = 0.3) -> list[tuple]:
+        """
+        区别于match_all_any，这个不会改变self.roi_back
+        :param roi:
+        :param image:
+        :param threshold:
+        :return:
+        """
+        if threshold is None:
+            threshold = self.threshold
+        if not self.is_template_match:
+            raise Exception(f"unknown method {self.method}")
+        source_grey = cv2.cvtColor(self.corp(image, roi), cv2.COLOR_BGR2GRAY)
+        mat_grey = cv2.cvtColor(self.image, cv2.COLOR_BGR2GRAY)
+        results = cv2.matchTemplate(source_grey, mat_grey, cv2.TM_CCOEFF_NORMED)
+        locations = np.where(results >= threshold)
+        matches = []
+        for pt in zip(*locations[::-1]):  # (x, y) coordinates
+            score = results[pt[1], pt[0]]
+            # 得分, x, y, w, h
+            x = roi[0] + pt[0]
+            y = roi[1] + pt[1]
+            matches.append((score, x, y, mat_grey.shape[1], mat_grey.shape[0]))
+        if len(matches) > 0:
+            scores = np.array([m[0] for m in matches])
+            boxes = np.array([[m[1], m[2], m[3], m[4]] for m in matches])
+            # 使用OpenCV的NMSBoxes
+            indices = cv2.dnn.NMSBoxes(boxes.tolist(), scores.tolist(), score_threshold=threshold, nms_threshold=nms_threshold)
+            filtered_matches = [matches[i] for i in indices]
+            return filtered_matches
+        return matches
+
     def coord(self) -> tuple:
         """
         获取roi_front的随机的点击的坐标
@@ -342,6 +375,106 @@ class RuleImage:
             if abs(average_color[i] - color[i]) > bias:
                 return False
         return True
+
+
+def _to_gray(img):
+    if img is None:
+        return None
+    if len(img.shape) == 3:
+        return cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    return img
+
+
+def compute_overlap_multistage(
+    prev_img: np.ndarray,
+    curr_img: np.ndarray,
+    min_overlap: int = 50,
+    coarse_scale: float = 0.5,
+    coarse_step: int = 20,
+    fine_window: int = 40,
+    fine_step: int = 2,
+    score_threshold: float = 0.75,
+) -> Tuple[int, float]:
+    """
+    多阶段重叠检测：先粗搜索（降采样 + 大步长），再细搜索（原图 + 小步长）。
+    返回 (best_overlap_pixels, best_score)
+    best_overlap_pixels: 前图底部与当前图顶部的重叠高度（像素）
+    best_score: 相似度得分（TM_CCOEFF_NORMED 的 max_val）
+    若没有合格匹配，则返回 (0, 0.0)
+    """
+    if prev_img is None or curr_img is None:
+        return 0, 0.0
+
+    # 灰度化
+    prev_gray = _to_gray(prev_img)
+    curr_gray = _to_gray(curr_img)
+
+    H = prev_gray.shape[0]
+
+    # ---------- 粗搜索阶段 (降采样) ----------
+    # 缩放
+    if coarse_scale <= 0 or coarse_scale > 1:
+        raise ValueError("coarse_scale must be in (0, 1].")
+    prev_ds = cv2.resize(prev_gray, (0, 0), fx=coarse_scale, fy=coarse_scale, interpolation=cv2.INTER_AREA)
+    curr_ds = cv2.resize(curr_gray, (0, 0), fx=coarse_scale, fy=coarse_scale, interpolation=cv2.INTER_AREA)
+
+    H_ds = prev_ds.shape[0]
+    min_overlap_ds = max(1, int(min_overlap * coarse_scale))
+
+    best_overlap_ds = 0
+    best_score_ds = -1.0
+
+    # 为避免模板太大或搜索无意义长度，限制上限为 H_ds - 1
+    for overlap_ds in range(min_overlap_ds, max(2, H_ds - 1), coarse_step):
+        # 模板取 prev 底部 overlap_ds 高度
+        template = prev_ds[-overlap_ds:, :]
+        # 但如果模板比 curr_ds 大会报错，避免这种情况：
+        if template.shape[0] > curr_ds.shape[0] or template.shape[1] > curr_ds.shape[1]:
+            continue
+        res = cv2.matchTemplate(curr_ds, template, cv2.TM_CCOEFF_NORMED)
+        _, max_val, _, _ = cv2.minMaxLoc(res)
+        if max_val > best_score_ds:
+            best_score_ds = max_val
+            best_overlap_ds = overlap_ds
+
+    if best_score_ds < 0:
+        # 没有找到任何候选
+        return 0, 0.0
+
+    # 将粗候选放大回原图像素
+    est_overlap = int(round(best_overlap_ds / coarse_scale))
+
+    # ---------- 细搜索阶段（原图小范围精搜） ----------
+    # 细搜索范围在 [est_overlap - fine_window, est_overlap + fine_window]
+    low = max(min_overlap, est_overlap - fine_window)
+    high = min(H - 1, est_overlap + fine_window)
+
+    best_overlap = 0
+    best_score = -1.0
+
+    # 如果 low>high（罕见），退化为全范围搜索（小步长）
+    if low > high:
+        low = min_overlap
+        high = H - 1
+
+    for overlap in range(low, high + 1, fine_step):
+        template = prev_gray[-overlap:, :]
+        if template.shape[0] > curr_gray.shape[0] or template.shape[1] > curr_gray.shape[1]:
+            continue
+        # 在 curr_gray 中匹配模板
+        res = cv2.matchTemplate(curr_gray, template, cv2.TM_CCOEFF_NORMED)
+        _, max_val, _, _ = cv2.minMaxLoc(res)
+        if max_val > best_score:
+            best_score = max_val
+            best_overlap = overlap
+
+    # ---------- 判断是否为有效匹配 ----------
+    # best_score 是 TM_CCOEFF_NORMED，范围大致在[-1,1]，常用阈值 0.7~0.9
+    if best_score >= score_threshold:
+        return best_overlap, float(best_score)
+    else:
+        # 如果得分不够好，仍可返回 0 或者返回最好的结果（这里返回 0 表示没有可靠重叠）
+        return 0, float(best_score)
 
 
 if __name__ == "__main__":

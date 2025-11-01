@@ -160,5 +160,14 @@
     "method": "Template matching",
     "threshold": 0.8,
     "description": "误触点到式神检查"
+  },
+  {
+    "itemName": "select_team",
+    "imageName": "ss_select_team.png",
+    "roiFront": "972,300,28,30",
+    "roiBack": "512,134,508,492",
+    "method": "Template matching",
+    "threshold": 0.8,
+    "description": "选择队伍按钮"
   }
 ]
