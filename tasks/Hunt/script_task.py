@@ -176,6 +176,7 @@ class ScriptTask(GameUi, GeneralBattle, GeneralInvite, SwitchSoul, HuntAssets):
                 return False
             if self.appear_then_click(self.I_PREPARE_HIGHLIGHT, interval=1.5):
                 logger.info('Netherworld click prepare after maybe failed')
+                self.device.stuck_record_add('BATTLE_STATUS_S')
                 continue
             # 如果三分钟还没打完，再延长五分钟
             if stuck_timer and stuck_timer.reached():
