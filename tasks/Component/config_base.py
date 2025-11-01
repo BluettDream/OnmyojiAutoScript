@@ -3,6 +3,7 @@
 # github https://github.com/runhey
 import re
 from datetime import timedelta, time, datetime
+from module.base.observable import ObservableModel
 from typing import Any
 
 from pydantic import BaseModel, ValidationError
@@ -81,7 +82,7 @@ def dynamic_hide(*fields: str,):
     return field_serializer(*fields)(serializer_exclude)
 
 
-class ConfigBase(BaseModel):
+class ConfigBase(ObservableModel):
     def __init__(self, *args, **kwargs):
         try:
             super().__init__(*args, **kwargs)

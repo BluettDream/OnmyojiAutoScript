@@ -1,13 +1,14 @@
 # This Python file uses the following encoding: utf-8
 # @author runhey
 # github https://github.com/runhey
-from typing import Dict, Any
+from module.base.debouncer import Debouncer
+from typing import Dict, Any, Optional
 
 import re
 import inflection
 
 from pathlib import Path
-from pydantic import BaseModel, ValidationError, Field
+from pydantic import BaseModel, ValidationError, Field, PrivateAttr
 
 from module.config.utils import *
 from module.logger import logger
@@ -79,8 +80,8 @@ from tasks.Duel.config import Duel
 # ----------------------------------------------------------------------------------------------------------------------
 
 class ConfigModel(ConfigBase):
-    config_name: str = "oas"
-    running_task: str = ''
+    config_name: str = Field(default='oas', exclude=True)
+    running_task: str = Field(default='', exclude=True)
     script: Script = Field(default_factory=Script)
     restart: Restart = Field(default_factory=Restart)
     global_game: GlobalGame = Field(default_factory=GlobalGame)
@@ -146,6 +147,12 @@ class ConfigModel(ConfigBase):
     guild_banquet: GuildBanquet = Field(default_factory=GuildBanquet)
     demon_retreat: DemonRetreat = Field(default_factory=DemonRetreat)
 
+    save_debouncer: Optional[Debouncer] = Field(default=None, exclude=True)
+
+    def model_post_init(self, __context):
+        super().model_post_init(__context)
+        self.save_debouncer = Debouncer(self.save)
+
     def __init__(self, config_name: str=None) -> None:
         """
 
@@ -158,16 +165,10 @@ class ConfigModel(ConfigBase):
         data["config_name"] = config_name
         super().__init__(**data)
 
-    def __setattr__(self, key, value):
-        """
-        只要修改属性就会触发这个函数 自动保存
-        :param key:
-        :param value:
-        :return:
-        """
-        super().__setattr__(key, value)
-        logger.info("auto save config")
-        self.save()
+    def on_change(self, handler):
+        self.save_debouncer.trigger()
+        # 停止传播
+        handler.resolve()
 
     @staticmethod
     def read_json(config_name: str) -> dict:
@@ -401,9 +402,10 @@ class ConfigModel(ConfigBase):
 
         # 设置参数
         try:
+            # 自动保存
             setattr(group_object, argument, value)
             logger.info(f'Set arg {self.config_name}.{task}.{group}.{argument}.{value}')
-            self.save()  # 我是没有想到什么方法可以使得属性改变自动保存的
+            # self.save()  # 我是没有想到什么方法可以使得属性改变自动保存的
             return True
         except ValidationError as e:
             logger.error(e)
