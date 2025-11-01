@@ -17,6 +17,7 @@ from tasks.Component.GeneralInvite.general_invite import GeneralInvite
 from tasks.Component.SwitchSoul.switch_soul import SwitchSoul
 from tasks.Hunt.assets import HuntAssets
 
+
 class ScriptTask(GameUi, GeneralBattle, GeneralInvite, SwitchSoul, HuntAssets):
     kirin_day = True  # 不是麒麟就是阴界之门
     tomorrow_kirin_day = True  # 明天是麒麟还是阴界之门
@@ -117,8 +118,7 @@ class ScriptTask(GameUi, GeneralBattle, GeneralInvite, SwitchSoul, HuntAssets):
                 self.ui_click_until_disappear(self.I_UI_BACK_YELLOW)
                 return
         logger.info('Start battle')
-        self.run_general_battle()        
-
+        self.run_general_battle(self.config.hunt.kirin_battle_config)
 
     def netherworld(self):
         logger.hr('netherworld', 2)
@@ -143,8 +143,7 @@ class ScriptTask(GameUi, GeneralBattle, GeneralInvite, SwitchSoul, HuntAssets):
                 self.ui_click_until_disappear(self.I_UI_BACK_RED)
                 return
         logger.info('Start battle')
-        self.run_general_battle()
-
+        self.run_general_battle(self.config.hunt.netherworld_battle_config)
 
     def battle_wait(self, random_click_swipt_enable: bool) -> bool:
         """
@@ -183,12 +182,6 @@ class ScriptTask(GameUi, GeneralBattle, GeneralInvite, SwitchSoul, HuntAssets):
                 stuck_timer = None
                 self.device.stuck_record_clear()
                 self.device.stuck_record_add('BATTLE_STATUS_S')
-
-
-
-
-
-
 
 
 if __name__ == '__main__':
