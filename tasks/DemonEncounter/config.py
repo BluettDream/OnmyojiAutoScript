@@ -84,14 +84,14 @@ def convert_to_general_battle_config(boss_type: str, demon_battle_conf: 'DemonBa
                                      best_demon_battle_conf: 'BestDemonBattleConfig' = None) -> GeneralBattleConfig:
     if demon_battle_conf:
         enable = getattr(demon_battle_conf, f'{boss_type}_enable')
-        group, team = (getattr(demon_battle_conf, boss_type).split(','), ) if enable else (1, 1)
+        group, team = getattr(demon_battle_conf, boss_type).split(',')
     elif best_demon_battle_conf:
         enable = getattr(best_demon_battle_conf, f'{boss_type}_enable')
-        group, team = (getattr(best_demon_battle_conf, f'{boss_type}').split(','), ) if enable else (1, 1)
+        group, team = getattr(best_demon_battle_conf, boss_type).split(',')
     else:
         enable = False
         group, team = (1, 1)
-    return GeneralBattleConfig(preset_enable=enable, preset_group=group, preset_team=team)
+    return GeneralBattleConfig(preset_enable=enable, preset_group=group if enable else 1, preset_team=team if enable else 1)
 
 
 class DemonBattleConfig(BaseModel):
