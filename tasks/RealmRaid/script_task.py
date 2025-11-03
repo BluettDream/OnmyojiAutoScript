@@ -183,7 +183,9 @@ class ScriptTask(GeneralBattle, GameUi, SwitchSoul, RealmRaidAssets):
                 logger.info('Now is the first one')
                 if con.raid_config.exit_four:
                     logger.info('Exit four enable')
-                    self.fire(index)
+                    if not self.fire(index):
+                        # 没有成功进入战斗则重新检查票数和其他条件
+                        continue
                     self.run_general_battle_back(con.general_battle_config, exit_four=True)
                     self.fire(index)
                     self.run_general_battle_back(con.general_battle_config, exit_four=True)
@@ -194,7 +196,9 @@ class ScriptTask(GeneralBattle, GameUi, SwitchSoul, RealmRaidAssets):
             elif self.check_medal_is_frog(frog, medal, index):
                 # 如果挑战的这只是呱太的话，就要把锁定改为不锁定
                 con.general_battle_config.lock_team_enable = False
-            self.fire(index)
+            if not self.fire(index):
+                # 没有成功进入战斗则重新检查票数和其他条件
+                continue
             last_battle = self.run_general_battle(con.general_battle_config)
             if lock_before:
                 con.general_battle_config.lock_team_enable = lock_before
@@ -463,23 +467,30 @@ class ScriptTask(GeneralBattle, GameUi, SwitchSoul, RealmRaidAssets):
             if self.appear_then_click(self.I_FRESH_ENSURE, interval=1):
                 continue
 
-    def fire(self, order: int):
+    def fire(self, order: int, max_try: int = 3) -> bool:
         """
         挑战
+        :param max_try: 最大尝试几次, 防止ocr识别出错导致没票了还一直点击
         :param order:  第几个
-        :return:
+        :return: 是否点击进攻成功
         """
         click = self.partition[order - 1]
         self.wait_until_appear(self.I_RR_PERSON)
+        click_cnt = 0
         while 1:
+            if click_cnt >= max_try:
+                logger.warning('Cannot enter fire, retry')
+                return False
             self.screenshot()
             if not self.appear(self.I_RR_PERSON, threshold=0.8):
                 break
             if self.appear_then_click(self.I_FIRE, interval=1):
                 continue
             if self.click(click, interval=1.8):
+                click_cnt += 1
                 continue
         logger.info(f'Click fire {order} success')
+        return True
 
     @cached_property
     def false_roi(self) -> list:
