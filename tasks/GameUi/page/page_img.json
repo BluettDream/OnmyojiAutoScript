@@ -250,5 +250,14 @@
     "method": "Template matching",
     "threshold": 0.8,
     "description": "description"
+  },
+  {
+    "itemName": "realm_raid_goto_shikigami_records",
+    "imageName": "page_realm_raid_goto_shikigami_records.png",
+    "roiFront": "1208,610,45,44",
+    "roiBack": "1166,520,112,198",
+    "method": "Template matching",
+    "threshold": 0.8,
+    "description": "突破进入式神录标志"
   }
 ]
