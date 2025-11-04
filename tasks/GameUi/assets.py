@@ -93,6 +93,8 @@ class GameUiAssets:
 	I_BONDLING_GOTO_EXPLORATION = RuleImage(roi_front=(20,13,60,59), roi_back=(20,13,60,59), threshold=0.8, method="Template matching", file="./tasks/GameUi/page/page_bondling_goto_exploration.png")
 	# description 
 	I_RYOUTOPPA_GOTO_REALMRAID = RuleImage(roi_front=(1201,234,62,105), roi_back=(1201,234,62,105), threshold=0.8, method="Template matching", file="./tasks/GameUi/page/page_ryoutoppa_goto_realmraid.png")
+	# 突破进入式神录标志 
+	I_REALM_RAID_GOTO_SHIKIGAMI_RECORDS = RuleImage(roi_front=(1208,610,45,44), roi_back=(1166,520,112,198), threshold=0.8, method="Template matching", file="./tasks/GameUi/page/page_realm_raid_goto_shikigami_records.png")
 
 
 	# Image Rule Assets
