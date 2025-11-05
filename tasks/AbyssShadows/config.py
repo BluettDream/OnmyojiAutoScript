@@ -13,8 +13,8 @@ from module.base.timer import Timer
 from tasks.AbyssShadows.assets import AbyssShadowsAssets
 from tasks.Component.GeneralBattle.config_general_battle import GeneralBattleConfig
 from tasks.Component.SwitchSoul.switch_soul_config import SwitchSoulConfig
-from tasks.Component.config_base import ConfigBase, Time, DateTime, dynamic_hide
-from tasks.Component.config_scheduler import Scheduler, GuildScheduler
+from tasks.Component.config_base import ConfigBase, Time, DateTime
+from tasks.Component.config_scheduler import Scheduler
 
 
 class AreaType(Enum):
@@ -258,11 +258,11 @@ class Condition:
 
 class AbyssShadowsTime(ConfigBase):
     # 尝试主动开启狭间-区别于游戏中的自动开启狭间功能
-    try_start_abyss_shadows: bool = Field(default=False, description='尝试主动开启狭间')
+    try_start_abyss_shadows: bool = Field(default=False, description='try_start_abyss_shadows_help')
     # 难度
-    difficulty: AbyssShadowsDifficulty = Field(default=AbyssShadowsDifficulty.EASY, description='选择开启的难度')
+    difficulty: AbyssShadowsDifficulty = Field(default=AbyssShadowsDifficulty.EASY, description='difficulty_help')
     # 是否尝试补全首领副将精英 2/4/6 数量限制
-    try_complete_enemy_count: bool = Field(default=False, description='尝试击败所有首领副将精英, 无视数量限制')
+    try_complete_enemy_count: bool = Field(default=False, description='try_complete_enemy_count_help')
 
 
 class ProcessManage(ConfigBase):
@@ -273,29 +273,29 @@ class ProcessManage(ConfigBase):
     # 之间用-分隔，不同怪物用;分隔
     # 未实现-->小蛇使用E,-后面表示打几只,例如E-2表示打两只小蛇
     # 例如 A-1;B-2;C-3...
-    attack_order: str = Field(default='A-1;B-1;B;A-2;A-3;A-4;A-5;A-6', description='攻击顺序A,B,C,D分别表示四个区域。123456表示区域内6个怪物\n从上到下,从左到右的顺序,用-分隔,不同怪物用;分隔')
+    attack_order: str = Field(default='A-1;B-1;B;A-2;A-3;A-4;A-5;A-6', description='attack_order_help')
     # 标记主怪
     # EnemyType,  多个用;分隔
-    mark_main: MarkMainConfig = Field(default=MarkMainConfig.BOSS_ONLY, description='选择标记主怪的策略,BOSS首领,GENERAL副将,ELITE精英')
+    mark_main: MarkMainConfig = Field(default=MarkMainConfig.BOSS_ONLY, description='mark_main_help')
     # 是否启用切换御魂
-    enable_switch_soul_in_as: bool = Field(default=False, description='是否启用切换御魂,会自动战斗内切换预设')
+    enable_switch_soul_in_as: bool = Field(default=False, description='enable_switch_soul_in_as_help')
     # 首领预设
-    preset_boss: str = Field(default='6,1', description='首领御魂，例6,1，同其他通用御魂配置')
+    preset_boss: str = Field(default='6,1', description='preset_boss_help')
     # 副将预设
-    preset_general: str = Field(default='6,2', description='副将御魂')
+    preset_general: str = Field(default='6,2', description='preset_general_help')
     # 精英预设
-    preset_elite: str = Field(default='6,3', description='精英御魂')
+    preset_elite: str = Field(default='6,3', description='preset_elite_help')
     # 小蛇预设
     # preset_snake: str = Field(default='', description='preset_snake_help')
 
     # 首领策略 秒退/直到消灭/时间到了退出/伤害足够退出
     # 可用值: 'TRUE', 'FALSE', 时间（秒）(1-999)，或最大伤害值(1000-)
     # 详见类 :class:`~tasks.AbyssShadows.config.Condition
-    strategy_boss: str = Field(default='FALSE', description='首领战斗策略\nTRUE:秒退/FALSE:直到消灭为止/30:时间达到30秒退出(范围1-999)/4380000:伤害达到438万退出(范围从1000开始)')
+    strategy_boss: str = Field(default='FALSE', description='strategy_boss_help')
     # 副将策略
-    strategy_general: str = Field(default='30', description='副将战斗策略,同首领')
+    strategy_general: str = Field(default='30', description='strategy_general_help')
     # 精英策略
-    strategy_elite: str = Field(default='4380000', description='精英战斗策略,同首领')
+    strategy_elite: str = Field(default='4380000', description='strategy_elite_help')
 
     def is_need_mark_main(self, enemy_type: EnemyType) -> bool:
         strategy = self.mark_main  # 获取 MarkMainConfig 枚举值
@@ -336,15 +336,13 @@ class SavedParams(ConfigBase):
     # 参数保存的时间,用于判断是不是当天的数据
     save_date: str = Field(default='', description='save_date_help')
     # 已完成
-    done: str = Field(default='', description='已完成(仅供显示禁止操作)')
+    done: str = Field(default='', description='done_help')
     # 已知的已经打完的
-    unavailable: str = Field(default='', description='未完成(仅供显示禁止操作)')
-
-    hide_fields = dynamic_hide('save_date')
+    unavailable: str = Field(default='', description='unavailable_help')
 
 
 class AbyssShadows(ConfigBase):
-    scheduler: GuildScheduler = Field(default_factory=GuildScheduler)
+    scheduler: Scheduler = Field(default_factory=Scheduler)
     abyss_shadows_time: AbyssShadowsTime = Field(default_factory=AbyssShadowsTime)
     process_manage: ProcessManage = Field(default_factory=ProcessManage)
     saved_params: SavedParams = Field(default_factory=SavedParams)
