@@ -308,6 +308,7 @@ class BaseTask(GlobalGameAssets, CostumeBase):
         :param timeout: 等待稳定的超时时间
         :return: timer时间内稳定出现则返回True, 否则False
         """
+        logger.info(f'Wait until {target.name} position stable')
         timeout_timer = Timer(timeout).start()
         stable_timer = Timer(stable_time).start()
         pre_roi_front, cur_roi_front = None, None
@@ -324,6 +325,7 @@ class BaseTask(GlobalGameAssets, CostumeBase):
                 if pre_roi_front is not None and target.match(self.device.image, threshold=threshold):
                     # 到达稳定时间
                     if stable_timer.reached():
+                        logger.info(f'{target.name} position has stabilized')
                         return True
                 else:
                     stable_timer.reset()  # 上一次匹配到的位置这次匹配不到了, 重置定时器
