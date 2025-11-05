@@ -78,23 +78,6 @@ class ScriptTask(GeneralBattle, GameUi, SwitchSoul, AbyssShadowsAssets):
         if cfg.abyss_shadows_time.try_start_abyss_shadows:
             self.start_abyss_shadows()
 
-        # 识别到了开启按钮证明狭间还没有开启
-        def abyss_start() -> bool:
-            self.screenshot()
-            self.ui_goto_page(page_abyss)
-            if not self.appear(self.I_BTN_START):
-                return True
-            self.ui_goto_page(page_main)
-            logger.info('Waiting for abyss start')
-            return False
-
-        if not self.wait_until(abyss_start, timeout=cfg.scheduler.max_wait_time * 60,
-                               interval=(50, 70)):
-            logger.warning('Wait for abyss start timeout')
-            self.ui_goto_page(page_main)
-            self.set_next_run(task='AbyssShadows', finish=False, server=True, success=True)
-            raise TaskEnd
-
         try:
             self.init_list_from_cfg()
             # 判断各个区域是否可用
