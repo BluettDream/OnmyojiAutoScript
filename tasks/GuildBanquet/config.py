@@ -5,7 +5,7 @@ from enum import Enum
 
 from pydantic import Field, BaseModel, SerializationInfo, field_serializer
 
-from tasks.Component.config_scheduler import Scheduler, GuildScheduler
+from tasks.Component.config_scheduler import Scheduler
 from tasks.Component.config_base import ConfigBase, Time, dynamic_hide
 
 
@@ -39,6 +39,6 @@ class GuildBanquetTime(BaseModel):
 
 
 class GuildBanquet(ConfigBase):
-    scheduler: GuildScheduler = Field(default_factory=GuildScheduler)
+    scheduler: Scheduler = Field(default_factory=Scheduler)
     guild_banquet_time: GuildBanquetTime = Field(default_factory=GuildBanquetTime)
 

@@ -219,28 +219,6 @@ class BaseTask(GlobalGameAssets, CostumeBase):
 
         return appear
 
-    def wait_until(self, check_func, timeout: float, interval: float | tuple):
-        """
-        等待直到满足条件
-        :param check_func: 检查函数
-        :param timeout: 超时时间, 单位s
-        :param interval: 循环间隔, 单位s, 如果是tuple则会随机在范围内等待
-        :return: 检查函数成功则返回True, 超时返回False
-        """
-        if not timeout or not interval:
-            raise ValueError('Not set timeout or interval in wait until')
-        timeout_timer = Timer(timeout).start()
-        while not timeout_timer.reached():
-            if check_func():
-                return True
-            self.device.stuck_record_clear()
-            self.device.stuck_record_add('PAUSE')
-            if isinstance(interval, tuple):
-                sleep(random.uniform(*interval))
-            elif isinstance(interval, float):
-                sleep(interval)
-        return False
-
     def wait_until_appear(self,
                           target: RuleImage | RuleOcr,
                           skip_first_screenshot=False,

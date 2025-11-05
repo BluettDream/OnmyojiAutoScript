@@ -17,11 +17,6 @@ class Scheduler(ConfigBase):
     float_time: Time = Field(default=Time(hour=0, minute=0, second=0), description='float_time_help')
 
 
-class GuildScheduler(Scheduler):
-    max_wait_time: int = Field(default=10,
-                               description='单位分钟, 任务执行后若寮活还未开始则会在该时间内一直等待开始, 每分钟判断一次')
-
-
 if __name__ == "__main__":
     dict_s = {
         "enable": False,
