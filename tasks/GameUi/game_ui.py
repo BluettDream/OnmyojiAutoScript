@@ -4,7 +4,6 @@
 import time
 
 import importlib
-import pkgutil
 from pathlib import Path
 
 from datetime import datetime
@@ -121,7 +120,7 @@ class GameUi(BaseTask, GameUiAssets):
         while 1:
             self.maybe_screenshot(skip_first_screenshot)
             skip_first_screenshot = False
-            # 如果20S还没有到底，那么就抛出异常
+            # 如果10S还没有到底，那么就抛出异常
             if timeout.reached():
                 break
             # Known pages
@@ -136,8 +135,8 @@ class GameUi(BaseTask, GameUiAssets):
             if self.try_close_unknown_page():
                 timeout = Timer(10, count=20).start()
             else:
-                # entirely unknown page, click safe random
-                self.click(random_click(), interval=3)
+                # entirely unknown page, click safe random area
+                self.click(random_click(), interval=4)
             # wait to ui
             sleep(0.3)
             app_check()
