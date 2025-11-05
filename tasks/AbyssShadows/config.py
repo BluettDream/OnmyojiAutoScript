@@ -5,16 +5,13 @@
 # github    https://github.com/roarhill/oas
 from enum import Enum
 from module.atom.click import RuleClick
-from module.atom.image import RuleImage
 
 from pydantic import BaseModel, Field
 
 from module.base.timer import Timer
 from tasks.AbyssShadows.assets import AbyssShadowsAssets
-from tasks.Component.GeneralBattle.config_general_battle import GeneralBattleConfig
-from tasks.Component.SwitchSoul.switch_soul_config import SwitchSoulConfig
 from tasks.Component.config_base import ConfigBase, Time, DateTime, dynamic_hide
-from tasks.Component.config_scheduler import Scheduler, GuildScheduler
+from tasks.Component.config_scheduler import Scheduler
 
 
 class AreaType(Enum):
@@ -344,7 +341,7 @@ class SavedParams(ConfigBase):
 
 
 class AbyssShadows(ConfigBase):
-    scheduler: GuildScheduler = Field(default_factory=GuildScheduler)
+    scheduler: Scheduler = Field(default_factory=Scheduler)
     abyss_shadows_time: AbyssShadowsTime = Field(default_factory=AbyssShadowsTime)
     process_manage: ProcessManage = Field(default_factory=ProcessManage)
     saved_params: SavedParams = Field(default_factory=SavedParams)
