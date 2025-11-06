@@ -241,7 +241,7 @@ class GameUi(BaseTask, GameUiAssets):
     def ui_goto_page(self, dest_page: Page, confirm_wait=0, skip_first_screenshot=True, timeout: int = 60) -> bool:
         """前往指定page, 自动调用获取当前页面方法, 其他参数同ui_goto
         """
-        self.ui_get_current_page()
+        self.ui_get_current_page(skip_first_screenshot)
         return self.ui_goto(dest_page, confirm_wait, skip_first_screenshot, timeout)
 
     def ui_goto(self, destination: Page, confirm_wait=0, skip_first_screenshot=True, timeout: int = 60) -> bool:
@@ -256,7 +256,7 @@ class GameUi(BaseTask, GameUiAssets):
         # 初始化
         timeout_timer = Timer(timeout).start()
         confirm_timer = Timer(confirm_wait, count=int(confirm_wait // 0.5)).start()
-        close_unknown_timer = Timer(3).start()
+        close_unknown_timer = Timer(15).start()
         # 构建路径映射
         path_dict = self.build_reverse_path_dict(destination)
 
