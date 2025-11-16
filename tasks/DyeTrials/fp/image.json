@@ -43,6 +43,14 @@
     "method": "Template matching",
     "threshold": 0.8,
     "description": "description"
+  },
+  {
+    "itemName": "fp_close_get_skin",
+    "imageName": "fp_fp_close_get_skin.png",
+    "roiFront": "932,227,43,43",
+    "roiBack": "887,59,317,243",
+    "method": "Template matching",
+    "threshold": 0.8,
+    "description": "关闭获取皮肤弹窗"
   }
 ]
-
