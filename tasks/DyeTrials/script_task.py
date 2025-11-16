@@ -64,6 +64,10 @@ class ScriptTask(GeneralBattle, GameUi, SwitchSoul, DyeTrialsAssets):
             if boss_timer.reached():
                 self.config.notifier.push(title='超鬼王', message='识别超时退出')
                 break
+            # 关闭获得皮肤提示弹窗
+            if self.appear_then_click(self.I_FP_CLOSE_GET_SKIN, interval=0.8):
+                logger.warning('Maybe already get skin, close tip')
+                continue
             # 获得奖励
             if self.ui_reward_appear_click():
                 boss_timer.reset()

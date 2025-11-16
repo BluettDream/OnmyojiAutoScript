@@ -21,6 +21,8 @@ class DyeTrialsAssets:
 	I_FP_CHALLENGE = RuleImage(roi_front=(1159,598,60,29), roi_back=(1159,598,60,29), threshold=0.8, method="Template matching", file="./tasks/DyeTrials/fp/fp_fp_challenge.png")
 	# description 
 	I_BATTLE_SUCCESS = RuleImage(roi_front=(435,147,100,100), roi_back=(435,147,100,100), threshold=0.8, method="Template matching", file="./tasks/DyeTrials/fp/battle_success.png")
+	# 关闭获取皮肤弹窗 
+	I_FP_CLOSE_GET_SKIN = RuleImage(roi_front=(932,227,43,43), roi_back=(887,59,317,243), threshold=0.8, method="Template matching", file="./tasks/DyeTrials/fp/fp_fp_close_get_skin.png")
 
 
 	# Ocr Rule Assets
