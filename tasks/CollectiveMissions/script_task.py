@@ -189,13 +189,21 @@ class ScriptTask(GameUi, CollectiveMissionsAssets):
             return True
         return False
 
-    def get_task_reward(self):
+    def get_task_reward(self, skip_first_screenshot: bool = True):
         """获取其他已完成的任务奖励"""
-        if not self.appear(self.I_CM_GET_REWARD):
-            return
-        logger.info('Discover the tasks that have been completed')
-        self.get_reward_and_close(self.I_CM_GET_REWARD)
-        logger.info('Get task reward finished')
+        timeout_timer = Timer(3).start()
+        process_reward = False
+        while not timeout_timer.reached():
+            self.maybe_screenshot(skip_first_screenshot)
+            skip_first_screenshot = False
+            if not self.appear(self.I_CM_GET_REWARD):
+                break
+            process_reward = True
+            logger.info('Discover the tasks that have been completed')
+            self.get_reward_and_close(self.I_CM_GET_REWARD)
+            timeout_timer.reset()
+        if process_reward:
+            logger.info('Get task reward finished')
 
     def get_reward_and_close(self,  target: RuleImage):
         # 捐赠可能有双倍的，需要领两次
