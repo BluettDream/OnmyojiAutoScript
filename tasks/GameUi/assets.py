@@ -204,9 +204,9 @@ class GameUiAssets:
 	# 珍旅居 
 	I_CHECK_TRAVEL = RuleImage(roi_front=(1134,583,78,77), roi_back=(1134,583,78,77), threshold=0.8, method="Template matching", file="./tasks/GameUi/page/page_check_travel.png")
 	# 活动列表页前往活动 
-	I_ACT_LIST_GOTO_ACT = RuleImage(roi_front=(971,506,156,60), roi_back=(925,458,272,166), threshold=0.8, method="Template matching", file="./tasks/GameUi/page/page_act_list_goto_act.png")
+	I_ACT_LIST_GOTO_ACT = RuleImage(roi_front=(1063,627,156,60), roi_back=(1007,552,272,166), threshold=0.8, method="Template matching", file="./tasks/GameUi/page/page_act_list_goto_act.png")
 	# 活动列表页标志 
-	I_CHECK_ACT_LIST = RuleImage(roi_front=(60,617,79,66), roi_back=(19,555,163,164), threshold=0.8, method="Template matching", file="./tasks/GameUi/page/page_check_act_list.png")
+	I_CHECK_ACT_LIST = RuleImage(roi_front=(90,14,125,44), roi_back=(75,3,161,64), threshold=0.8, method="Template matching", file="./tasks/GameUi/page/page_check_act_list.png")
 
 
 	# Image Rule Assets

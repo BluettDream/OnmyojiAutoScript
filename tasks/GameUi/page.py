@@ -190,7 +190,7 @@ page_main.link(button=G.I_MAIN_GOTO_TRAVEL, destination=page_travel)
 # 活动列表页 act_list
 page_act_list = Page(G.I_CHECK_ACT_LIST)
 page_act_list.additional = [G.I_PAPER_DOLL_CLOSE]
-page_act_list.link(button=G.I_BACK_ACT_LIST, destination=page_main)
+page_act_list.link(button=G.I_BACK_Y, destination=page_main)
 page_main.link(button=G.I_ACT_LIST_EXPAND, destination=page_act_list)
 
 # 道馆
