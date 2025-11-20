@@ -107,9 +107,9 @@ class ScriptTask(GeneralBattle, SwitchSoul, GameUi, MetaDemonAssets):
                 win = False
                 self.click(ipages.random_click())
                 continue
-            if self.appear(self.I_MD_SETTLING, interval=0.8):
+            if self.appear(self.I_MD_SETTLING, interval=3.5):
                 logger.info('wait result')
-                time.sleep(random.uniform(0.8, 1.6))
+                time.sleep(random.uniform(3, 5))
                 continue
         total_run_time = datetime.now() - self.start_time
         logger.info(f'battle win: {win}')
