@@ -137,6 +137,7 @@ class ScriptTask(GeneralBattle, SwitchSoul, GameUi, MetaDemonAssets):
         if not self.conf.meta_demon_config.auto_tea and (current > total or remain < 0):
             self.set_next_run('MetaDemon', target=datetime.now() + self.conf.scheduler.wait_interval)
             self.finish_task()
+        return True
 
     def check_and_switch_ticket(self):
         """切换鬼王门票"""
