@@ -127,7 +127,16 @@ class ScriptTask(GeneralBattle, SwitchSoul, GameUi, MetaDemonAssets):
         :return: True可以战斗, False不能战斗
         """
         logger.hr('battle prepare', 2)
-        return self.check_and_switch_ticket() and self.check_and_switch_powerful() and self.check_and_switch_soul()
+        return self.check_fatigue() and self.check_and_switch_ticket() and \
+            self.check_and_switch_powerful() and self.check_and_switch_soul()
+
+    def check_fatigue(self):
+        logger.hr('Check fatigue')
+        current, remain, total = self.O_MD_FATIGUE.ocr_digit_counter(self.device.image)
+        # 不喝茶且当前疲劳度已满
+        if not self.conf.meta_demon_config.auto_tea and (current > total or remain < 0):
+            self.set_next_run('MetaDemon', target=datetime.now() + self.conf.scheduler.wait_interval)
+            self.finish_task()
 
     def check_and_switch_ticket(self):
         """切换鬼王门票"""
