@@ -1,0 +1,13 @@
+{
+  "name": "goto_metademon_list",
+  "direction": "vertical",
+  "type": "ocr",
+  "roiBack": "53,121,48,557",
+  "description": "前往超鬼王活动",
+  "list": [
+    {
+      "itemName": "版本",
+      "roiFront": "56,125,43,68"
+    }
+  ]
+}

@@ -1,155 +1,200 @@
 [
   {
-    "itemName": "md_enter",
-    "imageName": "md_md_enter.png",
-    "roiFront": "426,463,60,80",
-    "roiBack": "239,369,547,215",
-    "method": "Template matching",
-    "threshold": 0.8,
-    "description": "description"
-  },
-  {
-    "itemName": "md_main",
-    "imageName": "md_md_main.png",
-    "roiFront": "658,156,41,139",
-    "roiBack": "636,133,100,245",
-    "method": "Template matching",
-    "threshold": 0.8,
-    "description": "description"
-  },
-  {
-    "itemName": "md_find",
-    "imageName": "md_md_find.png",
-    "roiFront": "1112,581,100,100",
-    "roiBack": "1112,581,100,100",
-    "method": "Template matching",
-    "threshold": 0.8,
-    "description": "description"
-  },
-  {
-    "itemName": "md_hard",
-    "imageName": "md_md_hard.png",
-    "roiFront": "513,515,26,27",
-    "roiBack": "513,515,26,27",
-    "method": "Template matching",
-    "threshold": 0.8,
-    "description": "高"
-  },
-  {
     "itemName": "md_fire",
     "imageName": "md_md_fire.png",
-    "roiFront": "1107,563,109,113",
-    "roiBack": "1107,563,109,113",
-    "method": "Template matching",
-    "threshold": 0.7,
-    "description": "description"
-  },
-  {
-    "itemName": "md_gift_box",
-    "imageName": "md_md_gift_box.png",
-    "roiFront": "1184,182,42,50",
-    "roiBack": "1184,182,42,50",
+    "roiFront": "1132,577,99,53",
+    "roiBack": "1104,546,154,147",
     "method": "Template matching",
     "threshold": 0.8,
-    "description": "description"
+    "description": "挑战鬼王"
   },
   {
-    "itemName": "md_extreme",
-    "imageName": "md_md_extreme.png",
-    "roiFront": "512,516,30,25",
-    "roiBack": "512,516,30,25",
+    "itemName": "md_shikigami",
+    "imageName": "md_md_shikigami.png",
+    "roiFront": "1039,628,40,38",
+    "roiBack": "1018,617,81,77",
     "method": "Template matching",
     "threshold": 0.8,
-    "description": "难度"
+    "description": "式神录"
   },
   {
-    "itemName": "md_fire_common",
-    "imageName": "md_md_fire_common.png",
-    "roiFront": "1065,499,100,36",
-    "roiBack": "1065,499,100,36",
+    "itemName": "md_settling",
+    "imageName": "md_md_settling.png",
+    "roiFront": "723,441,82,32",
+    "roiBack": "714,431,100,51",
     "method": "Template matching",
     "threshold": 0.8,
-    "description": "description"
+    "description": "鬼王结算中"
   },
   {
-    "itemName": "md_fire_power",
-    "imageName": "md_md_fire_power.png",
-    "roiFront": "1159,498,100,37",
-    "roiBack": "1159,498,100,37",
+    "itemName": "md_synthesize",
+    "imageName": "md_md_synthesize.png",
+    "roiFront": "0,0,100,100",
+    "roiBack": "0,0,100,100",
     "method": "Template matching",
     "threshold": 0.8,
-    "description": "description"
+    "description": "鬼王合成"
   },
   {
-    "itemName": "md_battle_failure",
-    "imageName": "md_md_battle_failure.png",
-    "roiFront": "412,105,100,100",
-    "roiBack": "412,105,100,100",
+    "itemName": "check_boss_page",
+    "imageName": "md_check_boss_page.png",
+    "roiFront": "1064,19,43,40",
+    "roiBack": "1054,7,62,63",
     "method": "Template matching",
     "threshold": 0.8,
-    "description": "失败"
+    "description": "鬼王页面标志"
   },
   {
-    "itemName": "a2",
-    "imageName": "Screenshots_a2.png",
-    "roiFront": "751,137,41,149",
-    "roiBack": "751,137,41,149",
+    "itemName": "md_check_main_page",
+    "imageName": "md_md_check_main_page.png",
+    "roiFront": "464,231,39,213",
+    "roiBack": "449,220,72,244",
     "method": "Template matching",
     "threshold": 0.8,
-    "description": "进入鬼王界面"
+    "description": "超鬼王主界面"
   },
   {
-    "itemName": "a3",
-    "imageName": "Screenshots_a3.png",
-    "roiFront": "1137,581,100,100",
-    "roiBack": "1137,581,100,100",
+    "itemName": "md_get_yesterday_reward",
+    "imageName": "md_md_get_yesterday_reward.png",
+    "roiFront": "547,571,183,56",
+    "roiBack": "471,523,327,163",
+    "method": "Template matching",
+    "threshold": 0.8,
+    "description": "领取昨日奖励"
+  },
+  {
+    "itemName": "md_one_star",
+    "imageName": "md_md_one_star.png",
+    "roiFront": "361,312,68,69",
+    "roiBack": "261,299,754,133",
+    "method": "Template matching",
+    "threshold": 0.9,
+    "description": "一星鬼王召唤票"
+  },
+  {
+    "itemName": "md_two_stars",
+    "imageName": "md_md_two_stars.png",
+    "roiFront": "460,314,66,67",
+    "roiBack": "266,303,751,134",
+    "method": "Template matching",
+    "threshold": 0.9,
+    "description": "二星鬼王召唤票"
+  },
+  {
+    "itemName": "md_three_stars",
+    "imageName": "md_md_three_stars.png",
+    "roiFront": "557,315,67,67",
+    "roiBack": "266,302,749,129",
+    "method": "Template matching",
+    "threshold": 0.9,
+    "description": "三星鬼王召唤票"
+  },
+  {
+    "itemName": "md_four_stars",
+    "imageName": "md_md_four_stars.png",
+    "roiFront": "656,314,71,68",
+    "roiBack": "261,299,754,132",
+    "method": "Template matching",
+    "threshold": 0.9,
+    "description": "四星鬼王召唤票"
+  },
+  {
+    "itemName": "md_five_stars",
+    "imageName": "md_md_five_stars.png",
+    "roiFront": "754,313,71,69",
+    "roiBack": "267,303,749,129",
+    "method": "Template matching",
+    "threshold": 0.9,
+    "description": "五星鬼王召唤票"
+  },
+  {
+    "itemName": "md_six_stars",
+    "imageName": "md_md_six_stars.png",
+    "roiFront": "854,314,66,69",
+    "roiBack": "265,299,754,133",
+    "method": "Template matching",
+    "threshold": 0.9,
+    "description": "六星鬼王召唤票"
+  },
+  {
+    "itemName": "md_get_boss",
+    "imageName": "md_md_get_boss.png",
+    "roiFront": "559,446,161,49",
+    "roiBack": "514,421,242,101",
+    "method": "Template matching",
+    "threshold": 0.8,
+    "description": "立即召唤鬼王"
+  },
+  {
+    "itemName": "md_check_selected",
+    "imageName": "md_md_check_selected.png",
+    "roiFront": "666,285,50,22",
+    "roiBack": "264,275,751,39",
+    "method": "Template matching",
+    "threshold": 0.8,
+    "description": "检查是否选中对应鬼王票"
+  },
+  {
+    "itemName": "md_close_popup",
+    "imageName": "md_md_close_popup.png",
+    "roiFront": "1003,160,41,37",
+    "roiBack": "895,39,257,209",
+    "method": "Template matching",
+    "threshold": 0.8,
+    "description": "关闭超鬼王内弹窗"
+  },
+  {
+    "itemName": "md_drink_tea",
+    "imageName": "md_md_drink_tea.png",
+    "roiFront": "555,467,168,58",
+    "roiBack": "527,455,235,80",
+    "method": "Template matching",
+    "threshold": 0.8,
+    "description": "喝茶"
+  },
+  {
+    "itemName": "check_act_list_metademon_act",
+    "imageName": "md_check_act_list_metademon_act.png",
+    "roiFront": "718,293,448,127",
+    "roiBack": "675,249,566,240",
+    "method": "Template matching",
+    "threshold": 0.8,
+    "description": "活动列表页超鬼王活动标志"
+  },
+  {
+    "itemName": "md_disable_powerful_fire",
+    "imageName": "md_md_disable_powerful_fire.png",
+    "roiFront": "1113,513,24,24",
+    "roiBack": "1108,508,36,36",
+    "method": "Template matching",
+    "threshold": 0.8,
+    "description": "禁用强力追击"
+  },
+  {
+    "itemName": "md_enable_powerful_fire",
+    "imageName": "md_md_enable_powerful_fire.png",
+    "roiFront": "1114,513,25,26",
+    "roiBack": "1111,507,31,34",
+    "method": "Template matching",
+    "threshold": 0.8,
+    "description": "开启强力追击"
+  },
+  {
+    "itemName": "md_switch_ticket",
+    "imageName": "md_md_switch_ticket.png",
+    "roiFront": "1114,496,144,38",
+    "roiBack": "1112,480,148,68",
+    "method": "Template matching",
+    "threshold": 0.8,
+    "description": "切换鬼王门票"
+  },
+  {
+    "itemName": "md_summon_boss",
+    "imageName": "md_md_summon_boss.png",
+    "roiFront": "1142,581,76,83",
+    "roiBack": "1105,546,157,154",
     "method": "Template matching",
     "threshold": 0.8,
     "description": "召唤鬼王"
-  },
-  {
-    "itemName": "a4",
-    "imageName": "Screenshots_a4.png",
-    "roiFront": "1137,581,100,100",
-    "roiBack": "1137,581,100,100",
-    "method": "Template matching",
-    "threshold": 0.8,
-    "description": "挑战"
-  },
-  {
-    "itemName": "a5",
-    "imageName": "Screenshots_a5.png",
-    "roiFront": "1129,536,100,100",
-    "roiBack": "1129,536,100,100",
-    "method": "Template matching",
-    "threshold": 0.8,
-    "description": "准备"
-  },
-  {
-    "itemName": "a6",
-    "imageName": "Screenshots_a6.png",
-    "roiFront": "435,147,100,100",
-    "roiBack": "435,147,100,100",
-    "method": "Template matching",
-    "threshold": 0.8,
-    "description": "description"
-  },
-  {
-    "itemName": "back_check",
-    "imageName": "md_back_check.png",
-    "roiFront": "378,257,68,32",
-    "roiBack": "378,257,68,32",
-    "method": "Template matching",
-    "threshold": 0.8,
-    "description": "超鬼王打完了"
-  },
-  {
-    "itemName": "red_back",
-    "imageName": "md_red_back.png",
-    "roiFront": "925,181,47,48",
-    "roiBack": "925,181,47,48",
-    "method": "Template matching",
-    "threshold": 0.8,
-    "description": "红色的叉叉"
   }
 ]

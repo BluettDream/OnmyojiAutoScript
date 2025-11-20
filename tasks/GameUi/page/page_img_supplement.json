@@ -56,8 +56,8 @@
   {
     "itemName": "act_list_goto_act",
     "imageName": "page_act_list_goto_act.png",
-    "roiFront": "971,506,156,60",
-    "roiBack": "925,458,272,166",
+    "roiFront": "1063,627,156,60",
+    "roiBack": "1007,552,272,166",
     "method": "Template matching",
     "threshold": 0.8,
     "description": "活动列表页前往活动"
@@ -65,8 +65,8 @@
   {
     "itemName": "check_act_list",
     "imageName": "page_check_act_list.png",
-    "roiFront": "60,617,79,66",
-    "roiBack": "19,555,163,164",
+    "roiFront": "90,14,125,44",
+    "roiBack": "75,3,161,64",
     "method": "Template matching",
     "threshold": 0.8,
     "description": "活动列表页标志"
