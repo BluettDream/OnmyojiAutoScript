@@ -24,6 +24,7 @@ class ScriptTask(GeneralBattle, SwitchSoul, GameUi, MetaDemonAssets):
     class State:
         done: bool = False
         switch_soul_done: bool = False
+        synthesis_done: bool = False
 
     conf: MetaDemon = None
     cur_boss_type: BossType = None
@@ -127,8 +128,62 @@ class ScriptTask(GeneralBattle, SwitchSoul, GameUi, MetaDemonAssets):
         :return: True可以战斗, False不能战斗
         """
         logger.hr('battle prepare', 2)
-        return self.check_fatigue() and self.check_and_switch_ticket() and \
-            self.check_and_switch_powerful() and self.check_and_switch_soul()
+        if not self.check_fatigue():
+            return False
+        self.synthesis_boss_ticket()
+        return self.check_and_switch_ticket() and self.check_and_switch_soul() and self.check_and_switch_powerful()
+
+    def synthesis_boss_ticket(self):
+        """合成鬼王"""
+        if self.State.synthesis_done:
+            return
+        logger.hr('synthesis boss ticket')
+        self.State.synthesis_done = True
+        if len(self.conf.meta_demon_config.synthesis_list_v) <= 0:
+            return
+        type_ticket_dict: dict[BossType, tuple[RuleImage, int]] = {
+            BossType.ONE_STAR: (self.I_MD_SYNTHESIS_ONE_STAR, 3),
+            BossType.TWO_STARS: (self.I_MD_SYNTHESIS_TWO_STAR, 3),
+            BossType.THREE_STARS: (self.I_MD_SYNTHESIS_THREE_STAR, 3),
+            BossType.FOUR_STARS: (self.I_MD_SYNTHESIS_FOUR_STAR, 3),
+            BossType.FIVE_STARS: (self.I_MD_SYNTHESIS_FIVE_STAR, 2),
+        }
+        synthesis_list = self.conf.meta_demon_config.synthesis_list_v
+        self.ui_click(self.I_MD_SYNTHESIS, self.I_MD_START_SYNTHESIS, interval=0.6)
+        for boss_type in synthesis_list:
+            self.do_synthesis(type_ticket_dict[boss_type][0], type_ticket_dict[boss_type][1])
+        self.ui_click(self.I_MD_CLOSE_POPUP, self.I_MD_SHIKIGAMI, interval=0.6)  # 关闭弹窗退回到鬼王界面
+
+    def do_synthesis(self, target_boss_ticket: RuleImage, need_ticket: int):
+        """开始合成鬼王
+        :param target_boss_ticket: 目标鬼王级别门票
+        :param need_ticket: 合成当前级别鬼王需要的门票数量
+        """
+        if not self.appear(target_boss_ticket):
+            logger.info(f'{target_boss_ticket} not recognized, skip synthesis')
+            return
+        click_cnt, max_cnt = 0, random.randint(2, 3)
+        while True:
+            self.screenshot()
+            if click_cnt >= max_cnt:  # 兜底,多次点击开始合成都没有出现获得奖励则退出
+                break
+            if self.appear(self.I_MD_SYNTHESIS_NEED_MONEY, interval=0.8):  # 出现花钱购买合成券
+                self.ui_click(self.I_MD_CLOSE_POPUP, self.I_MD_START_SYNTHESIS, interval=0.6)  # 关闭购买弹窗
+                break
+            if self.appear(self.I_UI_REWARD, interval=0.8):  # 出现获得奖励说明合成成功
+                self.click(ipages.random_click(), interval=0.6)
+                click_cnt = 0  # 清空点击标志
+                continue
+            if self.appear(self.I_MD_SYNTHESIS_EMPTY, interval=0.8):  # 有空位
+                empty_list = self.I_MD_SYNTHESIS_EMPTY.match_all(self.device.image)
+                if len(empty_list) < need_ticket:  # 空位数量小于需要的门票数量->门票不够则退出
+                    logger.info(f'{target_boss_ticket} ticket not enough, skip synthesis')
+                    break
+            if self.appear_then_click(target_boss_ticket, interval=2):  # 点击对应级别鬼王门票
+                if self.appear_then_click(self.I_MD_START_SYNTHESIS, interval=2.5):  # 点击开始合成
+                    click_cnt += 1
+                continue
+        logger.info(f'{target_boss_ticket} synthesis done')
 
     def check_fatigue(self):
         logger.hr('Check fatigue')
@@ -140,7 +195,7 @@ class ScriptTask(GeneralBattle, SwitchSoul, GameUi, MetaDemonAssets):
         return True
 
     def check_and_switch_ticket(self):
-        """切换鬼王门票"""
+        """切换鬼王门票并更新当前鬼王级别"""
         logger.hr('Summon boss')
         # 打开切换门票弹窗
         while True:
@@ -180,7 +235,7 @@ class ScriptTask(GeneralBattle, SwitchSoul, GameUi, MetaDemonAssets):
             if not self.conf.switch_soul.switch_once:
                 self.State.switch_soul_done = False
             self.current_count = 0
-        self.cur_boss_type = need_fire_list[0]
+        self.cur_boss_type = need_fire_list[0]  # 更新当前鬼王级别
         target_ticket_rule_image = type_ticket_dict[self.cur_boss_type]
         selected = False
         logger.info(f'Summon {self.cur_boss_type.name.lower()} boss')

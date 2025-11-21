@@ -138,7 +138,7 @@
     "itemName": "md_close_popup",
     "imageName": "md_md_close_popup.png",
     "roiFront": "1003,160,41,37",
-    "roiBack": "895,39,257,209",
+    "roiBack": "895,39,345,209",
     "method": "Template matching",
     "threshold": 0.8,
     "description": "关闭超鬼王内弹窗"
@@ -196,5 +196,113 @@
     "method": "Template matching",
     "threshold": 0.8,
     "description": "召唤鬼王"
+  },
+  {
+    "itemName": "md_synthesis_one_star",
+    "imageName": "md_md_synthesis_one_star.png",
+    "roiFront": "228,178,60,65",
+    "roiBack": "209,150,100,501",
+    "method": "Template matching",
+    "threshold": 0.85,
+    "description": "合成一星"
+  },
+  {
+    "itemName": "md_synthesis_two_star",
+    "imageName": "md_md_synthesis_two_star.png",
+    "roiFront": "226,276,61,66",
+    "roiBack": "207,152,99,500",
+    "method": "Template matching",
+    "threshold": 0.85,
+    "description": "合成二星"
+  },
+  {
+    "itemName": "md_synthesis_three_star",
+    "imageName": "md_md_synthesis_three_star.png",
+    "roiFront": "226,377,61,66",
+    "roiBack": "208,152,97,498",
+    "method": "Template matching",
+    "threshold": 0.85,
+    "description": "合成三星"
+  },
+  {
+    "itemName": "md_synthesis_four_star",
+    "imageName": "md_md_synthesis_four_star.png",
+    "roiFront": "226,477,61,68",
+    "roiBack": "208,148,96,500",
+    "method": "Template matching",
+    "threshold": 0.85,
+    "description": "合成四星"
+  },
+  {
+    "itemName": "md_synthesis_five_star",
+    "imageName": "md_md_synthesis_five_star.png",
+    "roiFront": "225,570,63,71",
+    "roiBack": "206,149,103,503",
+    "method": "Template matching",
+    "threshold": 0.85,
+    "description": "合成五星"
+  },
+  {
+    "itemName": "md_start_synthesis",
+    "imageName": "md_md_start_synthesis.png",
+    "roiFront": "906,562,108,39",
+    "roiBack": "884,548,155,62",
+    "method": "Template matching",
+    "threshold": 0.8,
+    "description": "开始合成"
+  },
+  {
+    "itemName": "md_synthesis_need_money",
+    "imageName": "md_md_synthesis_need_money.png",
+    "roiFront": "1055,545,68,54",
+    "roiBack": "1004,521,178,109",
+    "method": "Template matching",
+    "threshold": 0.8,
+    "description": "合成花钱标志"
+  },
+  {
+    "itemName": "md_invite_friends",
+    "imageName": "md_md_invite_friends.png",
+    "roiFront": "713,545,125,60",
+    "roiBack": "693,529,161,95",
+    "method": "Template matching",
+    "threshold": 0.8,
+    "description": "邀请好友"
+  },
+  {
+    "itemName": "md_invite",
+    "imageName": "md_md_invite.png",
+    "roiFront": "252,162,40,39",
+    "roiBack": "239,143,70,74",
+    "method": "Template matching",
+    "threshold": 0.8,
+    "description": "鬼王集结"
+  },
+  {
+    "itemName": "md_synthesis",
+    "imageName": "md_md_synthesis.png",
+    "roiFront": "1200,224,40,41",
+    "roiBack": "1172,199,100,100",
+    "method": "Template matching",
+    "threshold": 0.8,
+    "description": "合成标志"
+  },
+  {
+    "itemName": "md_synthesis_empty",
+    "imageName": "md_md_synthesis_empty.png",
+    "roiFront": "800,158,72,66",
+    "roiBack": "622,144,420,407",
+    "method": "Template matching",
+    "threshold": 0.8,
+    "description": "合成鬼王空位"
+  },
+  {
+    "itemName": "md_friend_selected",
+    "imageName": "md_md_friend_selected.png",
+    "roiFront": "600,178,32,38",
+    "roiBack": "351,174,578,357",
+    "method": "Template matching",
+    "threshold": 0.8,
+    "description": "好友选中标志"
   }
 ]

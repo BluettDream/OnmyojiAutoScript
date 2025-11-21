@@ -48,7 +48,7 @@ class MetaDemonAssets:
 	# 检查是否选中对应鬼王票 
 	I_MD_CHECK_SELECTED = RuleImage(roi_front=(666,285,50,22), roi_back=(264,275,751,39), threshold=0.8, method="Template matching", file="./tasks/MetaDemon/md/md_md_check_selected.png")
 	# 关闭超鬼王内弹窗 
-	I_MD_CLOSE_POPUP = RuleImage(roi_front=(1003,160,41,37), roi_back=(895,39,257,209), threshold=0.8, method="Template matching", file="./tasks/MetaDemon/md/md_md_close_popup.png")
+	I_MD_CLOSE_POPUP = RuleImage(roi_front=(1003,160,41,37), roi_back=(895,39,345,209), threshold=0.8, method="Template matching", file="./tasks/MetaDemon/md/md_md_close_popup.png")
 	# 喝茶 
 	I_MD_DRINK_TEA = RuleImage(roi_front=(555,467,168,58), roi_back=(527,455,235,80), threshold=0.8, method="Template matching", file="./tasks/MetaDemon/md/md_md_drink_tea.png")
 	# 活动列表页超鬼王活动标志 
@@ -61,10 +61,41 @@ class MetaDemonAssets:
 	I_MD_SWITCH_TICKET = RuleImage(roi_front=(1114,496,144,38), roi_back=(1112,480,148,68), threshold=0.8, method="Template matching", file="./tasks/MetaDemon/md/md_md_switch_ticket.png")
 	# 召唤鬼王 
 	I_MD_SUMMON_BOSS = RuleImage(roi_front=(1142,581,76,83), roi_back=(1105,546,157,154), threshold=0.8, method="Template matching", file="./tasks/MetaDemon/md/md_md_summon_boss.png")
+	# 合成一星 
+	I_MD_SYNTHESIS_ONE_STAR = RuleImage(roi_front=(228,178,60,65), roi_back=(209,150,100,501), threshold=0.85, method="Template matching", file="./tasks/MetaDemon/md/md_md_synthesis_one_star.png")
+	# 合成二星 
+	I_MD_SYNTHESIS_TWO_STAR = RuleImage(roi_front=(226,276,61,66), roi_back=(207,152,99,500), threshold=0.85, method="Template matching", file="./tasks/MetaDemon/md/md_md_synthesis_two_star.png")
+	# 合成三星 
+	I_MD_SYNTHESIS_THREE_STAR = RuleImage(roi_front=(226,377,61,66), roi_back=(208,152,97,498), threshold=0.85, method="Template matching", file="./tasks/MetaDemon/md/md_md_synthesis_three_star.png")
+	# 合成四星 
+	I_MD_SYNTHESIS_FOUR_STAR = RuleImage(roi_front=(226,477,61,68), roi_back=(208,148,96,500), threshold=0.85, method="Template matching", file="./tasks/MetaDemon/md/md_md_synthesis_four_star.png")
+	# 合成五星 
+	I_MD_SYNTHESIS_FIVE_STAR = RuleImage(roi_front=(225,570,63,71), roi_back=(206,149,103,503), threshold=0.85, method="Template matching", file="./tasks/MetaDemon/md/md_md_synthesis_five_star.png")
+	# 开始合成 
+	I_MD_START_SYNTHESIS = RuleImage(roi_front=(906,562,108,39), roi_back=(884,548,155,62), threshold=0.8, method="Template matching", file="./tasks/MetaDemon/md/md_md_start_synthesis.png")
+	# 合成花钱标志 
+	I_MD_SYNTHESIS_NEED_MONEY = RuleImage(roi_front=(1055,545,68,54), roi_back=(1004,521,178,109), threshold=0.8, method="Template matching", file="./tasks/MetaDemon/md/md_md_synthesis_need_money.png")
+	# 邀请好友 
+	I_MD_INVITE_FRIENDS = RuleImage(roi_front=(713,545,125,60), roi_back=(693,529,161,95), threshold=0.8, method="Template matching", file="./tasks/MetaDemon/md/md_md_invite_friends.png")
+	# 鬼王集结 
+	I_MD_INVITE = RuleImage(roi_front=(252,162,40,39), roi_back=(239,143,70,74), threshold=0.8, method="Template matching", file="./tasks/MetaDemon/md/md_md_invite.png")
+	# 合成标志 
+	I_MD_SYNTHESIS = RuleImage(roi_front=(1200,224,40,41), roi_back=(1172,199,100,100), threshold=0.8, method="Template matching", file="./tasks/MetaDemon/md/md_md_synthesis.png")
+	# 合成鬼王空位 
+	I_MD_SYNTHESIS_EMPTY = RuleImage(roi_front=(800,158,72,66), roi_back=(622,144,420,407), threshold=0.8, method="Template matching", file="./tasks/MetaDemon/md/md_md_synthesis_empty.png")
+	# 好友选中标志 
+	I_MD_FRIEND_SELECTED = RuleImage(roi_front=(600,178,32,38), roi_back=(351,174,578,357), threshold=0.8, method="Template matching", file="./tasks/MetaDemon/md/md_md_friend_selected.png")
 
 
 	# Ocr Rule Assets
 	# 疲劳度 
 	O_MD_FATIGUE = RuleOcr(roi=(1109,22,114,34), area=(1106,17,124,41), mode="DigitCounter", method="Default", keyword="", name="md_fatigue")
+	# 好友列表 
+	O_MD_FRIENDS = RuleOcr(roi=(435,179,486,351), area=(435,178,489,352), mode="Full", method="Default", keyword="", name="md_friends")
+
+
+	# Swipe Rule Assets
+	# 向上滑动好友列表 
+	S_MD_SWIPE_FRIEND_UP = RuleSwipe(roi_front=(784,398,55,20), roi_back=(792,340,56,23), mode="default", name="md_swipe_friend_up")
 
 
