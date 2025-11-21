@@ -854,18 +854,32 @@
       "failure_interval": "01 00:00:00",
       "server_update": "09:00:00",
       "delay_date": 1,
-      "float_time": "00:00:00"
+      "float_time": "00:00:00",
+      "wait_interval": "00 01:40:00"
     },
     "meta_demon_config": {
+      "limit_time": "00:45:00",
+      "limit_count": 50,
       "auto_tea": false,
-      "extreme_notify": false
+      "fire_sequence": "1 2 3 4",
+      "powerful_list": "",
+      "synthesis_list": "1"
     },
     "switch_soul": {
       "enable": false,
-      "switch_group_team": "-1,-1",
-      "enable_switch_by_name": false,
-      "group_name": "",
-      "team_name": ""
+      "switch_once": false,
+      "one_star": "",
+      "enable_one_star_preset": false,
+      "two_stars": "",
+      "enable_two_stars_preset": false,
+      "three_stars": "",
+      "enable_three_stars_preset": false,
+      "four_stars": "",
+      "enable_four_stars_preset": false,
+      "five_stars": "",
+      "enable_five_stars_preset": false,
+      "six_stars": "",
+      "enable_six_stars_preset": false
     }
   },
   "frog_boss": {
@@ -933,6 +947,25 @@
     }
   },
   "dye_trials": {
+    "scheduler": {
+      "enable": false,
+      "next_run": "2023-01-01 00:00:00",
+      "priority": 5,
+      "success_interval": "01 00:00:00",
+      "failure_interval": "01 00:00:00",
+      "server_update": "09:00:00",
+      "delay_date": 1,
+      "float_time": "00:00:00"
+    },
+    "switch_soul_config": {
+      "enable": false,
+      "switch_group_team": "-1,-1",
+      "enable_switch_by_name": false,
+      "group_name": "",
+      "team_name": ""
+    }
+  },
+  "gugu_art_studio": {
     "scheduler": {
       "enable": false,
       "next_run": "2023-01-01 00:00:00",
@@ -1095,6 +1128,7 @@
       "hya_limit_time": "00:20:00",
       "hya_limit_count": 10,
       "hya_invite_friend": false,
+      "hya_onmyoji": "神乐",
       "hya_auto_bean": false,
       "hya_priorities": "",
       "hya_sp": 1.0,
@@ -1441,9 +1475,7 @@
       "float_time": "00:00:00"
     },
     "missions_config": {
-      "missions_rule": "契灵 > 觉醒三 > 觉醒二 > 觉醒一 > 御灵三 > 御灵二 > 御灵一 > 御魂二 > 御魂一 > 远远不够",
-      "setup_when_bondling": true,
-      "missions_select": "觉醒三"
+      "missions_select": "觉醒一"
     }
   },
   "hunt": {
@@ -1546,31 +1578,25 @@
       "float_time": "00:00:00"
     },
     "abyss_shadows_time": {
-      "custom_run_time_friday": "19:00:00",
-      "custom_run_time_saturday": "19:00:00",
-      "custom_run_time_sunday": "19:00:00"
+      "try_start_abyss_shadows": false,
+      "difficulty": "EASY",
+      "try_complete_enemy_count": false
     },
-    "abyss_shadows_combat_time": {
-      "CombatTime_enable": false,
-      "boss_combat_time": 60,
-      "general_combat_time": 60,
-      "elite_combat_time": 60
+    "process_manage": {
+      "attack_order": "A-1;B-1;B;A-2;A-3;A-4;A-5;A-6",
+      "mark_main": "BOSS_ONLY",
+      "enable_switch_soul_in_as": false,
+      "preset_boss": "6,1",
+      "preset_general": "6,2",
+      "preset_elite": "6,3",
+      "strategy_boss": "FALSE",
+      "strategy_general": "30",
+      "strategy_elite": "4380000"
     },
-    "general_battle_config": {
-      "lock_team_enable": false,
-      "preset_enable": false,
-      "preset_group": 1,
-      "preset_team": 1,
-      "green_enable": false,
-      "green_mark": "green_left1",
-      "random_click_swipt_enable": false
-    },
-    "switch_soul_config": {
-      "enable": false,
-      "switch_group_team": "-1,-1",
-      "enable_switch_by_name": false,
-      "group_name": "",
-      "team_name": ""
+    "saved_params": {
+      "save_date": "",
+      "done": "",
+      "unavailable": ""
     }
   },
   "guild_banquet": {
