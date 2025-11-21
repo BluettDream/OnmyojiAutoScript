@@ -1,0 +1,9 @@
+[
+  {
+    "itemName": "md_swipe_friend_up",
+    "roiFront": "784,398,55,20",
+    "roiBack": "792,340,56,23",
+    "mode": "default",
+    "description": "向上滑动好友列表"
+  }
+]

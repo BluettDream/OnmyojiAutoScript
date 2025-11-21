@@ -26,6 +26,7 @@ class MetaDemonConfig(ConfigBase):
     auto_tea: bool = Field(default=False, description='疲劳度满时是否自动喝茶, 关闭则自动根据调度器等待间隔时间安排下一次调度')
     fire_sequence: str = Field(default='1 2 3 4', description='攻击顺序:从左到右,空格分隔(1:一星鬼王,2:二星鬼王...)\n例:3 2(先攻击三星鬼王然后二星鬼王)')
     powerful_list: str = Field(default='', description='开启强力鬼王列表(空格分隔),例:4 5(四星鬼王和五星鬼王开启强力追击)')
+    synthesis_list: str = Field(default='1', description='鬼王合成列表(空格分隔),支持1-5星合成,例:1 2 3(合成一星,二星,三星鬼王)')
 
     @property
     def limit_time_v(self) -> timedelta:
@@ -50,6 +51,15 @@ class MetaDemonConfig(ConfigBase):
         powerful_num_list = powerful_list_text.split(' ')
         powerful_boss_type_list = [BossType(int(num_text)) for num_text in powerful_num_list]
         return powerful_boss_type_list
+
+    @property
+    def synthesis_list_v(self) -> list[BossType]:
+        synthesis_list_text = self.synthesis_list.strip()
+        if synthesis_list_text == '':
+            return []
+        synthesis_num_list = synthesis_list_text.split(' ')
+        synthesis_boss_type_list = [BossType(int(num_text)) for num_text in synthesis_num_list]
+        return synthesis_boss_type_list
 
 
 class MetaDemonSwitchSoulConfig(ConfigBase):

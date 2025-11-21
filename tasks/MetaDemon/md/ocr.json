@@ -7,5 +7,14 @@
     "method": "Default",
     "keyword": "",
     "description": "疲劳度"
+  },
+  {
+    "itemName": "md_friends",
+    "roiFront": "435,179,486,351",
+    "roiBack": "435,178,489,352",
+    "mode": "Full",
+    "method": "Default",
+    "keyword": "",
+    "description": "好友列表"
   }
 ]
