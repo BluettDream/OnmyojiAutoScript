@@ -204,6 +204,10 @@ class ScriptTask(GeneralBattle, SwitchSoul, GameUi, MetaDemonAssets):
                 return True
             if self.appear(self.I_MD_GET_BOSS, interval=0.6):  # 打开弹窗了
                 break
+            if self.appear(self.I_MD_TICKET_EMPTY, interval=0.6):  # 任何门票都没有了
+                self.State.done = True
+                logger.info('Not have any boss ticket, exit')
+                return False
             if self.appear_then_click(self.I_MD_SWITCH_TICKET, interval=0.6):
                 continue
         type_ticket_dict: dict[BossType, RuleImage] = {

@@ -304,5 +304,14 @@
     "method": "Template matching",
     "threshold": 0.8,
     "description": "好友选中标志"
+  },
+  {
+    "itemName": "md_ticket_empty",
+    "imageName": "md_md_ticket_empty.png",
+    "roiFront": "591,305,100,100",
+    "roiBack": "447,295,368,154",
+    "method": "Template matching",
+    "threshold": 0.8,
+    "description": "无鬼王门票标志"
   }
 ]
