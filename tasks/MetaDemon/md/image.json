@@ -68,7 +68,7 @@
     "roiFront": "361,312,68,69",
     "roiBack": "261,299,754,133",
     "method": "Template matching",
-    "threshold": 0.9,
+    "threshold": 0.85,
     "description": "一星鬼王召唤票"
   },
   {
@@ -77,7 +77,7 @@
     "roiFront": "460,314,66,67",
     "roiBack": "266,303,751,134",
     "method": "Template matching",
-    "threshold": 0.9,
+    "threshold": 0.85,
     "description": "二星鬼王召唤票"
   },
   {
@@ -86,7 +86,7 @@
     "roiFront": "557,315,67,67",
     "roiBack": "266,302,749,129",
     "method": "Template matching",
-    "threshold": 0.9,
+    "threshold": 0.85,
     "description": "三星鬼王召唤票"
   },
   {
@@ -95,7 +95,7 @@
     "roiFront": "656,314,71,68",
     "roiBack": "261,299,754,132",
     "method": "Template matching",
-    "threshold": 0.9,
+    "threshold": 0.85,
     "description": "四星鬼王召唤票"
   },
   {
@@ -104,7 +104,7 @@
     "roiFront": "754,313,71,69",
     "roiBack": "267,303,749,129",
     "method": "Template matching",
-    "threshold": 0.9,
+    "threshold": 0.85,
     "description": "五星鬼王召唤票"
   },
   {
@@ -113,7 +113,7 @@
     "roiFront": "854,314,66,69",
     "roiBack": "265,299,754,133",
     "method": "Template matching",
-    "threshold": 0.9,
+    "threshold": 0.85,
     "description": "六星鬼王召唤票"
   },
   {
