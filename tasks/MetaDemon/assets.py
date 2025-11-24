@@ -85,6 +85,8 @@ class MetaDemonAssets:
 	I_MD_SYNTHESIS_EMPTY = RuleImage(roi_front=(800,158,72,66), roi_back=(622,144,420,407), threshold=0.8, method="Template matching", file="./tasks/MetaDemon/md/md_md_synthesis_empty.png")
 	# 好友选中标志 
 	I_MD_FRIEND_SELECTED = RuleImage(roi_front=(600,178,32,38), roi_back=(351,174,578,357), threshold=0.8, method="Template matching", file="./tasks/MetaDemon/md/md_md_friend_selected.png")
+	# 无鬼王门票标志 
+	I_MD_TICKET_EMPTY = RuleImage(roi_front=(591,305,100,100), roi_back=(447,295,368,154), threshold=0.8, method="Template matching", file="./tasks/MetaDemon/md/md_md_ticket_empty.png")
 
 
 	# Ocr Rule Assets
