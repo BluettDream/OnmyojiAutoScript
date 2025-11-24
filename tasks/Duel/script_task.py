@@ -164,7 +164,7 @@ class ScriptTask(GameUi, GeneralBattle, SwitchSoul, DuelAssets, SwitchOnmyoji):
         logger.hr('duel battle waiting')
         battle_operated = False
         battle_timeout_timer = Timer(270).start()
-        ret_timer = Timer(2.5).start()
+        ret_timer = Timer(2.5)
         battle_timeout_cnt, max_timeout_cnt = 0, 3
         ret = False
         while True:
