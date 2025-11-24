@@ -2,6 +2,8 @@
 # @author runhey
 # github https://github.com/runhey
 import time
+
+import random
 import re
 
 from module.logger import logger
@@ -13,9 +15,10 @@ from tasks.Component.Buy.buy import Buy
 from tasks.RichMan.assets import RichManAssets
 from tasks.RichMan.config import GuildStore
 
+
 class Guild(Buy, GameUi, RichManAssets):
 
-    def execute_guild(self, con: GuildStore=None):
+    def execute_guild(self, con: GuildStore = None):
 
         if not con.enable:
             return
@@ -32,27 +35,20 @@ class Guild(Buy, GameUi, RichManAssets):
                 continue
         logger.info('Enter guild store success')
         time.sleep(0.5)
-        while 1:
+        swipe_cnt, max_swipe = 0, random.randint(4, 6)
+        mystery_ret, scrap_ret, skin_ret = False, False, False
+        while swipe_cnt <= max_swipe:
             self.screenshot()
-            # 功勋商店 购买皮肤券 现在问题是皮肤券作为下滑判断标志,下滑过程中roi_front[1]发生了变化,
-            # 导致后续识别本周剩余数量位置偏差,现在解决方案是创建一个相同属性的I_GUILD_SKIN_CHECK 来作为判断标志
-            if self.appear(self.I_GUILD_SKIN_CHECK):
-                break
-            if self.swipe(self.S_GUILD_STORE, interval=1.5):
-                time.sleep(2)
-                continue
-
-        # 开始购买
-        if con.mystery_amulet:
-            # 蓝票
-            self._guild_mystery_amulet()
-        if con.black_daruma_scrap:
-            # 黑碎
-            self._guild_black_daruma_scrap()
-        if con.skin_ticket:
-            # 皮肤券
-            self._guild_skin_ticket(con.skin_ticket)
-
+            if con.mystery_amulet and self.appear(self.I_GUILD_BLUE, interval=1.5) and not mystery_ret:  # 蓝票
+                mystery_ret = self._guild_mystery_amulet()
+            if con.black_daruma_scrap and self.appear(self.I_GUILD_SCRAP, interval=1.5) and not scrap_ret:  # 黑碎
+                scrap_ret = self._guild_black_daruma_scrap()
+            if con.skin_ticket and self.appear(self.I_GUILD_SKIN, interval=1.5) and not skin_ret:  # 皮肤券
+                skin_ret = self._guild_skin_ticket()
+            self.swipe(self.S_GUILD_STORE, interval=1.5)
+            time.sleep(2)
+            logger.attr(max_swipe - swipe_cnt, 'remain swipe times')
+            swipe_cnt += 1
         # 回去
         while 1:
             self.screenshot()
@@ -138,5 +134,3 @@ if __name__ == '__main__':
 
     # t._guild_skin_ticket(5)
     t.execute_guild(con=c.rich_man.guild_store)
-
-

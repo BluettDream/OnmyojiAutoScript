@@ -1,8 +1,8 @@
 [
   {
     "itemName": "guild_store",
-    "roiFront": "807,460,46,35",
-    "roiBack": "720,214,90,34",
+    "roiFront": "806,460,46,35",
+    "roiBack": "754,360,90,34",
     "mode": "default",
     "description": "description"
   }
