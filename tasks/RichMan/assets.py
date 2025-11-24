@@ -44,7 +44,7 @@ class RichManAssets:
 
 	# Swipe Rule Assets
 	# description 
-	S_GUILD_STORE = RuleSwipe(roi_front=(807,460,46,35), roi_back=(720,214,90,34), mode="default", name="guild_store")
+	S_GUILD_STORE = RuleSwipe(roi_front=(806,460,46,35), roi_back=(754,360,90,34), mode="default", name="guild_store")
 
 
 	# Image Rule Assets
