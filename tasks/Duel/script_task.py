@@ -172,6 +172,9 @@ class ScriptTask(GameUi, GeneralBattle, SwitchSoul, DuelAssets, SwitchOnmyoji):
             self.check_and_get_reward()
             if self.appear(self.I_CHECK_DUEL, interval=0.6) and self.appear(self.I_D_HELP, interval=0.6):  # 斗技主界面
                 break
+            if self.appear_then_click(self.I_UI_BACK_RED, interval=1.2):  # 关闭段位上升页面
+                ret_timer.reset()
+                continue
             if ret_timer.started() and ret_timer.reached():  # 兜底逻辑, 已经结算了但是还没有到斗技主界面
                 self.ui_goto_page(page_duel)
                 break
@@ -198,7 +201,7 @@ class ScriptTask(GameUi, GeneralBattle, SwitchSoul, DuelAssets, SwitchOnmyoji):
             if battle_timeout_timer.reached_and_reset():
                 battle_timeout_cnt += 1
                 self.reset_device('BATTLE_STATUS_S')
-                logger.warning('Duel battle stuck, swipe')
+                logger.warning("battle' time is too long, increase wait time")
         return ret
 
     def duel_exit_battle(self):
