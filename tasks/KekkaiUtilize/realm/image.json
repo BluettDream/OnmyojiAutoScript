@@ -47,7 +47,7 @@
   {
     "itemName": "box_exp",
     "imageName": "realm_box_exp.png",
-    "roiFront": "893,440,42,45",
+    "roiFront": "993,452,31,54",
     "roiBack": "862,396,249,216",
     "method": "Template matching",
     "threshold": 0.7,
@@ -92,8 +92,8 @@
   {
     "itemName": "box_exp_max",
     "imageName": "realm_box_exp_max.png",
-    "roiFront": "889,430,61,64",
-    "roiBack": "829,372,228,186",
+    "roiFront": "991,452,38,53",
+    "roiBack": "829,372,254,249",
     "method": "Template matching",
     "threshold": 0.7,
     "description": "盒子经验满"
