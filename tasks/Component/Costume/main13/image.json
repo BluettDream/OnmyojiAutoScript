@@ -29,8 +29,8 @@
   {
     "itemName": "check_main_13",
     "imageName": "main13_check_main_13.png",
-    "roiFront": "806,273,64,31",
-    "roiBack": "805,273,67,31",
+    "roiFront": "620,121,90,94",
+    "roiBack": "574,89,189,180",
     "method": "Template matching",
     "threshold": 0.8,
     "description": "description"
