@@ -3,7 +3,7 @@
     "itemName": "harvest_jade",
     "imageName": "harvest_harvest_jade.png",
     "roiFront": "732,489,34,33",
-    "roiBack": "177,451,973,141",
+    "roiBack": "177,358,973,234",
     "method": "Template matching",
     "threshold": 0.8,
     "description": "点击勾玉"
@@ -12,7 +12,7 @@
     "itemName": "harvest_sign",
     "imageName": "harvest_harvest_sign.png",
     "roiFront": "397,500,24,34",
-    "roiBack": "70,471,889,89",
+    "roiBack": "70,375,1085,184",
     "method": "Template matching",
     "threshold": 0.8,
     "description": "签到小图标"
@@ -30,7 +30,7 @@
     "itemName": "harvest_sign_999",
     "imageName": "harvest_harvest_sign_999.png",
     "roiFront": "345,494,23,29",
-    "roiBack": "51,459,888,103",
+    "roiBack": "51,372,1109,189",
     "method": "Template matching",
     "threshold": 0.8,
     "description": "999签到福袋"
@@ -39,7 +39,7 @@
     "itemName": "harvest_mail",
     "imageName": "harvest_harvest_mail.png",
     "roiFront": "337,505,37,25",
-    "roiBack": "38,465,880,89",
+    "roiBack": "38,396,1128,157",
     "method": "Template matching",
     "threshold": 0.8,
     "description": "邮件小图标"
@@ -75,7 +75,7 @@
     "itemName": "harvest_soul",
     "imageName": "harvest_harvest_soul.png",
     "roiFront": "241,497,38,36",
-    "roiBack": "68,480,930,72",
+    "roiBack": "68,392,1113,159",
     "method": "Template matching",
     "threshold": 0.8,
     "description": "description"
@@ -93,7 +93,7 @@
     "itemName": "harvest_ap",
     "imageName": "harvest_harvest_ap.png",
     "roiFront": "721,486,31,38",
-    "roiBack": "206,462,970,134",
+    "roiBack": "206,361,970,235",
     "method": "Template matching",
     "threshold": 0.8,
     "description": "description"
@@ -111,7 +111,7 @@
     "itemName": "harvest_sign_3",
     "imageName": "harvest_harvest_sign_3.png",
     "roiFront": "291,495,33,36",
-    "roiBack": "100,473,1014,91",
+    "roiBack": "100,385,1014,179",
     "method": "Template matching",
     "threshold": 0.8,
     "description": "签到"
@@ -183,7 +183,7 @@
     "itemName": "harvest_mail_copy",
     "imageName": "harvest_harvest_mail_copy.png",
     "roiFront": "257,509,29,21",
-    "roiBack": "192,472,790,100",
+    "roiBack": "192,382,928,190",
     "method": "Template matching",
     "threshold": 0.8,
     "description": "description"

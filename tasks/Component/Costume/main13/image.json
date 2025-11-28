@@ -29,8 +29,8 @@
   {
     "itemName": "check_main_13",
     "imageName": "main13_check_main_13.png",
-    "roiFront": "806,273,64,31",
-    "roiBack": "805,273,67,31",
+    "roiFront": "620,121,90,94",
+    "roiBack": "574,89,189,180",
     "method": "Template matching",
     "threshold": 0.8,
     "description": "description"
@@ -42,6 +42,42 @@
     "roiBack": "543,125,57,64",
     "method": "Template matching",
     "threshold": 0.6,
+    "description": "description"
+  },
+  {
+    "itemName": "wq_done_13",
+    "imageName": "main13_wq_done_13.png",
+    "roiFront": "172,281,32,34",
+    "roiBack": "97,245,213,170",
+    "method": "Template matching",
+    "threshold": 0.8,
+    "description": "description"
+  },
+  {
+    "itemName": "harvest_sign_13",
+    "imageName": "main13_harvest_sign_13.png",
+    "roiFront": "890,424,21,30",
+    "roiBack": "850,392,100,100",
+    "method": "Template matching",
+    "threshold": 0.8,
+    "description": "description"
+  },
+  {
+    "itemName": "harvest_jade_13",
+    "imageName": "main13_harvest_jade_13.png",
+    "roiFront": "992,428,20,25",
+    "roiBack": "955,395,100,100",
+    "method": "Template matching",
+    "threshold": 0.8,
+    "description": "description"
+  },
+  {
+    "itemName": "harvest_mail_13",
+    "imageName": "main13_harvest_mail_13.png",
+    "roiFront": "888,430,26,20",
+    "roiBack": "850,396,100,100",
+    "method": "Template matching",
+    "threshold": 0.8,
     "description": "description"
   }
 ]

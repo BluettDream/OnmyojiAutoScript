@@ -309,3 +309,13 @@ class LoginHandler(BaseTask, RestartAssets):
                 self.wait_until_appear(self.I_HARVEST_MAIL_CONFIRM, wait_time=1)
                 timeout_timer.reset()
                 continue
+
+
+if __name__ == '__main__':
+    from module.config.config import Config
+    from module.device.device import Device
+
+    c = Config('oas1')
+    d = Device(c)
+    t = LoginHandler(c, d)
+    t.harvest()
