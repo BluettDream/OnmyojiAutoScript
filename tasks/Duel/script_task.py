@@ -143,7 +143,8 @@ class ScriptTask(GameUi, GeneralBattle, SwitchSoul, DuelAssets, SwitchOnmyoji):
             if self.appear_then_click(self.I_BAN, interval=1.2):
                 self.is_celeb = True
                 continue
-            if self.is_celeb:  # 名仕不开启自动上阵, 根据最后一个式神的名字是否改变来检查自己式神是否被ban
+            # 名仕不开启自动上阵, 根据最后一个式神的名字是否改变来检查自己式神是否被ban
+            if not self.appear(self.I_D_CHECK_BAN, interval=0.8) and self.is_celeb:
                 ocr_name = self.O_D_BAN_NAME.ocr(self.device.image)
                 shikigami_banned = ocr_name != '' and not any(
                     char in ocr_name for char in self.conf.duel_celeb_config.ban_name)
@@ -298,7 +299,8 @@ class ScriptTask(GameUi, GeneralBattle, SwitchSoul, DuelAssets, SwitchOnmyoji):
         return self.appear(self.I_D_PREPARE) or \
             self.appear(self.I_D_AUTO_ENTRY) or \
             self.appear(self.I_BAN) or \
-            self.appear(self.I_D_WORD_BATTLE)
+            self.appear(self.I_D_WORD_BATTLE) or \
+            self.appear(self.I_D_CHECK_BAN)
 
     def is_battle_win(self) -> bool:
         return self.appear(self.I_WIN) or self.appear(self.I_D_VICTORY)
