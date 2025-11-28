@@ -3,7 +3,7 @@
     "itemName": "harvest_jade",
     "imageName": "harvest_harvest_jade.png",
     "roiFront": "732,489,34,33",
-    "roiBack": "177,3585,973,234",
+    "roiBack": "177,358,973,234",
     "method": "Template matching",
     "threshold": 0.8,
     "description": "点击勾玉"
@@ -163,7 +163,7 @@
   },
   {
     "itemName": "harvest_back_pet_house",
-    "imageName": "harvest_harvest_back_pet_house.png",
+    "imageName": "harvest_back_pet_house.png",
     "roiFront": "20,15,70,70",
     "roiBack": "20,15,70,70",
     "method": "Template matching",

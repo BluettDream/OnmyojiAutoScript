@@ -12,7 +12,7 @@ class RestartAssets:
 
 	# Image Rule Assets
 	# 点击勾玉 
-	I_HARVEST_JADE = RuleImage(roi_front=(732,489,34,33), roi_back=(177,3585,973,234), threshold=0.8, method="Template matching", file="./tasks/Restart/harvest/harvest_harvest_jade.png")
+	I_HARVEST_JADE = RuleImage(roi_front=(732,489,34,33), roi_back=(177,358,973,234), threshold=0.8, method="Template matching", file="./tasks/Restart/harvest/harvest_harvest_jade.png")
 	# 签到小图标 
 	I_HARVEST_SIGN = RuleImage(roi_front=(397,500,24,34), roi_back=(70,375,1085,184), threshold=0.8, method="Template matching", file="./tasks/Restart/harvest/harvest_harvest_sign.png")
 	# description 
@@ -48,7 +48,7 @@ class RestartAssets:
 	# 寮包 
 	I_HARVEST_GUILD_REWARD = RuleImage(roi_front=(244,498,41,42), roi_back=(200,403,817,157), threshold=0.8, method="Template matching", file="./tasks/Restart/harvest/harvest_harvest_guild_reward.png")
 	# 宠物小屋关闭按钮 
-	I_HARVEST_BACK_PET_HOUSE = RuleImage(roi_front=(20,15,70,70), roi_back=(20,15,70,70), threshold=0.8, method="Template matching", file="./tasks/Restart/harvest/harvest_harvest_back_pet_house.png")
+	I_HARVEST_BACK_PET_HOUSE = RuleImage(roi_front=(20,15,70,70), roi_back=(20,15,70,70), threshold=0.8, method="Template matching", file="./tasks/Restart/harvest/harvest_back_pet_house.png")
 	# 点击庭院阴阳师出现的姿度按钮 
 	I_HARVEST_ZIDU = RuleImage(roi_front=(785,475,135,135), roi_back=(785,475,135,135), threshold=0.8, method="Template matching", file="./tasks/Restart/harvest/harvest_harvest_zidu.png")
 	# description 

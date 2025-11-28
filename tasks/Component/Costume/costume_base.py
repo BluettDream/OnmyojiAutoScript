@@ -20,7 +20,11 @@ main_costume_model = {
         'I_MAIN_GOTO_EXPLORATION': f'I_MAIN_GOTO_EXPLORATION_{i}',
         'I_MAIN_GOTO_SUMMON': f'I_MAIN_GOTO_SUMMON_{i}',
         'I_MAIN_GOTO_TOWN': f'I_MAIN_GOTO_TOWN_{i}',
-        'I_PET_HOUSE': f'I_PET_HOUSE_{i}'
+        'I_PET_HOUSE': f'I_PET_HOUSE_{i}',
+        'I_WQ_DONE': f'I_WQ_DONE_{i}',
+        'I_HARVEST_SIGN': f'I_HARVEST_SIGN_{i}',
+        'I_HARVEST_JADE': f'I_HARVEST_JADE_{i}',
+        'I_HARVEST_MAIL': f'I_HARVEST_MAIL_{i}'
     } for i in range(1, 14)
 }
 
@@ -104,7 +108,9 @@ class CostumeBase:
         logger.info(f'Switch main costume to {main_type}')
         costume_assets = CostumeAssets()
         for key, value in main_costume_model[main_type].items():
-            assert_value: RuleImage = getattr(costume_assets, value)
+            assert_value: RuleImage = getattr(costume_assets, value, None)
+            if assert_value is None:
+                continue
             self.replace_img(key, assert_value)
 
     def check_costume_realm(self, realm_type: RealmType):
