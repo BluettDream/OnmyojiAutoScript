@@ -39,9 +39,9 @@ class DuelAssets:
 	# 战 
 	I_D_WORD_BATTLE = RuleImage(roi_front=(613,41,54,54), roi_back=(600,24,84,85), threshold=0.8, method="Template matching", file="./tasks/Duel/duel/duel_d_word_battle.png")
 	# 名士的星星 
-	I_D_CELEB_STAR = RuleImage(roi_front=(586,456,30,32), roi_back=(574,444,53,54), threshold=0.75, method="Template matching", file="./tasks/Duel/duel/duel_d_celeb_star.png")
+	I_D_CELEB_STAR = RuleImage(roi_front=(646,450,33,37), roi_back=(551,433,185,67), threshold=0.75, method="Template matching", file="./tasks/Duel/duel/duel_d_celeb_star.png")
 	# 名士专属 
-	I_D_CELEB_HONOR = RuleImage(roi_front=(665,531,25,30), roi_back=(652,517,52,53), threshold=0.75, method="Template matching", file="./tasks/Duel/duel/duel_d_celeb_honor.png")
+	I_D_CELEB_HONOR = RuleImage(roi_front=(338,641,25,30), roi_back=(199,606,222,76), threshold=0.75, method="Template matching", file="./tasks/Duel/duel/duel_d_celeb_honor.png")
 	# 练 
 	I_BATTLE_WITH_TRAIN = RuleImage(roi_front=(1161,588,78,81), roi_back=(1114,547,163,172), threshold=0.8, method="Template matching", file="./tasks/Duel/duel/duel_battle_with_train.png")
 	# 练2 
@@ -51,9 +51,11 @@ class DuelAssets:
 	# 活动的战斗按钮 
 	I_D_BATTLE2 = RuleImage(roi_front=(1171,592,69,78), roi_back=(1119,566,154,143), threshold=0.8, method="Template matching", file="./tasks/Duel/duel/duel_d_battle2.png")
 	# 禁用 
-	I_BAN = RuleImage(roi_front=(1112,537,100,100), roi_back=(1112,537,100,100), threshold=0.8, method="Template matching", file="./tasks/Duel/duel/duel_ban.png")
+	I_BAN = RuleImage(roi_front=(1139,565,77,72), roi_back=(1122,545,114,116), threshold=0.8, method="Template matching", file="./tasks/Duel/duel/duel_ban.png")
 	# 左上角的退出 
 	I_DUEL_EXIT = RuleImage(roi_front=(14,12,43,41), roi_back=(14,12,43,41), threshold=0.8, method="Template matching", file="./tasks/Duel/duel/duel_duel_exit.png")
+	# ban选界面 
+	I_D_CHECK_BAN = RuleImage(roi_front=(611,36,56,62), roi_back=(590,14,100,100), threshold=0.8, method="Template matching", file="./tasks/Duel/duel/duel_d_check_ban.png")
 
 
 	# Ocr Rule Assets
