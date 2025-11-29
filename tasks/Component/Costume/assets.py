@@ -76,11 +76,15 @@ class CostumeAssets:
 	# description 
 	I_WQ_DONE_13 = RuleImage(roi_front=(172,281,32,34), roi_back=(97,245,213,170), threshold=0.8, method="Template matching", file="./tasks/Component/Costume/main13/main13_wq_done_13.png")
 	# description 
-	I_HARVEST_SIGN_13 = RuleImage(roi_front=(890,424,21,30), roi_back=(850,392,100,100), threshold=0.8, method="Template matching", file="./tasks/Component/Costume/main13/main13_harvest_sign_13.png")
+	I_HARVEST_SIGN_13 = RuleImage(roi_front=(890,424,21,30), roi_back=(804,387,312,129), threshold=0.8, method="Template matching", file="./tasks/Component/Costume/main13/main13_harvest_sign_13.png")
 	# description 
-	I_HARVEST_JADE_13 = RuleImage(roi_front=(992,428,20,25), roi_back=(955,395,100,100), threshold=0.8, method="Template matching", file="./tasks/Component/Costume/main13/main13_harvest_jade_13.png")
+	I_HARVEST_JADE_13 = RuleImage(roi_front=(992,428,20,25), roi_back=(808,395,327,118), threshold=0.8, method="Template matching", file="./tasks/Component/Costume/main13/main13_harvest_jade_13.png")
 	# description 
-	I_HARVEST_MAIL_13 = RuleImage(roi_front=(888,430,26,20), roi_back=(850,396,100,100), threshold=0.8, method="Template matching", file="./tasks/Component/Costume/main13/main13_harvest_mail_13.png")
+	I_HARVEST_MAIL_13 = RuleImage(roi_front=(888,430,26,20), roi_back=(782,392,328,135), threshold=0.8, method="Template matching", file="./tasks/Component/Costume/main13/main13_harvest_mail_13.png")
+	# description 
+	I_HARVEST_SOUL_13 = RuleImage(roi_front=(887,423,20,31), roi_back=(814,386,279,137), threshold=0.8, method="Template matching", file="./tasks/Component/Costume/main13/main13_harvest_soul_13.png")
+	# description 
+	I_HARVEST_GUILD_REWARD_13 = RuleImage(roi_front=(881,429,33,25), roi_back=(774,382,320,122), threshold=0.8, method="Template matching", file="./tasks/Component/Costume/main13/main13_harvest_guild_reward_13.png")
 
 
 	# Image Rule Assets
