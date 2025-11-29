@@ -21,10 +21,12 @@ main_costume_model = {
         'I_MAIN_GOTO_SUMMON': f'I_MAIN_GOTO_SUMMON_{i}',
         'I_MAIN_GOTO_TOWN': f'I_MAIN_GOTO_TOWN_{i}',
         'I_PET_HOUSE': f'I_PET_HOUSE_{i}',
-        'I_WQ_DONE': f'I_WQ_DONE_{i}',
+        'I_WQ_DONE': f'I_WQ_DONE_{i}',  # 该条及以下非强制更改, 若对应庭院内容识别不到可以添加
         'I_HARVEST_SIGN': f'I_HARVEST_SIGN_{i}',
         'I_HARVEST_JADE': f'I_HARVEST_JADE_{i}',
-        'I_HARVEST_MAIL': f'I_HARVEST_MAIL_{i}'
+        'I_HARVEST_MAIL': f'I_HARVEST_MAIL_{i}',
+        'I_HARVEST_SOUL': f'I_HARVEST_SOUL_{i}',
+        'I_HARVEST_GUILD_REWARD': f'I_HARVEST_GUILD_REWARD_{i}'
     } for i in range(1, 14)
 }
 

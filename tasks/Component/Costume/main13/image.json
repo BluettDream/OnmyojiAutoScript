@@ -57,7 +57,7 @@
     "itemName": "harvest_sign_13",
     "imageName": "main13_harvest_sign_13.png",
     "roiFront": "890,424,21,30",
-    "roiBack": "850,392,100,100",
+    "roiBack": "804,387,312,129",
     "method": "Template matching",
     "threshold": 0.8,
     "description": "description"
@@ -66,7 +66,7 @@
     "itemName": "harvest_jade_13",
     "imageName": "main13_harvest_jade_13.png",
     "roiFront": "992,428,20,25",
-    "roiBack": "955,395,100,100",
+    "roiBack": "808,395,327,118",
     "method": "Template matching",
     "threshold": 0.8,
     "description": "description"
@@ -75,7 +75,25 @@
     "itemName": "harvest_mail_13",
     "imageName": "main13_harvest_mail_13.png",
     "roiFront": "888,430,26,20",
-    "roiBack": "850,396,100,100",
+    "roiBack": "782,392,328,135",
+    "method": "Template matching",
+    "threshold": 0.8,
+    "description": "description"
+  },
+  {
+    "itemName": "harvest_soul_13",
+    "imageName": "main13_harvest_soul_13.png",
+    "roiFront": "887,423,20,31",
+    "roiBack": "814,386,279,137",
+    "method": "Template matching",
+    "threshold": 0.8,
+    "description": "description"
+  },
+  {
+    "itemName": "harvest_guild_reward_13",
+    "imageName": "main13_harvest_guild_reward_13.png",
+    "roiFront": "881,429,33,25",
+    "roiBack": "774,382,320,122",
     "method": "Template matching",
     "threshold": 0.8,
     "description": "description"
