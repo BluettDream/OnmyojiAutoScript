@@ -146,6 +146,7 @@ class Scales(Buy, MallNavbar):
             # 购买
             self._scales_buy_more(self.I_SCA_OROCHI_SCALES)
             time.sleep(0.5)
+
     def _scales_orochi(self, buy_number: int):
         """
         要求必须是在御魂礼盒界面
@@ -357,7 +358,7 @@ if __name__ == '__main__':
     from module.config.config import Config
     from module.device.device import Device
 
-    c = Config('oas1')
+    c = Config('oas2')
     d = Device(c)
     t = Scales(c, d)
 

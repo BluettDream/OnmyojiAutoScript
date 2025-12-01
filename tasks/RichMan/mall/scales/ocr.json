@@ -1,9 +1,9 @@
 [
   {
     "itemName": "sca_number_orochi",
-    "roiFront": "46,318,30,25",
-    "roiBack": "46,318,30,25",
-    "mode": "Quantity",
+    "roiFront": "42,318,31,25",
+    "roiBack": "42,318,31,25",
+    "mode": "Digit",
     "method": "Default",
     "keyword": "",
     "description": "蛇皮剩余可买的"
