@@ -38,7 +38,7 @@
   {
     "itemName": "ryou_dokan_shikigami",
     "imageName": "res_ryou_dokan_shikigami.png",
-    "roiFront": "960,580,140,120",
+    "roiFront": "995,602,77,72",
     "roiBack": "960,580,140,120",
     "method": "Template matching",
     "threshold": 0.8,
