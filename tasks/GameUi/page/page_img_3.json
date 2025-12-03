@@ -11,8 +11,8 @@
   {
     "itemName": "main_goto_onmyodo",
     "imageName": "page_main_goto_onmyodo.png",
-    "roiFront": "992,614,51,60",
-    "roiBack": "992,614,51,60",
+    "roiFront": "997,620,39,34",
+    "roiBack": "975,590,86,98",
     "method": "Template matching",
     "threshold": 0.8,
     "description": "description"
