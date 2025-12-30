@@ -19,6 +19,9 @@ class FriendshipPoints(Special):
         if not con.enable:
             logger.info('Friendship points is not enable')
             return
+        if self.config.model.rich_man.done_record.check_done_and_record_dt('friendship'):
+            logger.warning('Friendship points already done')
+            return
         self._enter_friendship()
 
         # 购买
@@ -31,6 +34,7 @@ class FriendshipPoints(Special):
         if con.broken_amulet != 0:
             self.buy_mall_more(buy_button=self.I_FS_BROKEN, remain_number=False, money_ocr=self.O_MALL_RESOURCE_5,
                                buy_number=con.broken_amulet, buy_max=99, buy_money=100)
+        self.config.model.rich_man.done_record.friendship_done = True
 
     def buy_mall_one(self, buy_button: RuleImage, buy_check: RuleImage, money_ocr: RuleOcr, buy_money: int):
         """

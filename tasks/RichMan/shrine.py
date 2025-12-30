@@ -18,6 +18,9 @@ class Shrine(GameUi, RichManAssets):
         if not con.enable:
             logger.info('Shrine is disabled')
             return
+        if self.config.model.rich_man.done_record.check_done_and_record_dt('shrine'):
+            logger.info('Shrine is done')
+            return
         self.ui_get_current_page()
         self.ui_goto(page_summon)
 
@@ -39,6 +42,7 @@ class Shrine(GameUi, RichManAssets):
             self.shrine_white_five()
         if con.white_daruma_four:
             self.shrine_white_four()
+        self.config.model.rich_man.done_record.shrine_done = True
 
     def shrine_check_money(self, mix: int) -> bool:
         self.screenshot()

@@ -30,7 +30,7 @@ class ScriptTask(Mall, Guild, ThousandThings, Shrine):
         self.execute_mall()
 
         self.set_next_run(task='RichMan', success=True, finish=False)
-
+        self.config.model.rich_man.done_record.last_record_date = datetime.now()
         raise TaskEnd('RichMan')
 
 

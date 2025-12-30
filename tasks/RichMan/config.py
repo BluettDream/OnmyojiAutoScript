@@ -1,11 +1,11 @@
 # This Python file uses the following encoding: utf-8
 # @author runhey
 # github https://github.com/runhey
-from datetime import timedelta
+from datetime import timedelta, datetime
 from pydantic import BaseModel, Field
 
 from tasks.Component.config_scheduler import Scheduler
-from tasks.Component.config_base import ConfigBase
+from tasks.Component.config_base import ConfigBase, DateTime, dynamic_hide
 from tasks.Utils.config_enum import DemonClass
 
 
@@ -92,7 +92,27 @@ class GuildStore(BaseModel):
     black_daruma_scrap: bool = Field(title='Black Daruma Scrap', default=False)
     skin_ticket: int = Field(title='Skin Ticket', default=0, description='skin_ticket_help')
 
+class DoneRecord(BaseModel):
+    last_record_date: DateTime = Field(default=DateTime.fromisoformat('2025-12-01 00:00:00'))
+    special_done: bool = Field(default=False)
+    honor_done: bool = Field(default=False)
+    friendship_done: bool = Field(default=False)
+    medal_done: bool = Field(default=False)
+    charisma_done: bool = Field(default=False)
+    thousand_done: bool = Field(default=False)
+    consignment_done: bool = Field(default=False)
+    scales_done: bool = Field(default=False)
+    bondlings_done: bool = Field(default=False)
+    shrine_done: bool = Field(default=False)
+    guild_done: bool = Field(default=False)
 
+    def check_done_and_record_dt(self, name: str) -> bool:
+        """检查对应任务是否完成并记录时间"""
+        # 不是同一周则直接判定没有完成
+        if self.last_record_date.isocalendar()[:2] != datetime.now().isocalendar()[:2]:
+            self.last_record_date = datetime.now()
+            return False
+        return getattr(self, f'{name}_done', False)
 
 
 class RichMan(ConfigBase):
@@ -109,3 +129,7 @@ class RichMan(ConfigBase):
     bondlings: Bondlings = Field(default_factory=Bondlings)
     shrine: Shrine = Field(default_factory=Shrine)
     guild_store: GuildStore = Field(default_factory=GuildStore)
+
+    done_record: DoneRecord = Field(default_factory=DoneRecord)
+
+    hide_fields = dynamic_hide('done_record')
