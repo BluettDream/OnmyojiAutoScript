@@ -27,6 +27,9 @@ class Consignment(Buy, MallNavbar):
         if not con.buy_sale_ticket:
             logger.info('Consignment buy_sale_ticket is not enable')
             return
+        if self.config.model.rich_man.done_record.check_done_and_record_dt('consignment'):
+            logger.info('Consignment is done')
+            return
         self._enter_consignment()
         self.ui_click(self.I_CON_ENTER, self.I_CON_ENTER_CHECK)
         time.sleep(0.5)
@@ -43,6 +46,7 @@ class Consignment(Buy, MallNavbar):
         else:
             self.buy_one(self.I_CON_TICKET, remain_number)
         logger.info('Consignment buy_sale_ticket is success')
+        self.config.model.rich_man.done_record.consignment_done = True
 
 
 

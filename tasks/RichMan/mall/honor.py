@@ -21,6 +21,9 @@ class Honor(Special):
         if not con.enable:
             logger.info('Honor is not enable')
             return
+        if self.config.model.rich_man.done_record.check_done_and_record_dt('honor'):
+            logger.info('Honor is done')
+            return
         self._enter_honor()
         
         # 向下滑找到购买的物品
@@ -52,6 +55,7 @@ class Honor(Special):
             if self.swipe(self.S_SP_DOWN, interval=2):
                 swipe_count += 1
                 time.sleep(2)
+        self.config.model.rich_man.done_record.honor_done = True
 
     def _honor_mystery_amulet(self, enable: bool=False):
         logger.hr('Buy mystery amulet', 3)

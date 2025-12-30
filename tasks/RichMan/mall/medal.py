@@ -21,6 +21,9 @@ class Medal(FriendshipPoints):
         if not con.enable:
             logger.info('Medal is not enable')
             return
+        if self.config.model.rich_man.done_record.check_done_and_record_dt('medal'):
+            logger.info('Medal is done')
+            return
         self._enter_medal()
 
         # 黑蛋
@@ -59,6 +62,7 @@ class Medal(FriendshipPoints):
                                buy_number=con.broken_amulet, buy_max=99, buy_money=20)
 
         time.sleep(1)
+        self.config.model.rich_man.done_record.medal_done = True
 
 
 if __name__ == '__main__':

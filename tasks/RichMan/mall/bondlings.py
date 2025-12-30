@@ -22,6 +22,9 @@ class Bondlings(Buy, MallNavbar):
         if not con.enable:
             logger.info('Bondlings is disable')
             return
+        if self.config.model.rich_man.done_record.check_done_and_record_dt('bondlings'):
+            logger.info('Bondlings is done')
+            return
         self._enter_bondlings()
 
         # 购买石头
@@ -36,6 +39,7 @@ class Bondlings(Buy, MallNavbar):
         # 购买中级盘
         self._bondlings_base(buy_button=self.I_BL_BUY_MEDIUM, remain_number=self.O_BL_RES_MEDIUM, check_class=4,
                              buy_number=con.medium_bondling_discs, buy_max=25, buy_money=20)
+        self.config.model.rich_man.done_record.bondlings_done = True
 
     def _bondlings_base(self, buy_button: RuleImage, remain_number: RuleOcr, check_class: int,
                        buy_number: int, buy_max: int, buy_money: int):
