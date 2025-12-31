@@ -11,7 +11,7 @@ from module.atom.click import RuleClick
 from tasks.base_task import BaseTask
 from tasks.Component.GeneralBattle.general_battle import GeneralBattle
 from tasks.GameUi.game_ui import GameUi
-from tasks.GameUi.page import page_area_boss, page_shikigami_records
+from tasks.GameUi.page import page_area_boss, page_shikigami_records, page_main
 from tasks.Component.SwitchSoul.switch_soul import SwitchSoul
 from tasks.AreaBoss.assets import AreaBossAssets
 from tasks.AreaBoss.config_boss import AreaBossFloor
@@ -69,25 +69,11 @@ class ScriptTask(GeneralBattle, GameUi, SwitchSoul, AreaBossAssets):
         elif con.boss_number - boss_fought == 1:
             self.boss_fight(self.I_BATTLE_1)
         # 退出
-        self.go_back()
+        self.ui_goto_page(page_main)
         self.set_next_run(task='AreaBoss', success=True, finish=False)
 
         # 以抛出异常的形式结束
         raise TaskEnd
-
-    def go_back(self) -> None:
-        """
-        返回, 要求这个时候是出现在地域鬼王的主界面
-        :return:
-        """
-        # 点击返回
-        logger.info("Script back home")
-        while 1:
-            self.screenshot()
-            if self.appear_then_click(self.I_BACK_BLUE, threshold=0.6, interval=2):
-                continue
-            if self.appear(self.I_CHECK_MAIN, threshold=0.6):
-                break
 
     def boss(self, battle: RuleImage, collect: bool = False):
 

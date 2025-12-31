@@ -61,7 +61,7 @@ page_summon.link(button=G.I_SUMMON_GOTO_MAIN, destination=page_main)
 page_main.link(button=G.I_MAIN_GOTO_SUMMON, destination=page_summon)
 # 探索exploration
 page_exploration = Page(G.I_CHECK_EXPLORATION)
-page_exploration.link(button=G.I_BACK_BLUE, destination=page_main)
+page_exploration.link(button=G.I_BACK_Y, destination=page_main)
 page_main.link(button=G.I_MAIN_GOTO_EXPLORATION, destination=page_exploration)
 # 町中town
 page_town = Page(G.I_CHECK_TOWN)
@@ -71,11 +71,11 @@ page_main.link(button=G.I_MAIN_GOTO_TOWN, destination=page_town)
 # ************************************* 探索部分 *****************************************#
 # 觉醒 awake zones
 page_awake_zones = Page(G.I_CHECK_AWAKE)
-page_awake_zones.link(button=G.I_BACK_BLUE, destination=page_exploration)
+page_awake_zones.link(button=G.I_BACK_Y, destination=page_exploration)
 page_exploration.link(button=G.I_EXPLORATION_GOTO_AWAKE_ZONE, destination=page_awake_zones)
 # 御魂 soul zones
 page_soul_zones = Page(G.I_CHECK_SOUL_ZONES)
-page_soul_zones.link(button=G.I_BACK_BLUE, destination=page_exploration)
+page_soul_zones.link(button=G.I_BACK_Y, destination=page_exploration)
 page_exploration.link(button=G.I_EXPLORATION_GOTO_SOUL_ZONE, destination=page_soul_zones)
 # 结界突破 realm raid
 page_realm_raid = Page(G.I_CHECK_REALM_RAID)
@@ -88,19 +88,19 @@ page_realm_raid.link(button=RyouToppaAssets.I_RYOU_TOPPA, destination=page_kekka
 page_kekkai_toppa.link(button=G.I_RYOUTOPPA_GOTO_REALMRAID, destination=page_realm_raid)
 # 御灵 goryou realm
 page_goryou_realm = Page(G.I_CHECK_GORYOU)
-page_goryou_realm.link(button=G.I_BACK_BLUE, destination=page_exploration)
+page_goryou_realm.link(button=G.I_BACK_Y, destination=page_exploration)
 page_exploration.link(button=G.I_EXPLORATION_GOTO_GORYOU_REALM, destination=page_goryou_realm)
 # 委派 delegation
 page_delegation = Page(G.I_CHECK_DELEGATION)
-page_delegation.link(button=G.I_BACK_BLUE, destination=page_exploration)
+page_delegation.link(button=G.I_BACK_Y, destination=page_exploration)
 page_exploration.link(button=G.I_EXPLORATION_GOTO_DELEGATION, destination=page_delegation)
 # 秘闻副本 SECRET zones
 page_secret_zones = Page(G.I_CHECK_SECRET_ZONES)
-page_secret_zones.link(button=G.I_BACK_BLUE, destination=page_exploration)
+page_secret_zones.link(button=G.I_BACK_Y, destination=page_exploration)
 page_exploration.link(button=G.I_EXPLORATION_GOTO_SECRET_ZONES, destination=page_secret_zones)
 # 地域鬼王 area boss
 page_area_boss = Page(G.I_CHECK_AREA_BOSS)
-page_area_boss.link(button=G.I_BACK_BLUE, destination=page_exploration)
+page_area_boss.link(button=G.I_BACK_Y, destination=page_exploration)
 page_exploration.link(button=G.I_EXPLORATION_GOTO_AREA_BOSS, destination=page_area_boss)
 # 平安奇谭 heian kitan
 page_heian_kitan = Page(G.I_CHECK_HEIAN_KITAN)

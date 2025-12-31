@@ -356,7 +356,8 @@ class BaseExploration(GameUi, GeneralBattle, GeneralRoom, GeneralInvite, Replace
                 # https://github.com/runhey/OnmyojiAutoScript/issues/548
                 logger.warning('Exit immediately after the boss battle')
                 break
-            if self.appear_then_click(self.I_E_EXIT_CONFIRM, interval=0.8):
+            if self.appear_then_click(self.I_E_EXIT_CONFIRM, interval=0.8) or \
+                    self.appear_then_click(self.I_BACK_Y, interval=0.8):
                 continue
             if self.appear(self.I_EXPLORATION_TITLE) or self.appear(self.I_CHECK_EXPLORATION):
                 continue
