@@ -22,9 +22,6 @@ class Special(Buy, MallNavbar):
         if not con.enable:
             logger.info('Special room is not enable')
             return
-        if self.config.model.rich_man.done_record.check_done_and_record_dt('special'):
-            logger.info('Special record is done')
-            return
         self._enter_special()
         # 向下滑找到购买的物品
         totem_bought, medium_bought, low_bought = False, False, False
@@ -50,7 +47,6 @@ class Special(Buy, MallNavbar):
 
             if self.swipe(self.S_SP_DOWN, interval=2):
                 time.sleep(2)
-        self.config.model.rich_man.done_record.special_done = True
 
     def _special_totom(self, totem_pass: bool):
         """
@@ -140,7 +136,10 @@ class Special(Buy, MallNavbar):
             buy_res_number = buy_number
         if buy_cycles_number:
             for i in range(buy_cycles_number):
-                self.buy_more(self.I_SP_BUY_LOW)
+                ret = self.buy_more(self.I_SP_BUY_LOW)
+                # 溢出了就不买了
+                if ret is not None and not ret:
+                    break
                 time.sleep(0.5)
         if buy_res_number:
             self.buy_more(self.I_SP_BUY_LOW, buy_res_number)

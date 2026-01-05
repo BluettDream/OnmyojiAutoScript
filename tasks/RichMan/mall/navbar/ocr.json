@@ -1,8 +1,8 @@
 [
   {
     "itemName": "mall_resource_1",
-    "roiFront": "144,7,100,43",
-    "roiBack": "144,7,100,43",
+    "roiFront": "255,8,100,43",
+    "roiBack": "256,8,100,43",
     "mode": "Quantity",
     "method": "Default",
     "keyword": "",
@@ -10,8 +10,8 @@
   },
   {
     "itemName": "mall_resource_2",
-    "roiFront": "326,8,124,39",
-    "roiBack": "326,8,124,39",
+    "roiFront": "440,10,80,39",
+    "roiBack": "438,10,82,39",
     "mode": "Quantity",
     "method": "Default",
     "keyword": "",
@@ -19,8 +19,8 @@
   },
   {
     "itemName": "mall_resource_3",
-    "roiFront": "533,9,107,38",
-    "roiBack": "533,9,107,38",
+    "roiFront": "614,9,79,38",
+    "roiBack": "612,10,81,38",
     "mode": "Quantity",
     "method": "Default",
     "keyword": "",
@@ -28,8 +28,8 @@
   },
   {
     "itemName": "mall_resource_4",
-    "roiFront": "739,8,100,39",
-    "roiBack": "739,8,100,39",
+    "roiFront": "796,8,70,39",
+    "roiBack": "793,7,72,39",
     "mode": "Quantity",
     "method": "Default",
     "keyword": "",
@@ -37,8 +37,8 @@
   },
   {
     "itemName": "mall_resource_5",
-    "roiFront": "935,11,100,37",
-    "roiBack": "935,11,100,37",
+    "roiFront": "970,10,72,37",
+    "roiBack": "968,9,73,37",
     "mode": "Quantity",
     "method": "Default",
     "keyword": "",

@@ -22,9 +22,6 @@ class Guild(Buy, GameUi, RichManAssets):
 
         if not con.enable:
             return
-        if self.config.model.rich_man.done_record.check_done_and_record_dt('guild'):
-            logger.info('Guild is done')
-            return
         logger.hr('Start guild', 1)
         self.ui_get_current_page()
         self.ui_goto(page_guild)
@@ -61,7 +58,6 @@ class Guild(Buy, GameUi, RichManAssets):
                 continue
             if self.appear_then_click(self.I_UI_BACK_YELLOW, interval=1):
                 continue
-        self.config.model.rich_man.done_record.guild_done = True
 
     def _guild_mystery_amulet(self):
         # 蓝票

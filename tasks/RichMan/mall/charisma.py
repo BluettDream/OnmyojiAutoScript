@@ -19,9 +19,6 @@ class Charisma(FriendshipPoints):
         if not con.enable:
             logger.info('Charisma is not enable')
             return
-        if self.config.model.rich_man.done_record.check_done_and_record_dt('charisma'):
-            logger.info('Charisma is done')
-            return
         self._enter_charisma()
 
         # 开始
@@ -34,7 +31,6 @@ class Charisma(FriendshipPoints):
         if con.mystery_amulet:
             self.buy_mall_one(buy_button=self.I_CH_BLUE, buy_check=self.I_CH_CHECK_BLUE,
                               money_ocr=self.O_MALL_RESOURCE_5, buy_money=400)
-        self.config.model.rich_man.done_record.charisma_done = True
 
 
 if __name__ == '__main__':

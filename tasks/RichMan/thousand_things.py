@@ -22,9 +22,6 @@ class ThousandThings(GameUi, RichManAssets):
         if not con.enable:
             logger.info('Thousand Things is disabled')
             return
-        if self.config.model.rich_man.done_record.check_done_and_record_dt('thousand'):
-            logger.info('Thousand Things is done')
-            return
         self.ui_get_current_page()
         self.ui_goto(page_travel)
 
@@ -51,7 +48,6 @@ class ThousandThings(GameUi, RichManAssets):
             if self.appear_then_click(self.I_UI_BACK_RED, interval=1):
                 continue
         logger.info('Exit Thousand Things')
-        self.config.model.rich_man.done_record.thousand_done = True
 
     def tt_buy_mystery_amulet(self) -> bool:
         """

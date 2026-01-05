@@ -21,9 +21,6 @@ class Scales(Buy, MallNavbar):
         if not con.enable:
             logger.info('Scales is not enable')
             return
-        if self.config.model.rich_man.done_record.check_done_and_record_dt('scales'):
-            logger.info('Scales is done')
-            return
         self._enter_scales()
 
         # 朴素的御魂
@@ -32,7 +29,6 @@ class Scales(Buy, MallNavbar):
         self._scales_demon(con.demon_souls, con.demon_class, con.demon_position)
         # 海国御魂
         self._scales_sea(con.picture_book_scrap, con.picture_book_rule)
-        self.config.model.rich_man.done_record.scales_done = True
 
 
     def _scales_buy_confirm(self, start_click, number: int = None):

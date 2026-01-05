@@ -16,10 +16,12 @@ class ThousandThings(BaseModel):
     black_daruma_fragment: bool = Field(title='Black Daruma Fragment', default=False)
     ap: bool = Field(title='AP', default=False, description='ap_help')
 
+
 class Consignment(BaseModel):
     # 寄售屋
     enable: bool = Field(title='Enable', default=False)
     buy_sale_ticket: bool = Field(title='Buy Sale Ticket', default=False, description='buy_sale_ticket_help')
+
 
 class Scales(BaseModel):
     # 密卷屋 蛇皮
@@ -39,11 +41,13 @@ class SpecialRoom(BaseModel):
     medium_bondling_discs: int = Field(title='Medium Bondling Discs', default=0, description='medium_bondling_discs_special')
     low_bondling_discs: int = Field(title='Low Bondling Discs', default=0, description='low_bondling_discs_special')
 
+
 class HonorRoom(BaseModel):
     # 杂货铺 荣誉购买
     enable: bool = Field(title='Enable', default=False)
     mystery_amulet: bool = Field(title='Mystery Amulet', default=False, description='mystery_amulet_help_honor')
     black_daruma_scrap: bool = Field(title='Black Daruma Scrap', default=False, description='black_daruma_scrap_help_honor')
+
 
 class FriendshipPoints(BaseModel):
     # 杂货铺 友情点
@@ -51,6 +55,7 @@ class FriendshipPoints(BaseModel):
     white_daruma: bool = Field(title='White Daruma', default=False)
     red_daruma: int = Field(title='Red Daruma', default=0)
     broken_amulet: int = Field(title='Broken Amulet', default=0)
+
 
 class MedalRoom(BaseModel):
     # 杂货铺 勋章购买
@@ -64,11 +69,13 @@ class MedalRoom(BaseModel):
     red_daruma: int = Field(title='Red Daruma', default=0)
     broken_amulet: int = Field(title='Broken Amulet', default=0)
 
+
 class Charisma(BaseModel):
     # 杂货铺 魅力购买
     enable: bool = Field(title='Enable', default=False)
     black_daruma_scrap: bool = Field(title='Black Daruma Scrap', default=False)
     mystery_amulet: bool = Field(title='Mystery Amulet', default=False)
+
 
 class Shrine(BaseModel):
     # 神社 神龛
@@ -76,6 +83,7 @@ class Shrine(BaseModel):
     black_daruma: bool = Field(title='Black Daruma', default=False)
     white_daruma_five: bool = Field(title='White Daruma Five', default=False)
     white_daruma_four: bool = Field(title='White Daruma Four', default=False)
+
 
 class Bondlings(BaseModel):
     # 契灵商店 契忆
@@ -85,34 +93,13 @@ class Bondlings(BaseModel):
     high_bondling_discs: int = Field(title='High Bondling Discs', default=0, description='high_bondling_discs_help')
     medium_bondling_discs: int = Field(title='Medium Bondling Discs', default=0, description='medium_bondling_discs_help')
 
+
 class GuildStore(BaseModel):
     # 寮商店
     enable: bool = Field(title='Enable', default=False)
     mystery_amulet: bool = Field(title='Mystery Amulet', default=False)
     black_daruma_scrap: bool = Field(title='Black Daruma Scrap', default=False)
     skin_ticket: int = Field(title='Skin Ticket', default=0, description='skin_ticket_help')
-
-class DoneRecord(BaseModel):
-    last_record_date: DateTime = Field(default=DateTime.fromisoformat('2025-12-01 00:00:00'))
-    special_done: bool = Field(default=False)
-    honor_done: bool = Field(default=False)
-    friendship_done: bool = Field(default=False)
-    medal_done: bool = Field(default=False)
-    charisma_done: bool = Field(default=False)
-    thousand_done: bool = Field(default=False)
-    consignment_done: bool = Field(default=False)
-    scales_done: bool = Field(default=False)
-    bondlings_done: bool = Field(default=False)
-    shrine_done: bool = Field(default=False)
-    guild_done: bool = Field(default=False)
-
-    def check_done_and_record_dt(self, name: str) -> bool:
-        """检查对应任务是否完成并记录时间"""
-        # 不是同一周则直接判定没有完成
-        if self.last_record_date.isocalendar()[:2] != datetime.now().isocalendar()[:2]:
-            self.last_record_date = datetime.now()
-            return False
-        return getattr(self, f'{name}_done', False)
 
 
 class RichMan(ConfigBase):
@@ -129,7 +116,3 @@ class RichMan(ConfigBase):
     bondlings: Bondlings = Field(default_factory=Bondlings)
     shrine: Shrine = Field(default_factory=Shrine)
     guild_store: GuildStore = Field(default_factory=GuildStore)
-
-    done_record: DoneRecord = Field(default_factory=DoneRecord)
-
-    hide_fields = dynamic_hide('done_record')

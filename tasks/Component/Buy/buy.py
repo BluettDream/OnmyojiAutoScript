@@ -158,7 +158,7 @@ class Buy(BaseTask, BuyAssets):
             if self.appear(self.I_UI_CONFIRM_SAMLL):
                 self.ui_click_until_disappear(self.I_UI_CONFIRM_SAMLL, interval=1)
                 logger.warning('Buy number limit')
-                break
+                return False
 
             if self.click(self.C_BUY_MORE, interval=2):
                 continue
