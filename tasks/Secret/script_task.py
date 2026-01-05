@@ -128,9 +128,7 @@ class ScriptTask(GameUi, GeneralBattle, SwitchSoul, SecretAssets):
                 success = self.run_general_battle(self.battle_config)
                 continue
 
-        self.ui_click(self.I_UI_BACK_BLUE, self.I_CHECK_MAIN)
-        self.ui_get_current_page()
-        self.ui_goto(page_main)
+        self.ui_goto_page(page_main)
         if con.secret_gold_50 or con.secret_gold_100:
             self.open_buff()
             if con.secret_gold_50:
