@@ -202,7 +202,7 @@ class ScriptTask(GameUi, WeeklyTriflesAssets):
         if not obtained:
             self.click_share(self.I_WT_SE_WECHAT)
         # 返回
-        self.ui_click(self.I_UI_BACK_BLUE, self.I_CHECK_MAIN)
+        self.ui_goto_page(page_main)
 
     def _broken_amulet(self, dest_num: int):
         """
