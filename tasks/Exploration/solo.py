@@ -10,6 +10,7 @@ from module.base.timer import Timer
 from tasks.Component.GeneralInvite.config_invite import InviteConfig, InviteNumber, FindMode
 from tasks.Exploration.base import BaseExploration, UpType, Scene
 from tasks.Exploration.config import ChooseRarity, AutoRotate, UserStatus, ExplorationLevel
+from tasks.GameUi.page import page_exploration
 
 
 class SoloExploration(BaseExploration):
@@ -93,6 +94,7 @@ class SoloExploration(BaseExploration):
             elif scene == Scene.BATTLE_PREPARE or scene == Scene.BATTLE_FIGHTING:
                 self.check_take_over_battle(is_screenshot=False, config=self._config.general_battle_config)
             elif scene == Scene.UNKNOWN:
+                self.ui_goto_page(dest_page=page_exploration)
                 continue
 
     def run_leader(self):
