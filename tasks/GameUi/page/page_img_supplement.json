@@ -65,8 +65,8 @@
   {
     "itemName": "check_act_list",
     "imageName": "page_check_act_list.png",
-    "roiFront": "90,14,125,44",
-    "roiBack": "75,3,161,64",
+    "roiFront": "112,13,125,44",
+    "roiBack": "75,3,205,66",
     "method": "Template matching",
     "threshold": 0.8,
     "description": "活动列表页标志"

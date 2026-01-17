@@ -20,11 +20,11 @@
   {
     "itemName": "battle",
     "imageName": "as_battle.png",
-    "roiFront": "813,254,35,135",
-    "roiBack": "754,140,154,315",
+    "roiFront": "479,356,35,135",
+    "roiBack": "421,266,154,315",
     "method": "Template matching",
     "threshold": 0.7,
-    "description": "征伐斗场"
+    "description": "爬塔主界面标志"
   },
   {
     "itemName": "battle_1",
@@ -65,29 +65,29 @@
   {
     "itemName": "ap",
     "imageName": "as_ap.png",
-    "roiFront": "1181,657,23,24",
-    "roiBack": "1149,631,103,71",
+    "roiFront": "1103,531,23,24",
+    "roiBack": "1077,514,81,59",
     "method": "Template matching",
     "threshold": 0.65,
-    "description": "寿司体力"
+    "description": "寿司体力爬塔标志"
   },
   {
     "itemName": "ap_activity",
     "imageName": "as_ap_activity.png",
-    "roiFront": "1153,636,21,25",
-    "roiBack": "1124,621,84,54",
+    "roiFront": "1153,532,21,25",
+    "roiBack": "1125,515,84,54",
     "method": "Template matching",
     "threshold": 0.8,
-    "description": "活动体力"
+    "description": "门票标志"
   },
   {
     "itemName": "switch",
     "imageName": "as_switch.png",
-    "roiFront": "1215,551,23,23",
-    "roiBack": "1204,538,74,49",
+    "roiFront": "1242,532,23,23",
+    "roiBack": "1214,521,65,49",
     "method": "Template matching",
     "threshold": 0.8,
-    "description": "切换按键"
+    "description": "切换门票和体力标志"
   },
   {
     "itemName": "buy_jade",
@@ -245,11 +245,11 @@
   {
     "itemName": "check_act_list_climb_act",
     "imageName": "as_check_act_list_climb_act.png",
-    "roiFront": "538,194,497,193",
-    "roiBack": "415,67,773,390",
+    "roiFront": "720,302,497,193",
+    "roiBack": "621,178,656,390",
     "method": "Template matching",
     "threshold": 0.8,
-    "description": "活动列表页爬塔活动"
+    "description": "活动列表页爬塔活动标志"
   },
   {
     "itemName": "act_map_switch",

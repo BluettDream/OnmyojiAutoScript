@@ -13,8 +13,8 @@ class GameUiAssets:
 	# Image Rule Assets
 	# description 
 	I_PAPER_DOLL_CLOSE = RuleImage(roi_front=(1253,102,25,62), roi_back=(1238,58,40,153), threshold=0.8, method="Template matching", file="./tasks/GameUi/additional/additional_paper_doll_close.png")
-	# description 
-	I_ACT_LIST_EXPAND = RuleImage(roi_front=(1191,508,30,25), roi_back=(1160,456,92,103), threshold=0.8, method="Template matching", file="./tasks/GameUi/additional/additional_act_list_expand.png")
+	# 庭院进入活动标志 
+	I_ACT_LIST_EXPAND = RuleImage(roi_front=(1186,141,40,41), roi_back=(1162,110,92,103), threshold=0.8, method="Template matching", file="./tasks/GameUi/additional/additional_act_list_expand.png")
 
 
 	# Ocr Rule Assets
@@ -208,7 +208,7 @@ class GameUiAssets:
 	# 活动列表页前往活动 
 	I_ACT_LIST_GOTO_ACT = RuleImage(roi_front=(1063,627,156,60), roi_back=(1007,552,272,166), threshold=0.8, method="Template matching", file="./tasks/GameUi/page/page_act_list_goto_act.png")
 	# 活动列表页标志 
-	I_CHECK_ACT_LIST = RuleImage(roi_front=(90,14,125,44), roi_back=(75,3,161,64), threshold=0.8, method="Template matching", file="./tasks/GameUi/page/page_check_act_list.png")
+	I_CHECK_ACT_LIST = RuleImage(roi_front=(112,13,125,44), roi_back=(75,3,205,66), threshold=0.8, method="Template matching", file="./tasks/GameUi/page/page_check_act_list.png")
 
 
 	# Image Rule Assets
@@ -223,9 +223,9 @@ class GameUiAssets:
 
 
 	# List Rule Assets
-	# 活动列表页文字列表 
-	L_ACT_LIST_OCR = RuleList(folder="./tasks/GameUi/page", direction="vertical", mode="ocr", roi_back=(219,91,47,513), size=(42, 78), 
-					 array=["日之"])
+	# 活动列表页爬塔活动文字 
+	L_ACT_LIST_OCR = RuleList(folder="./tasks/GameUi/page", direction="vertical", mode="ocr", roi_back=(50,123,49,553), size=(45, 69), 
+					 array=["版本"])
 
 
 	# Ocr Rule Assets

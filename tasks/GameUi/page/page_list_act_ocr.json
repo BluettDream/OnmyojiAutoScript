@@ -2,12 +2,12 @@
   "name": "act_list_ocr",
   "direction": "vertical",
   "type": "ocr",
-  "roiBack": "219,91,47,513",
-  "description": "活动列表页文字列表",
+  "roiBack": "50,123,49,553",
+  "description": "活动列表页爬塔活动文字",
   "list": [
     {
-      "itemName": "日之",
-      "roiFront": "221,212,42,78"
+      "itemName": "版本",
+      "roiFront": "52,124,45,69"
     }
   ]
 }

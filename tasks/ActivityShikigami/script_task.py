@@ -116,7 +116,7 @@ class ScriptTask(GameUi, BaseActivity, SwitchSoul, ActivityShikigamiAssets):
                     self.switch_soul(self.conf.switch_soul_config)
                     self.home_main()
                 # 活动主界面或副界面, 进入最终爬塔界面
-                case game.page_climb_act | game.page_climb_act_2:
+                case game.page_climb_act:
                     self.switch_soul(self.conf.switch_soul_config)
                     # self.ui_goto(game.page_climb_act_buff)
                     self.goto_act()
@@ -182,10 +182,8 @@ class ScriptTask(GameUi, BaseActivity, SwitchSoul, ActivityShikigamiAssets):
                 click_times += 1
                 logger.info(f'Try click fire, remain times[{max_times - click_times}]')
                 continue
-            if ((self.appear_then_click(self.I_C_CONFIRM1, interval=0.6) or
-                 self.appear_then_click(self.I_UI_CONFIRM_SAMLL, interval=1) or
-                 self.appear_then_click(self.I_UI_CONFIRM, interval=1)) or
-                    self.appear_then_click(self.I_N_CONFIRM, interval=1)):
+            if ((self.appear_then_click(self.I_UI_CONFIRM_SAMLL, interval=1) or
+                 self.appear_then_click(self.I_UI_CONFIRM, interval=1))):
                 continue
         # 运行战斗
         self.run_general_battle(config=self.get_general_battle_conf())
@@ -207,7 +205,7 @@ class ScriptTask(GameUi, BaseActivity, SwitchSoul, ActivityShikigamiAssets):
             if ok_cnt > max_retry:
                 break
             # 识别到挑战说明已经退出战斗
-            if ok_cnt > 0 and self.ocr_appear(self.O_FIRE):
+            if ok_cnt > 1 and self.ocr_appear(self.O_FIRE):
                 return True
             # 失败
             if self.appear(self.I_FALSE):
