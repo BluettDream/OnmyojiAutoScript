@@ -130,8 +130,6 @@ class ScriptTask(GameUi, BaseActivity, SwitchSoul, ActivityShikigamiAssets):
                     self.lock_team(self.conf.general_battle)
                     self.check_tickets_enough()
                     self.start_battle()
-                case game.page_battle:
-                    self.battle_wait(getattr(self.conf.general_battle, f'enable_{self.climb_type}_anti_detect', False))
                 case _:
                     if self.check(Status.GOTO_ACT_FAILED):
                         logger.warning(f'Climb type[{self.climb_type}] goto failed')
