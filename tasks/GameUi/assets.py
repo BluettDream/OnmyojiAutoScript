@@ -209,6 +209,10 @@ class GameUiAssets:
 	I_ACT_LIST_GOTO_ACT = RuleImage(roi_front=(1063,627,156,60), roi_back=(1007,552,272,166), threshold=0.8, method="Template matching", file="./tasks/GameUi/page/page_act_list_goto_act.png")
 	# 活动列表页标志 
 	I_CHECK_ACT_LIST = RuleImage(roi_front=(112,13,125,44), roi_back=(75,3,205,66), threshold=0.8, method="Template matching", file="./tasks/GameUi/page/page_check_act_list.png")
+	# 英杰试炼左上角标志 
+	I_CHECK_HERO_TEST = RuleImage(roi_front=(148,10,133,48), roi_back=(137,0,157,71), threshold=0.8, method="Template matching", file="./tasks/GameUi/page/page_check_hero_test.png")
+	# 探索前往英杰试炼 
+	I_EXPLORATION_GOTO_HERO_TEST = RuleImage(roi_front=(837,630,58,56), roi_back=(7,605,1272,113), threshold=0.8, method="Template matching", file="./tasks/GameUi/page/page_exploration_goto_hero_test.png")
 
 
 	# Image Rule Assets
