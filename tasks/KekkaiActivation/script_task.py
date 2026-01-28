@@ -377,16 +377,7 @@ class ScriptTask(KU, KekkaiActivationAssets):
             self.set_shikigami(shikigami_order=7, stop_image=self.I_RS_NO_ADD)
 
         # 回到结界界面
-        while 1:
-            self.screenshot()
-
-            if self.appear(self.I_REALM_SHIN) and self.appear(self.I_SHI_GROWN):
-                self.screenshot()
-                if not self.appear(self.I_REALM_SHIN):
-                    continue
-                break
-            if self.appear_then_click(self.I_UI_BACK_BLUE, interval=2.5):
-                continue
+        self.ui_goto_page(page_guild_realm)
 
     def harvest_card(self):
         """

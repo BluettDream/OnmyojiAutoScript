@@ -68,16 +68,6 @@ class ScriptTask(ExtendGreenMark, GameUi, SwitchSoul, DokanSceneDetector):
                 self.next_run(True)
                 return
 
-        # # 自动换御魂
-        # if cfg.switch_soul_config.enable:
-        #     self.ui_get_current_page()
-        #     self.ui_goto(page_shikigami_records)
-        #     self.run_switch_soul(cfg.switch_soul_config.switch_group_team)
-        # if cfg.switch_soul_config.enable_switch_by_name:
-        #     self.ui_get_current_page()
-        #     self.ui_goto(page_shikigami_records)
-        #     self.run_switch_soul_by_name(cfg.switch_soul_config.group_name, cfg.switch_soul_config.team_name)
-
         # 初始化相关动态参数,从配置文件读取相关记录,如果没有当天的记录则设置为默认值
         cfg.attack_count_config.init_attack_count(callback=self.config.save)
 
