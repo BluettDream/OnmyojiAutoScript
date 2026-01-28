@@ -487,7 +487,7 @@ class BaseTask(GlobalGameAssets, CostumeBase):
             case OcrMode.DURATION:
                 appear = result == target.parse_time(target.keyword)
 
-        if interval and appear:
+        if interval:
             self.interval_timer[target.name].reset()
 
         return appear

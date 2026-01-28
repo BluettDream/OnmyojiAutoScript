@@ -164,7 +164,7 @@ class ScriptTask(GameUi, GeneralBattle, HeroTestAssets, SwitchSoul):
                 self.I_REWARD_GOLD, action=action_click, interval=1.5
             ):
                 continue
-            if self.appear(self.O_FIRE, interval=2):
+            if self.appear(self.O_FIRE, interval=1.5):
                 break
 
         return win
