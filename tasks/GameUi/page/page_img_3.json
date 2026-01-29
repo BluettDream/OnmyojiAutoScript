@@ -11,20 +11,20 @@
   {
     "itemName": "main_goto_onmyodo",
     "imageName": "page_main_goto_onmyodo.png",
-    "roiFront": "997,620,39,34",
-    "roiBack": "975,590,86,98",
+    "roiFront": "998,618,40,35",
+    "roiBack": "893,595,254,103",
     "method": "Template matching",
     "threshold": 0.8,
-    "description": "description"
+    "description": "庭院前往阴阳术"
   },
   {
     "itemName": "main_goto_friends",
     "imageName": "page_main_goto_friends.png",
-    "roiFront": "879,623,55,55",
-    "roiBack": "867,606,79,77",
+    "roiFront": "886,624,45,47",
+    "roiBack": "731,600,289,92",
     "method": "Template matching",
     "threshold": 0.7,
-    "description": "description"
+    "description": "庭院前往好友"
   },
   {
     "itemName": "main_goto_daily",
@@ -39,37 +39,37 @@
     "itemName": "main_goto_mall",
     "imageName": "page_main_goto_mall.png",
     "roiFront": "663,661,41,22",
-    "roiBack": "644,613,81,78",
+    "roiBack": "601,613,163,78",
     "method": "Template matching",
     "threshold": 0.7,
-    "description": "description"
+    "description": "庭院前往商店"
   },
   {
     "itemName": "main_goto_guild",
     "imageName": "page_main_goto_guild.png",
-    "roiFront": "540,611,50,54",
-    "roiBack": "540,611,50,54",
+    "roiFront": "544,623,45,37",
+    "roiBack": "393,603,314,91",
     "method": "Template matching",
     "threshold": 0.7,
-    "description": "description"
+    "description": "庭院前往阴阳寮"
   },
   {
     "itemName": "main_goto_team",
     "imageName": "page_main_goto_team.png",
-    "roiFront": "437,625,38,48",
-    "roiBack": "366,606,192,83",
+    "roiFront": "436,642,38,34",
+    "roiBack": "339,604,247,87",
     "method": "Template matching",
     "threshold": 0.7,
-    "description": "description"
+    "description": "庭院前往组队"
   },
   {
     "itemName": "main_goto_collection",
     "imageName": "page_main_goto_collection.png",
-    "roiFront": "92,621,36,41",
-    "roiBack": "51,596,159,85",
+    "roiFront": "89,605,44,39",
+    "roiBack": "27,596,341,96",
     "method": "Template matching",
     "threshold": 0.7,
-    "description": "description"
+    "description": "庭院前往图鉴"
   },
   {
     "itemName": "check_records",
@@ -190,7 +190,7 @@
   },
   {
     "itemName": "dlc_close",
-    "imageName": "store_dlc_close.png",
+    "imageName": "page_dlc_close.png",
     "roiFront": "916,147,24,25",
     "roiBack": "916,147,24,25",
     "method": "Template matching",

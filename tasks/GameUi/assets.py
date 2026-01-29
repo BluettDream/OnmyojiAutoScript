@@ -141,20 +141,20 @@ class GameUiAssets:
 	# Image Rule Assets
 	# 式神录 
 	I_MAIN_GOTO_SHIKIGAMI_RECORDS = RuleImage(roi_front=(1098,611,56,64), roi_back=(1084,589,93,106), threshold=0.7, method="Template matching", file="./tasks/GameUi/page/page_main_goto_shikigami_records.png")
-	# description 
-	I_MAIN_GOTO_ONMYODO = RuleImage(roi_front=(997,620,39,34), roi_back=(975,590,86,98), threshold=0.8, method="Template matching", file="./tasks/GameUi/page/page_main_goto_onmyodo.png")
-	# description 
-	I_MAIN_GOTO_FRIENDS = RuleImage(roi_front=(879,623,55,55), roi_back=(867,606,79,77), threshold=0.7, method="Template matching", file="./tasks/GameUi/page/page_main_goto_friends.png")
+	# 庭院前往阴阳术 
+	I_MAIN_GOTO_ONMYODO = RuleImage(roi_front=(998,618,40,35), roi_back=(893,595,254,103), threshold=0.8, method="Template matching", file="./tasks/GameUi/page/page_main_goto_onmyodo.png")
+	# 庭院前往好友 
+	I_MAIN_GOTO_FRIENDS = RuleImage(roi_front=(886,624,45,47), roi_back=(731,600,289,92), threshold=0.7, method="Template matching", file="./tasks/GameUi/page/page_main_goto_friends.png")
 	# 进入花合战 
 	I_MAIN_GOTO_DAILY = RuleImage(roi_front=(779,612,51,67), roi_back=(754,595,89,97), threshold=0.7, method="Template matching", file="./tasks/GameUi/page/page_main_goto_daily.png")
-	# description 
-	I_MAIN_GOTO_MALL = RuleImage(roi_front=(663,661,41,22), roi_back=(644,613,81,78), threshold=0.7, method="Template matching", file="./tasks/GameUi/page/page_main_goto_mall.png")
-	# description 
-	I_MAIN_GOTO_GUILD = RuleImage(roi_front=(540,611,50,54), roi_back=(540,611,50,54), threshold=0.7, method="Template matching", file="./tasks/GameUi/page/page_main_goto_guild.png")
-	# description 
-	I_MAIN_GOTO_TEAM = RuleImage(roi_front=(437,625,38,48), roi_back=(366,606,192,83), threshold=0.7, method="Template matching", file="./tasks/GameUi/page/page_main_goto_team.png")
-	# description 
-	I_MAIN_GOTO_COLLECTION = RuleImage(roi_front=(92,621,36,41), roi_back=(51,596,159,85), threshold=0.7, method="Template matching", file="./tasks/GameUi/page/page_main_goto_collection.png")
+	# 庭院前往商店 
+	I_MAIN_GOTO_MALL = RuleImage(roi_front=(663,661,41,22), roi_back=(601,613,163,78), threshold=0.7, method="Template matching", file="./tasks/GameUi/page/page_main_goto_mall.png")
+	# 庭院前往阴阳寮 
+	I_MAIN_GOTO_GUILD = RuleImage(roi_front=(544,623,45,37), roi_back=(393,603,314,91), threshold=0.7, method="Template matching", file="./tasks/GameUi/page/page_main_goto_guild.png")
+	# 庭院前往组队 
+	I_MAIN_GOTO_TEAM = RuleImage(roi_front=(436,642,38,34), roi_back=(339,604,247,87), threshold=0.7, method="Template matching", file="./tasks/GameUi/page/page_main_goto_team.png")
+	# 庭院前往图鉴 
+	I_MAIN_GOTO_COLLECTION = RuleImage(roi_front=(89,605,44,39), roi_back=(27,596,341,96), threshold=0.7, method="Template matching", file="./tasks/GameUi/page/page_main_goto_collection.png")
 	# description 
 	I_CHECK_RECORDS = RuleImage(roi_front=(269,71,55,50), roi_back=(269,71,55,50), threshold=0.8, method="Template matching", file="./tasks/GameUi/page/page_check_records.png")
 	# description 
@@ -182,7 +182,7 @@ class GameUiAssets:
 	# 活动列表页返回庭院 
 	I_BACK_ACT_LIST = RuleImage(roi_front=(1165,65,51,47), roi_back=(1124,23,131,133), threshold=0.8, method="Template matching", file="./tasks/GameUi/page/page_back_act_list.png")
 	# 下载拓展包弹窗 
-	I_DLC_CLOSE = RuleImage(roi_front=(916,147,24,25), roi_back=(916,147,24,25), threshold=0.8, method="Template matching", file="./tasks/GameUi/page/store_dlc_close.png")
+	I_DLC_CLOSE = RuleImage(roi_front=(916,147,24,25), roi_back=(916,147,24,25), threshold=0.8, method="Template matching", file="./tasks/GameUi/page/page_dlc_close.png")
 	# 退出战斗按钮 
 	I_BACK_BATTLE = RuleImage(roi_front=(24,19,40,38), roi_back=(0,0,90,85), threshold=0.8, method="Template matching", file="./tasks/GameUi/page/page_back_battle.png")
 
