@@ -309,16 +309,7 @@ class ScriptTask(GeneralBattle, GeneralInvite, GeneralBuff, GeneralRoom, GameUi,
                     self.run_general_battle(config=self.config.orochi.general_battle_config)
                     break
 
-        # 回去
-        while 1:
-            self.screenshot()
-            if not self.appear(self.I_FORM_TEAM):
-                break
-            if self.appear_then_click(self.I_BACK_BL, interval=1):
-                continue
-
-        self.ui_current = page_soul_zones
-        self.ui_goto(page_main)
+        self.ui_goto_page(page_main)
 
     def run_wild(self):
         logger.info('Start run wild')
