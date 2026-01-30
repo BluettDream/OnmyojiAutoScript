@@ -190,7 +190,7 @@
   },
   {
     "itemName": "dlc_close",
-    "imageName": "page_dlc_close.png",
+    "imageName": "store_dlc_close.png",
     "roiFront": "916,147,24,25",
     "roiBack": "916,147,24,25",
     "method": "Template matching",
