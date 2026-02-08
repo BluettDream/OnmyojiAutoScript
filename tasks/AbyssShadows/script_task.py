@@ -20,7 +20,7 @@ from tasks.AbyssShadows.page import page_abyss
 from tasks.Component.GeneralBattle.general_battle import GeneralBattle
 from tasks.Component.SwitchSoul.switch_soul import SwitchSoul
 from tasks.GameUi.game_ui import GameUi
-from tasks.GameUi.page import page_main, page_guild
+from tasks.GameUi.page import page_main, page_guild, page_shikigami_records
 
 # 单个首领/副将/精英 一次无法完成目标（一般是一次没打掉） 的情况下，最大战斗次数
 MAX_BATTLE_COUNT = 2
@@ -71,6 +71,8 @@ class ScriptTask(GeneralBattle, GameUi, SwitchSoul, AbyssShadowsAssets):
             self.set_next_run(task='AbyssShadows', finish=False, server=True, success=True)
             raise TaskEnd
 
+        # 切换御魂
+        self.switch_soul_in_as()
         # 进入狭间
         self.ui_goto_page(page_abyss)
 
@@ -107,9 +109,6 @@ class ScriptTask(GeneralBattle, GameUi, SwitchSoul, AbyssShadowsAssets):
             if self.appear(self.I_CHECK_FINISH):
                 logger.info(f"{self.I_CHECK_FINISH} appear,abyss shadows finished")
                 raise AbyssShadowsFinished
-            # 切换御魂
-            self.switch_soul_in_as()
-            #
             self.device.stuck_record_add('BATTLE_STATUS_S')
             # 等待战斗开始
             self.wait_until_appear(self.I_IS_ATTACK, wait_time=180)
@@ -122,7 +121,7 @@ class ScriptTask(GeneralBattle, GameUi, SwitchSoul, AbyssShadowsAssets):
         logger.info("Abyss shadows process done")
 
         # 保持好习惯，一个任务结束了就返回到庭院，方便下一任务的开始
-        self.goto_main()
+        self.ui_goto_page(page_main)
 
         # 设置下次运行时间
         self.set_next_run(task='AbyssShadows', finish=True, server=True, success=True)
@@ -253,44 +252,6 @@ class ScriptTask(GeneralBattle, GameUi, SwitchSoul, AbyssShadowsAssets):
         logger.info(f"Switch to {area_name.name}")
 
         return success
-
-    def goto_main(self):
-        """ 保持好习惯，一个任务结束了就返回庭院，方便下一任务的开始或者是出错重启
-        """
-        # 可能在狭间，也可能在其他界面
-        timer_quit_abyss_shadows = Timer(16)
-        timer_quit_abyss_shadows.start()
-        while 1:
-            self.screenshot()
-            if timer_quit_abyss_shadows.reached():
-                logger.info("timer_quit_abyss_shadows reached,")
-                break
-
-            if self.appear(self.I_ABYSS_DRAGON) or self.appear(self.I_ABYSS_DRAGON_OVER):
-                # 在切换区域界面
-                self.device.click(x=600, y=600)
-                self.wait_until_appear(self.I_ABYSS_NAVIGATION, wait_time=2)
-                continue
-            if self.appear_then_click(self.I_ABYSS_MAP_EXIT, interval=2):
-                self.wait_until_appear(self.I_ABYSS_NAVIGATION, wait_time=2)
-                continue
-            if self.appear_then_click(self.I_ABYSS_ENEMY_INFO_EXIT, interval=2):
-                self.wait_until_appear(self.I_ABYSS_MAP_EXIT, wait_time=2)
-                continue
-            if self.appear_then_click(self.I_UI_BACK_BLUE, interval=2):
-                self.wait_until_appear(self.I_ABYSS_NAVIGATION, wait_time=1)
-                continue
-            if self.appear_then_click(self.I_UI_BACK_YELLOW, interval=2):
-                continue
-            if self.appear(self.I_ABYSS_NAVIGATION, threshold=0.85) or self.appear(self.I_CHECK_FINISH, threshold=0.85):
-                break
-            if self.appear(self.I_CHECK_SUMMON):
-                break
-
-        #
-        logger.info("Exiting abyss_shadows")
-        self.ui_get_current_page()
-        self.ui_goto(page_main)
 
     def goto_abyss_shadows(self) -> bool:
         """ 进入狭间
@@ -715,7 +676,7 @@ class ScriptTask(GeneralBattle, GameUi, SwitchSoul, AbyssShadowsAssets):
                 raise RequestHumanTakeover
             self.run_switch_soul((int(l[0]), int(l[1])))
 
-        self.ui_click_until_disappear(self.I_ABYSS_SHIKI, interval=2)
+        self.ui_goto_page(page_shikigami_records)
         soul_set: set[str] = set()
         soul_set.add(self.config.model.abyss_shadows.process_manage.preset_boss)
         soul_set.add(self.config.model.abyss_shadows.process_manage.preset_general)
@@ -725,9 +686,7 @@ class ScriptTask(GeneralBattle, GameUi, SwitchSoul, AbyssShadowsAssets):
             switch_soul(v)
 
         self.switch_soul_done = True
-        # 退出式神录
-        from tasks.GameUi.assets import GameUiAssets as gua
-        self.ui_click_until_disappear(gua.I_BACK_Y, interval=2)
+        self.ui_goto_page(page_main)
 
     def check_available(self, item_code: Code):
         # 判断该怪物是否可用
