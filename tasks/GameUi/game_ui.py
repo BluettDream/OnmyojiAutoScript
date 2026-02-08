@@ -32,11 +32,11 @@ from tasks.ActivityShikigami.assets import ActivityShikigamiAssets
 class GameUi(BaseTask, GameUiAssets):
     ui_current: Page = None
     ui_close = [GameUiAssets.I_BACK_MALL, GeneralBattleAssets.I_CONFIRM,
-                BaseTask.I_UI_BACK_RED, BaseTask.I_UI_BACK_YELLOW,
+                BaseTask.I_UI_BACK_RED, ActivityShikigamiAssets.I_SKIP_BUTTON,
                 GameUiAssets.I_BACK_FRIENDS, GameUiAssets.I_BACK_DAILY,
-                GameUiAssets.I_REALM_RAID_GOTO_EXPLORATION,
+                GameUiAssets.I_REALM_RAID_GOTO_EXPLORATION, BaseTask.I_UI_BACK_YELLOW,
                 GameUiAssets.I_SIX_GATES_GOTO_EXPLORATION, SixRealmsAssets.I_EXIT_SIXREALMS,
-                ActivityShikigamiAssets.I_SKIP_BUTTON, ActivityShikigamiAssets.I_RED_EXIT, BaseTask.I_UI_BACK_BLUE,
+                ActivityShikigamiAssets.I_RED_EXIT, BaseTask.I_UI_BACK_BLUE,
                 ActivityShikigamiAssets.I_RED_EXIT_2]
 
     def __init__(self, config, device):

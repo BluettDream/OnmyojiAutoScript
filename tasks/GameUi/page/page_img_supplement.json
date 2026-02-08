@@ -88,5 +88,14 @@
     "method": "Template matching",
     "threshold": 0.8,
     "description": "探索前往英杰试炼"
+  },
+  {
+    "itemName": "check_mall_recommend",
+    "imageName": "page_check_mall_recommend.png",
+    "roiFront": "930,12,42,37",
+    "roiBack": "905,0,100,100",
+    "method": "Template matching",
+    "threshold": 0.8,
+    "description": "商店推荐页面"
   }
 ]

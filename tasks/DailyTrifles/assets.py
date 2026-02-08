@@ -11,6 +11,28 @@ class DailyTriflesAssets:
 
 
 	# Image Rule Assets
+	# 进入庭院事务标志 
+	I_ENTER_COURTYARD_AFFAIRS = RuleImage(roi_front=(990,372,25,30), roi_back=(696,349,343,231), threshold=0.8, method="Template matching", file="./tasks/DailyTrifles/dt/dt_enter_courtyard_affairs.png")
+	# 庭院事务页面标志 
+	I_CHECK_COURTYARD_AFFAIRS = RuleImage(roi_front=(254,40,196,57), roi_back=(134,0,415,180), threshold=0.8, method="Template matching", file="./tasks/DailyTrifles/dt/dt_check_courtyard_affairs.png")
+	# 一键完成标志 
+	I_ONE_COMPLETE = RuleImage(roi_front=(1114,589,93,93), roi_back=(1083,562,163,139), threshold=0.8, method="Template matching", file="./tasks/DailyTrifles/dt/dt_one_complete.png")
+
+
+	# Image Rule Assets
+	# 邮件小图标 
+	I_HARVEST_MAIL = RuleImage(roi_front=(337,505,37,25), roi_back=(38,396,1128,157), threshold=0.8, method="Template matching", file="./tasks/DailyTrifles/dt/dt_harvest_mail.png")
+	# 另一种邮件图标 
+	I_HARVEST_MAIL_COPY = RuleImage(roi_front=(257,509,29,21), roi_back=(192,382,928,190), threshold=0.8, method="Template matching", file="./tasks/DailyTrifles/dt/dt_harvest_mail_copy.png")
+	# 全部收取 
+	I_HARVEST_MAIL_ALL = RuleImage(roi_front=(69,579,80,67), roi_back=(28,551,142,144), threshold=0.8, method="Template matching", file="./tasks/DailyTrifles/dt/dt_harvest_mail_all.png")
+	# 一键已读所有邮件 
+	I_READ_ALL_MAIL = RuleImage(roi_front=(180,605,130,35), roi_back=(149,588,182,72), threshold=0.8, method="Template matching", file="./tasks/DailyTrifles/dt/dt_read_all_mail.png")
+	# 确认收取邮件 
+	I_HARVEST_MAIL_CONFIRM = RuleImage(roi_front=(687,543,168,64), roi_back=(687,543,168,64), threshold=0.8, method="Template matching", file="./tasks/DailyTrifles/dt/dt_harvest_mail_confirm.png")
+
+
+	# Image Rule Assets
 	# description 
 	I_L_FRIENDS = RuleImage(roi_front=(67,625,70,72), roi_back=(67,625,70,72), threshold=0.9, method="Template matching", file="./tasks/DailyTrifles/love/love_l_friends.png")
 	# description 

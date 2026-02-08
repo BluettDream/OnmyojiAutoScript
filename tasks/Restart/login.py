@@ -9,9 +9,9 @@ from tasks.Restart.assets import RestartAssets
 from tasks.base_task import BaseTask
 import time
 
+
 class LoginHandler(BaseTask, RestartAssets):
     character: str
-    harvest_mail_cnt: int = 0
 
     def __init__(self, *wargs, **kwargs):
         super().__init__(*wargs, **kwargs)
@@ -57,7 +57,17 @@ class LoginHandler(BaseTask, RestartAssets):
             if self.appear(self.I_LOGIN_SCROOLL_OPEN, interval=0.5):
                 logger.info('Login success')
                 login_success = True
-
+            # 关闭姿度出现的蒙版
+            if self.appear(self.I_HARVEST_ZIDU, interval=1):
+                self.I_HARVEST_ZIDU.roi_front[0] -= 200
+                self.I_HARVEST_ZIDU.roi_front[1] -= 200
+                if self.click(self.I_HARVEST_ZIDU, interval=2):
+                    logger.info('Close zidu')
+                continue
+            # 御魂溢确认
+            if self.appear_then_click(self.I_UI_CONFIRM_SAMLL, interval=2.5):
+                logger.info('Soul overflow confirm')
+                continue
             # 网络异常
             # if self.ocr_appear(self.O_LOGIN_NETWORK):
             #     logger.error('Network error')
@@ -144,8 +154,6 @@ class LoginHandler(BaseTask, RestartAssets):
             self.device.click_record_clear()
             try:
                 self._app_handle_login()
-                if self.config.restart.harvest_config.enable:
-                    self.harvest()
                 return True
             except (GameTooManyClickError, GameStuckError) as e:
                 logger.warning(e)
@@ -157,158 +165,9 @@ class LoginHandler(BaseTask, RestartAssets):
         logger.critical('Onmyoji server may be under maintenance, or you may lost network connection')
         raise RequestHumanTakeover
 
-    def harvest(self):
-        """
-        获得奖励
-        :return: 如果没有发现任何奖励后退出
-        """
-        logger.hr('Harvest')
-        timer_harvest = Timer(5)  # 如果连续5秒没有发现任何奖励，退出
-        skip_default = False
-        while 1:
-            self.screenshot()
-
-            # 点击'获得奖励'
-            if self.ui_reward_appear_click():
-                timer_harvest.reset()
-                continue
-            # 获得奖励
-            if self.appear_then_click(self.I_UI_AWARD, interval=0.2):
-                timer_harvest.reset()
-                continue
-            # 偶尔会打开到聊天频道
-            if self.appear_then_click(self.I_HARVEST_CHAT_CLOSE, interval=1):
-                timer_harvest.reset()
-                continue
-            # 偶尔会进入其他页面
-            # 左上角的黄色关闭
-            if self.appear_then_click(self.I_LOGIN_YELLOW_CLOSE, interval=0.6):
-                timer_harvest.reset()
-                logger.info('Close yellow close')
-                continue
-            # 关闭宠物小屋
-            if self.appear_then_click(self.I_HARVEST_BACK_PET_HOUSE, interval=0.6):
-                timer_harvest.reset()
-                logger.info('Close yellow close')
-                continue
-            # 御魂溢确认
-            if self.appear_then_click(self.I_UI_CONFIRM_SAMLL, interval=2.5):
-                timer_harvest.reset()
-                skip_default = True
-                logger.info('Soul overflow')
-                continue
-            # 关闭姿度出现的蒙版
-            if self.appear(self.I_HARVEST_ZIDU, interval=1):
-                timer_harvest.reset()
-                self.I_HARVEST_ZIDU.roi_front[0] -= 200
-                self.I_HARVEST_ZIDU.roi_front[1] -= 200
-                if self.click(self.I_HARVEST_ZIDU, interval=2):
-                    logger.info('Close zidu')
-                continue
-
-            # 勾玉
-            if self.appear_then_click(self.I_HARVEST_JADE, interval=1.5):
-                timer_harvest.reset()
-                continue
-            # 签到
-            if self.appear_then_click(self.I_HARVEST_SIGN, interval=1.5):
-                self.wait_until_appear(self.I_HARVEST_SIGN_2, wait_time=2)
-                timer_harvest.reset()
-                continue
-            # 某些活动的特殊签到，有空看到就删掉
-            if self.appear_then_click(self.I_HARVEST_SIGN_3, interval=0.7):
-                timer_harvest.reset()
-                continue
-            if self.appear_then_click(self.I_HARVEST_SIGN_4, interval=1):
-                timer_harvest.reset()
-                continue
-            if self.appear_then_click(self.I_HARVEST_SIGN_2, interval=1.5):
-                self.wait_until_appear(self.I_LOGIN_RED_CLOSE, wait_time=2)
-                timer_harvest.reset()
-                continue
-            # 999天的签到福袋
-            if self.appear_then_click(self.I_HARVEST_SIGN_999, interval=1.5):
-                timer_harvest.reset()
-                continue
-            # 判断是否勾选了收取邮件（不收取邮件可以查看每日收获）
-            if not skip_default and self.config.restart.harvest_config.enable_mail and self.harvest_mail():
-                timer_harvest.reset()
-                continue
-            if self.appear_then_click(self.I_HARVEST_AP, interval=1, threshold=0.7):
-                timer_harvest.reset()
-                continue
-            # 御魂觉醒加成
-            if self.appear_then_click(self.I_HARVEST_SOUL, interval=1):
-                timer_harvest.reset()
-                continue
-            # 寮包
-            if self.appear_then_click(self.I_HARVEST_GUILD_REWARD, interval=2):
-                timer_harvest.reset()
-                continue
-            # 自选御魂
-            if not skip_default and self.appear(self.I_HARVEST_SOUL_1):
-                logger.info('Select soul 2')
-                self.ui_click(self.I_HARVEST_SOUL_1, stop=self.I_HARVEST_SOUL_2)
-                self.ui_click(self.I_HARVEST_SOUL_2, stop=self.I_HARVEST_SOUL_3, interval=3)
-                self.ui_click_until_disappear(click=self.I_HARVEST_SOUL_3)
-                timer_harvest.reset()
-
-            # 红色的关闭
-            if self.appear(self.I_LOGIN_RED_CLOSE):
-                self.click(self.I_LOGIN_RED_CLOSE, interval=2)
-                timer_harvest.reset()
-                continue
-
-            # 五秒内没有发现任何奖励，退出
-            if not timer_harvest.started():
-                timer_harvest.start()
-            else:
-                if timer_harvest.reached():
-                    logger.info('No more reward')
-                    return
-
     def set_specific_usr(self, character: str):
         self.character = character
         self.O_LOGIN_SPECIFIC_SERVE.keyword = character
-
-    def harvest_mail(self, ) -> bool:
-        if self.harvest_mail_cnt >= 1:
-            return False
-        if ((self.appear(self.I_HARVEST_MAIL) or self.appear(self.I_HARVEST_MAIL_COPY))
-                and not self.appear(self.I_LOGIN_RED_CLOSE)):
-            self.harvest_mail_cnt += 1
-            self.click(self.I_HARVEST_MAIL, interval=2)
-            if not self.wait_until_appear(self.I_READ_ALL_MAIL, wait_time=2):
-                logger.warning('Cannot recognize read all mail')
-                return False
-        else:
-            return False
-        logger.info('Harvest system mail')
-        self.click(self.I_SYSTEM_MAIL_CLOSE)
-        self.wait_until_appear(self.I_SYSTEM_MAIL_OPEN, wait_time=2)
-        self.exec_harvest_mail()
-        logger.info('Harvest special mail')
-        self.click(self.I_SPECIAL_MAIL_CLOSE)
-        self.wait_until_appear(self.I_SPECIAL_MAIL_OPEN, wait_time=2)
-        self.exec_harvest_mail()
-        return True
-
-    def exec_harvest_mail(self):
-        timeout_timer = Timer(3).start()
-        while not timeout_timer.reached():
-            self.screenshot()
-            if self.appear_then_click(self.I_READ_ALL_MAIL, interval=1.5):
-                continue
-            if self.appear(self.I_HARVEST_MAIL_CONFIRM):
-                self.click(self.I_HARVEST_MAIL_CONFIRM, interval=2)
-                self.wait_until_disappear(self.I_HARVEST_MAIL_CONFIRM)
-                break
-            if self.appear(self.I_HARVEST_MAIL_ALL, threshold=0.9):
-                time.sleep(random.uniform(0.3, 0.5))
-                self.click(self.I_HARVEST_MAIL_ALL, interval=2)
-                self.wait_until_appear(self.I_HARVEST_MAIL_CONFIRM, wait_time=1)
-                timeout_timer.reset()
-                continue
 
 
 if __name__ == '__main__':
@@ -318,4 +177,4 @@ if __name__ == '__main__':
     c = Config('oas1')
     d = Device(c)
     t = LoginHandler(c, d)
-    t.harvest()
+    t.app_handle_login()

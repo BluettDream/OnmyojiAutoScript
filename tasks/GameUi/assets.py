@@ -213,6 +213,8 @@ class GameUiAssets:
 	I_CHECK_HERO_TEST = RuleImage(roi_front=(148,10,133,48), roi_back=(137,0,157,71), threshold=0.8, method="Template matching", file="./tasks/GameUi/page/page_check_hero_test.png")
 	# 探索前往英杰试炼 
 	I_EXPLORATION_GOTO_HERO_TEST = RuleImage(roi_front=(837,630,58,56), roi_back=(7,605,1272,113), threshold=0.8, method="Template matching", file="./tasks/GameUi/page/page_exploration_goto_hero_test.png")
+	# 商店推荐页面 
+	I_CHECK_MALL_RECOMMEND = RuleImage(roi_front=(930,12,42,37), roi_back=(905,0,100,100), threshold=0.8, method="Template matching", file="./tasks/GameUi/page/page_check_mall_recommend.png")
 
 
 	# Image Rule Assets

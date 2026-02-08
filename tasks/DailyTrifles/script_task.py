@@ -6,11 +6,12 @@ from time import sleep
 from datetime import time, datetime, timedelta
 
 from exceptiongroup import catch
+from tasks.Component.config_base import Time
 from tasks.DailyTrifles.page import page_store_gift_room
 from winerror import NOERROR
 
 from tasks.GameUi.game_ui import GameUi
-from tasks.GameUi.page import page_main, page_summon, page_guild, page_mall, page_friends
+from tasks.GameUi.page import page_main, page_summon, page_guild, page_mall, page_friends, page_courtyard_affairs
 from tasks.DailyTrifles.config import DailyTriflesConfig
 from tasks.DailyTrifles.assets import DailyTriflesAssets
 from tasks.Component.Summon.summon import Summon
@@ -21,6 +22,7 @@ from module.base.timer import Timer
 from tasks.DailyTrifles.config import SummonType
 import re
 
+
 class ScriptTask(GameUi, Summon, DailyTriflesAssets):
 
     def run(self):
@@ -28,30 +30,36 @@ class ScriptTask(GameUi, Summon, DailyTriflesAssets):
         # 每日召唤
         if con.one_summon:
             self.run_one_summon()
+        if con.courtyard_affairs:
+            self.run_courtyard_affairs()
+        if con.pickup_email:
+            self.run_pickup_email()
         if con.guild_wish:
             pass
-        # 友情点
-        if con.friend_love:
-            self.run_friend_love()
         # 吉闻
         if con.luck_msg:
             self.run_luck_msg()
         # 商店签到 or 购买寿司
         if con.store_sign or con.buy_sushi_count > 0:
             self.run_store()
-        self.set_next_run('DailyTrifles', success=True, finish=False)
+        self.config.save()
+        self.plan_next_dt()
         raise TaskEnd('DailyTrifles')
 
     def run_one_summon(self):
-        self.ui_get_current_page()
-        self.ui_goto(page_summon)
-        config=self.config.daily_trifles.trifles_config
+        logger.hr('daily summon', 2)
+        if self.config.daily_trifles.today_is_done('summon'):
+            logger.info('Today is done, skip')
+            return
+        self.ui_goto_page(page_summon)
+        config = self.config.daily_trifles.trifles_config
         if config.summon_type == SummonType.default:
             self.summon_one(draw_mystery_pattern=config.draw_mystery_pattern)
             self.check_time()
         elif config.summon_type == SummonType.recall:
             self.summon_recall()
         self.back_summon_main()
+        self.config.daily_trifles.done_record.summon_dt = datetime.now()
 
     def check_time(self):
         config = self.config.daily_trifles.trifles_config
@@ -154,8 +162,11 @@ class ScriptTask(GameUi, Summon, DailyTriflesAssets):
         pass
 
     def run_luck_msg(self):
-        self.ui_get_current_page()
-        self.ui_goto(page_friends)
+        logger.hr('luck msg', 2)
+        if self.config.daily_trifles.today_is_done('luck_msg'):
+            logger.info('Today is done, skip')
+            return
+        self.ui_goto_page(page_friends)
         while 1:
             self.screenshot()
             if self.appear(self.I_LUCK_TITLE):
@@ -182,50 +193,22 @@ class ScriptTask(GameUi, Summon, DailyTriflesAssets):
                 break
 
         self.ui_click(self.I_UI_BACK_RED, self.I_CHECK_MAIN)
-
-    def run_friend_love(self):
-        self.ui_get_current_page()
-        self.ui_goto(page_friends)
-        while 1:
-            self.screenshot()
-            if self.appear(self.I_L_LOVE):
-                break
-            if self.appear_then_click(self.I_FRIENDSHIP_UP, interval=1):
-                continue
-            if self.appear_then_click(self.I_L_FRIENDS, interval=1):
-                continue
-        logger.info('Start friend love')
-        check_timer = Timer(2)
-        check_timer.start()
-        while 1:
-            self.screenshot()
-
-            if self.appear_then_click(self.I_L_COLLECT, interval=1):
-                continue
-            if self.ui_reward_appear_click():
-                logger.info('Get reward of friend love')
-                break
-            if check_timer.reached():
-                logger.warning('There is no any love')
-                break
-
-        self.ui_click(self.I_UI_BACK_RED, self.I_CHECK_MAIN)
+        self.config.daily_trifles.done_record.luck_msg_dt = datetime.now()
 
     def run_store(self):
-        self.ui_get_current_page()
-        self.ui_goto(page_mall, confirm_wait=3)
-
+        self.ui_goto_page(page_mall, confirm_wait=3)
         if self.config.daily_trifles.trifles_config.store_sign:
             self.run_store_sign()
         if self.config.daily_trifles.trifles_config.buy_sushi_count > 0:
             self.run_buy_sushi()
-
-        self.ui_click(self.I_UI_BACK_YELLOW, self.I_CHECK_MALL)
-        self.ui_get_current_page()
-        self.ui_goto(page_main)
+        self.ui_goto_page(page_main)
 
     def run_store_sign(self):
-
+        logger.hr('store sign', 2)
+        if self.config.daily_trifles.today_is_done('store_sign'):
+            logger.info('Today is done, skip')
+            return
+        self.config.daily_trifles.done_record.store_sign_dt = datetime.now()
         self.ui_goto_page(page_store_gift_room)
         self.screenshot()
         self.appear_then_click(self.I_GIFT_RECOMMEND, interval=1)
@@ -240,7 +223,10 @@ class ScriptTask(GameUi, Summon, DailyTriflesAssets):
             logger.info('Get reward of gift sign')
 
     def run_buy_sushi(self):
-
+        logger.hr('store sushi', 2)
+        if self.config.daily_trifles.today_is_done('sushi'):
+            logger.info('Today is done, skip')
+            return
         # 进入Special
         while 1:
             from tasks.RichMan.assets import RichManAssets
@@ -296,15 +282,67 @@ class ScriptTask(GameUi, Summon, DailyTriflesAssets):
                     break
                 self.ui_click(self.I_SPECIAL_SUSHI, stop=self.I_STORE_COST_TYPE_JADE, interval=2)
                 continue
-        return
+        self.config.daily_trifles.done_record.sushi_dt = datetime.now()
+
+    def run_courtyard_affairs(self):
+        """庭院事务"""
+        logger.hr('courtyard affairs', 2)
+        self.ui_goto_page(page_main)
+        timeout_timer = Timer(3).start()
+        while not timeout_timer.reached():
+            self.screenshot()
+            if self.appear(self.I_ENTER_COURTYARD_AFFAIRS, interval=1.2):
+                self.ui_goto_page(page_courtyard_affairs)
+                timeout_timer.reset()
+                break
+        if timeout_timer.reached():
+            logger.info('Not have courtyard affairs, exit')
+            return
+        self.screenshot()
+        self.appear_then_click(self.I_ONE_COMPLETE, interval=1)
+        self.ui_goto_page(page_main)
+        self.config.daily_trifles.done_record.courtyard_affairs_dt = datetime.now()
+
+    def run_pickup_email(self):
+        """领取邮件"""
+        logger.hr('pick up email', 2)
+        self.ui_goto_page(page_main)
+        timeout_timer = Timer(3).start()
+        while not timeout_timer.reached():
+            self.screenshot()
+            if self.appear_then_click(self.I_HARVEST_MAIL, interval=1.2) or \
+                    self.appear_then_click(self.I_HARVEST_MAIL_COPY, interval=1.2):
+                continue
+            if self.appear_then_click(self.I_HARVEST_MAIL_CONFIRM, interval=0.6):
+                continue
+            if self.appear_then_click(self.I_HARVEST_MAIL_ALL, interval=1.6):
+                timeout_timer.reset()
+                continue
+            if self.appear_then_click(self.I_READ_ALL_MAIL, interval=1.6):
+                continue
+        self.ui_goto_page(page_main)
+        self.config.daily_trifles.done_record.pickup_email_dt = datetime.now()
+
+    def plan_next_dt(self):
+        # 定时领体力（每天 12-14、20-22 时内各有 20 体力）
+        now = datetime.now()
+        # 如果时间在00:00-12:00之间则设定时间为当日 12 时
+        if now.time() < time(12, 0):
+            self.custom_next_run(task='DailyTrifles', custom_time=Time(12, 0), time_delta=0)
+        # 如果时间在12:00-20:00之间则设定时间为当日 20 时
+        elif time(12, 0) <= now.time() < time(20, 0):
+            self.custom_next_run(task='DailyTrifles', custom_time=Time(20, 0), time_delta=0)
+        # 如果时间在20:00-23:59之间则设定时间为次日 12 时
+        else:
+            self.custom_next_run(task='DailyTrifles', custom_time=Time(12, 0), time_delta=1)
 
 
 if __name__ == '__main__':
     from module.config.config import Config
     from module.device.device import Device
 
-    c = Config('oas1')
+    c = Config('oas2')
     d = Device(c)
     t = ScriptTask(c, d)
 
-    t.check_time()
+    t.run()

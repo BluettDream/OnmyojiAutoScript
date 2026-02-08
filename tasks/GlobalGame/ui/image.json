@@ -30,10 +30,10 @@
     "itemName": "ui_back_red",
     "imageName": "ui_ui_back_red.png",
     "roiFront": "1041,111,34,38",
-    "roiBack": "877,15,383,254",
+    "roiBack": "680,15,579,374",
     "method": "Template matching",
     "threshold": 0.8,
-    "description": "description"
+    "description": "右上角红色关闭按钮"
   },
   {
     "itemName": "ui_back_yellow",

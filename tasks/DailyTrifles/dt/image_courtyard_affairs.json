@@ -1,0 +1,29 @@
+[
+  {
+    "itemName": "enter_courtyard_affairs",
+    "imageName": "dt_enter_courtyard_affairs.png",
+    "roiFront": "990,372,25,30",
+    "roiBack": "696,349,343,231",
+    "method": "Template matching",
+    "threshold": 0.8,
+    "description": "进入庭院事务标志"
+  },
+  {
+    "itemName": "check_courtyard_affairs",
+    "imageName": "dt_check_courtyard_affairs.png",
+    "roiFront": "254,40,196,57",
+    "roiBack": "134,0,415,180",
+    "method": "Template matching",
+    "threshold": 0.8,
+    "description": "庭院事务页面标志"
+  },
+  {
+    "itemName": "one_complete",
+    "imageName": "dt_one_complete.png",
+    "roiFront": "1114,589,93,93",
+    "roiBack": "1083,562,163,139",
+    "method": "Template matching",
+    "threshold": 0.8,
+    "description": "一键完成标志"
+  }
+]

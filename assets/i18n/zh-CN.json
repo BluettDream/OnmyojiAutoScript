@@ -1,7 +1,9 @@
 {
   "boss_limit_time": "单局Boss限制时间",
   "skill_mode": "技能本模式",
-  "costume_main_13": "云景阆苑"
+  "costume_main_13": "云景阆苑",
+  "pickup_email": "是否自动领取邮件",
+  "courtyard_affairs": "是否启动庭院事务"
 }
 
 
