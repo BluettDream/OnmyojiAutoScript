@@ -343,6 +343,8 @@ class ConfigModel(ConfigBase):
 
         result: dict[str, list] = {}
         for key, value in task.model_dump(context={'hide': True}).items():
+            if value == 0xABCDEF:
+                continue
             if key not in groups:
                 for group_name in groups.keys():
                     if group_name in key:
