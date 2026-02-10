@@ -41,40 +41,17 @@ class ScriptTask(GameUi, GeneralBattle, SwitchSoul, DuelAssets, SwitchOnmyoji):
         self.limit_time: timedelta = timedelta(hours=limit_time.hour, minutes=limit_time.minute,
                                                seconds=limit_time.second)
         self.prepare_duel()
-        self.current_score = self.conf.duel_celeb_config.initial_score
-        duel_week_over = False
-        while 1:
-            # 任务执行时间超过限制时间，退出
-            if datetime.now() - self.start_time >= self.limit_time:
-                logger.info('Duel task is over time')
-                break
+        while True:
             self.screenshot()
             self.check_and_get_reward()
             if not self.duel_main():
                 self.ui_goto_page(page_duel)
                 continue
-            # 当前分数跟目标分数比较, 判断分数是否已经满足条件
-            if self.get_and_update_cur_score() >= self.conf.duel_config.target_score:
-                logger.info('Duel task is over score')
-                break
-            # 若不开启名仕战斗, 则到达名士直接退出
-            if not self.conf.duel_celeb_config.celeb_battle and self.is_celeb:
-                logger.info('You are already a celeb（名仕）')
-                duel_week_over = True
-                break
-            # 练习
-            if self.appear(self.I_BATTLE_WITH_TRAIN) or self.appear(self.I_BATTLE_WITH_TRAIN2):
-                break
-            # 荣誉满了，退出
-            if self.conf.duel_config.honor_full_exit and self.check_honor():
-                logger.info('Duel task is over honor')
+            if not self.can_start_duel():
                 break
             self.start_duel()
         logger.info('Duel battle end')
-        if duel_week_over:
-            self.set_next_run(task='Duel', success=True, finish=True)
-        else:
-            self.set_next_run(task='Duel', success=True, finish=False)
+        self.set_next_run(task='Duel', success=True, finish=True)
         self.ui_goto_page(page_main)
         # 调起花合战
         self.set_next_run(task='TalismanPass', target=datetime.now())
@@ -93,12 +70,36 @@ class ScriptTask(GameUi, GeneralBattle, SwitchSoul, DuelAssets, SwitchOnmyoji):
             self.switch_onmyoji(self.conf.duel_config.switch_onmyoji)
         self.ui_goto_page(page_duel)
         self.switch_all_soul()
+        self.current_score = self.conf.duel_celeb_config.initial_score
+
+    def can_start_duel(self) -> bool:
+        """是否可以运行斗技"""
+        # 任务执行时间超过限制时间，退出
+        if datetime.now() - self.start_time >= self.limit_time:
+            logger.info('Duel task is over time')
+            return False
+        # 当前分数跟目标分数比较, 判断分数是否已经满足条件
+        if self.get_and_update_cur_score() >= self.conf.duel_config.target_score:
+            logger.info('Duel task is over score')
+            return False
+        # 若不开启名仕战斗, 则到达名士直接退出
+        if not self.conf.duel_celeb_config.celeb_battle and self.is_celeb:
+            logger.info('You are already a celeb（名仕）')
+            return False
+        # 练习
+        if self.appear(self.I_BATTLE_WITH_TRAIN) or self.appear(self.I_BATTLE_WITH_TRAIN2):
+            return False
+        # 荣誉满了，退出
+        if self.conf.duel_config.honor_full_exit and self.check_honor():
+            logger.info('Duel task is over honor')
+            return False
+        return True
 
     def start_duel(self):
         """进行一次斗技"""
         logger.hr('Duel battle', 2)
         self.current_count += 1
-        self.start_battle()
+        self.enter_battle()
         self.battle_prepare()
         battle_ret = self.wait_battle()
         if battle_ret:
@@ -113,8 +114,8 @@ class ScriptTask(GameUi, GeneralBattle, SwitchSoul, DuelAssets, SwitchOnmyoji):
         logger.info(f'battle time: {task_run_time_seconds} / {self.limit_time}')
         self.ui_goto_page(page_duel)
 
-    def start_battle(self):
-        """点击开始战斗"""
+    def enter_battle(self):
+        """点击开始战斗(一直到出现战斗准备界面)"""
         logger.hr('duel battle matching')
         while not self.is_in_battle_prepare():
             self.screenshot()
@@ -165,7 +166,7 @@ class ScriptTask(GameUi, GeneralBattle, SwitchSoul, DuelAssets, SwitchOnmyoji):
         logger.hr('duel battle waiting')
         battle_operated = False
         battle_timeout_timer = Timer(270).start()
-        ret_timer = Timer(2.5)
+        ret_timer = Timer(5)
         battle_timeout_cnt, max_timeout_cnt = 0, 3
         ret = None
         while True:
@@ -218,10 +219,15 @@ class ScriptTask(GameUi, GeneralBattle, SwitchSoul, DuelAssets, SwitchOnmyoji):
 
     def check_honor(self) -> bool:
         """检查荣誉是否满了"""
+        if not self.appear(self.I_DUEL_HONOR):
+            return False
+        roi_x = self.I_DUEL_HONOR.roi_front[0] + self.I_DUEL_HONOR.roi_front[2]
+        roi_y = self.I_DUEL_HONOR.roi_front[1]
+        roi_w = 110
+        roi_h = self.I_DUEL_HONOR.roi_front[3]
+        self.O_D_HONOR.roi = [roi_x, roi_y, roi_w, roi_h]
         current, remain, total = self.O_D_HONOR.ocr(self.device.image)
-        if current == total and remain == 0:
-            return True
-        return False
+        return current == total and remain == 0
 
     def get_and_update_cur_score(self, skip_screenshot: bool = True) -> int:
         """
@@ -322,7 +328,7 @@ if __name__ == '__main__':
     from module.config.config import Config
     from module.device.device import Device
 
-    c = Config('mi')
+    c = Config('oas3')
     d = Device(c)
     t = ScriptTask(c, d)
 

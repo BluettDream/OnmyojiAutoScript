@@ -169,5 +169,14 @@
     "method": "Template matching",
     "threshold": 0.8,
     "description": "ban选界面"
+  },
+  {
+    "itemName": "duel_honor",
+    "imageName": "duel_duel_honor.png",
+    "roiFront": "211,636,20,20",
+    "roiBack": "200,601,130,100",
+    "method": "Template matching",
+    "threshold": 0.8,
+    "description": "斗技荣誉图标"
   }
 ]
