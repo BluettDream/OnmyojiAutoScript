@@ -25,5 +25,23 @@
     "method": "Template matching",
     "threshold": 0.8,
     "description": "一键完成标志"
+  },
+  {
+    "itemName": "enter_daily",
+    "imageName": "dt_enter_daily.png",
+    "roiFront": "1131,122,84,76",
+    "roiBack": "1117,98,136,226",
+    "method": "Template matching",
+    "threshold": 0.8,
+    "description": "右上角进入日常"
+  },
+  {
+    "itemName": "check_in_daily",
+    "imageName": "dt_check_in_daily.png",
+    "roiFront": "1131,115,106,88",
+    "roiBack": "1128,94,151,281",
+    "method": "Template matching",
+    "threshold": 0.8,
+    "description": "右上角检查是否在日常中"
   }
 ]

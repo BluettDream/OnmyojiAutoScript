@@ -17,6 +17,10 @@ class DailyTriflesAssets:
 	I_CHECK_COURTYARD_AFFAIRS = RuleImage(roi_front=(254,40,196,57), roi_back=(134,0,415,180), threshold=0.8, method="Template matching", file="./tasks/DailyTrifles/dt/dt_check_courtyard_affairs.png")
 	# 一键完成标志 
 	I_ONE_COMPLETE = RuleImage(roi_front=(1114,589,93,93), roi_back=(1083,562,163,139), threshold=0.8, method="Template matching", file="./tasks/DailyTrifles/dt/dt_one_complete.png")
+	# 右上角进入日常 
+	I_ENTER_DAILY = RuleImage(roi_front=(1131,122,84,76), roi_back=(1117,98,136,226), threshold=0.8, method="Template matching", file="./tasks/DailyTrifles/dt/dt_enter_daily.png")
+	# 右上角检查是否在日常中 
+	I_CHECK_IN_DAILY = RuleImage(roi_front=(1131,115,106,88), roi_back=(1128,94,151,281), threshold=0.8, method="Template matching", file="./tasks/DailyTrifles/dt/dt_check_in_daily.png")
 
 
 	# Image Rule Assets

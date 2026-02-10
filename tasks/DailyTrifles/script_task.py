@@ -298,7 +298,12 @@ class ScriptTask(GameUi, Summon, DailyTriflesAssets):
         if timeout_timer.reached():
             logger.info('Not have courtyard affairs, exit')
             return
-        self.screenshot()
+        while True:
+            self.screenshot()
+            if self.appear(self.I_CHECK_IN_DAILY, interval=0.5):
+                break
+            if self.appear_then_click(self.I_ENTER_DAILY, interval=1):
+                continue
         self.appear_then_click(self.I_ONE_COMPLETE, interval=1)
         self.ui_goto_page(page_main)
         self.config.daily_trifles.done_record.courtyard_affairs_dt = datetime.now()
@@ -341,8 +346,8 @@ if __name__ == '__main__':
     from module.config.config import Config
     from module.device.device import Device
 
-    c = Config('oas2')
+    c = Config('oas1')
     d = Device(c)
     t = ScriptTask(c, d)
 
-    t.run()
+    t.run_courtyard_affairs()
