@@ -11,7 +11,7 @@ from module.exception import TaskEnd
 from tasks.Component.GeneralBattle.general_battle import GeneralBattle
 from tasks.Component.SwitchSoul.switch_soul import SwitchSoul
 from tasks.GameUi.game_ui import GameUi
-from tasks.GameUi.page import page_main, page_shikigami_records, page_goryou_realm
+from tasks.GameUi.page import page_main, page_shikigami_records, page_goryou_realm, page_exploration
 from tasks.GoryouRealm.config import GoryouClass
 from tasks.GoryouRealm.assets import GoryouRealmAssets
 
@@ -70,12 +70,9 @@ class ScriptTask(GeneralBattle, GameUi, SwitchSoul, GoryouRealmAssets):
                     self.run_general_battle(config=con.general_battle_config)
                     break
 
-
-        self.ui_click(self.I_UI_BACK_BLUE, self.I_CHECK_EXPLORATION)
-        logger.info('Back to exploration')
+        self.ui_goto_page(page_main)
         self.set_next_run(task='GoryouRealm', success=True, finish=True)
         raise TaskEnd
-
 
     def check_date(self, goryou_class: GoryouClass = GoryouClass.RANDOM) -> GoryouClass:
         day_of_week = self.start_time.weekday()
@@ -106,9 +103,7 @@ class ScriptTask(GeneralBattle, GameUi, SwitchSoul, GoryouRealmAssets):
             logger.info(f'OAS will run {match_class[day_of_week].name} instead')
             goryou_class = match_class[day_of_week]
 
-
         return goryou_class
-
 
 
 if __name__ == '__main__':
