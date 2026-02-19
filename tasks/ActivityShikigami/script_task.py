@@ -179,7 +179,8 @@ class ScriptTask(StateMachine, GameUi, BaseActivity, SwitchSoul, ActivityShikiga
             更新前请先看 ./README.md
         """
         logger.hr(f'Start run climb type PASS', 1)
-        self.ui_click(self.I_TO_BATTLE_MAIN, stop=self.I_CHECK_BATTLE_MAIN, interval=1)
+        self.ui_clicks([self.I_TO_BATTLE_MAIN, self.I_TO_BATTLE_MAIN_2],
+                       stop=self.I_CHECK_BATTLE_MAIN, interval=1)
         self.switch_soul(self.I_BATTLE_MAIN_TO_RECORDS, self.I_CHECK_BATTLE_MAIN)
         self.switch_climb_mode_in_game('pass')
 
@@ -216,7 +217,8 @@ class ScriptTask(StateMachine, GameUi, BaseActivity, SwitchSoul, ActivityShikiga
             更新前请先看 ./README.md
         """
         logger.hr(f'Start run climb type AP')
-        self.ui_click(self.I_TO_BATTLE_MAIN, stop=self.I_CHECK_BATTLE_MAIN, interval=1)
+        self.ui_clicks([self.I_TO_BATTLE_MAIN, self.I_TO_BATTLE_MAIN_2],
+                       stop=self.I_CHECK_BATTLE_MAIN, interval=1)
         self.switch_soul(self.I_BATTLE_MAIN_TO_RECORDS, self.I_CHECK_BATTLE_MAIN)
         self.switch_climb_mode_in_game('ap')
 
@@ -299,13 +301,16 @@ class ScriptTask(StateMachine, GameUi, BaseActivity, SwitchSoul, ActivityShikiga
                 logger.info('Win battle')
                 while 1:
                     self.screenshot()
-                    appear_reward = self.appear_then_click(self.I_REWARD)
+                    # appear_reward = self.appear_then_click(self.I_REWARD)
                     appear_reward_purple_snake_skin = self.appear(self.I_REWARD_PURPLE_SNAKE_SKIN)
+                    appear_reward = self.appear(self.I_REWARD)
+                    if appear_reward:
+                        self.click(self.I_REWARD, interval=0.9)
                     if not appear_reward and not appear_reward_purple_snake_skin:
                         break
                     if appear_reward or appear_reward_purple_snake_skin:
                         reward_click = random.choice(
-                            [self.C_RANDOM_LEFT, self.C_RANDOM_RIGHT, self.C_RANDOM_TOP])
+                            [self.C_RANDOM_LEFT, self.C_RANDOM_RIGHT])
                         self.click(reward_click, interval=1.8)
                         continue
                 return True
@@ -341,7 +346,7 @@ class ScriptTask(StateMachine, GameUi, BaseActivity, SwitchSoul, ActivityShikiga
             'pass': self.I_CLIMB_MODE_PASS,
         }
         logger.info(f'Switch climb mode to {mode}')
-        self.ui_click(self.I_CLIMB_MODE_SWITCH, stop=map_check[mode], interval=1)
+        self.ui_click(self.I_CLIMB_MODE_SWITCH, stop=map_check[mode], interval=1.9)
 
     def lock_team(self, battle_conf: GeneralBattleConfig):
         """
@@ -350,10 +355,10 @@ class ScriptTask(StateMachine, GameUi, BaseActivity, SwitchSoul, ActivityShikiga
         enable_preset = getattr(battle_conf, f"enable_{self.climb_type}_preset", False)
         if not enable_preset:
             logger.info(f'Lock {self.climb_type} team')
-            self.ui_click(self.I_UNLOCK, stop=self.I_LOCK, interval=1)
+            self.ui_click(self.I_UNLOCK, stop=self.I_LOCK, interval=1.5)
             return
         logger.info(f'Unlock {self.climb_type} team')
-        self.ui_click(self.I_LOCK, stop=self.I_UNLOCK, interval=1)
+        self.ui_click(self.I_LOCK, stop=self.I_UNLOCK, interval=1.5)
 
     def check_tickets_enough(self) -> bool:
         """
