@@ -32,11 +32,11 @@ from tasks.ActivityShikigami.assets import ActivityShikigamiAssets
 class GameUi(BaseTask, GameUiAssets):
     ui_current: Page = None
     ui_close = [GameUiAssets.I_BACK_MALL, GeneralBattleAssets.I_CONFIRM,
-                BaseTask.I_UI_BACK_RED, BaseTask.I_UI_BACK_YELLOW,
+                BaseTask.I_UI_BACK_RED, ActivityShikigamiAssets.I_SKIP_BUTTON,
                 GameUiAssets.I_BACK_FRIENDS, GameUiAssets.I_BACK_DAILY,
-                GameUiAssets.I_REALM_RAID_GOTO_EXPLORATION,
+                GameUiAssets.I_REALM_RAID_GOTO_EXPLORATION, BaseTask.I_UI_BACK_YELLOW,
                 GameUiAssets.I_SIX_GATES_GOTO_EXPLORATION, SixRealmsAssets.I_EXIT_SIXREALMS,
-                ActivityShikigamiAssets.I_SKIP_BUTTON, ActivityShikigamiAssets.I_RED_EXIT, BaseTask.I_UI_BACK_BLUE]
+                ActivityShikigamiAssets.I_RED_EXIT, BaseTask.I_UI_BACK_BLUE,]
 
     def __init__(self, config, device):
         super().__init__(config, device)
@@ -195,7 +195,7 @@ class GameUi(BaseTask, GameUiAssets):
     def ui_goto_page(self, dest_page: Page, confirm_wait=0, skip_first_screenshot=True, timeout: int = 60) -> bool:
         """前往指定page, 自动调用获取当前页面方法, 其他参数同ui_goto
         """
-        self.ui_get_current_page()
+        self.ui_get_current_page(skip_first_screenshot)
         return self.ui_goto(dest_page, confirm_wait, skip_first_screenshot, timeout)
 
     def ui_goto(self, destination: Page, confirm_wait=0, skip_first_screenshot=True, timeout: int = 60) -> bool:

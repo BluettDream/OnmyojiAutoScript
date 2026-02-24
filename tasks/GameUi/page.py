@@ -164,12 +164,19 @@ page_daily = Page(G.I_CHECK_DAILY)
 page_daily.link(button=G.I_BACK_Y, destination=page_main)
 page_main.link(button=G.I_MAIN_GOTO_DAILY, destination=page_daily)
 from tasks.DailyTrifles.assets import DailyTriflesAssets
-
+# 庭院事务
+page_courtyard_affairs = Page(DailyTriflesAssets.I_CHECK_COURTYARD_AFFAIRS)
+page_main.link(button=DailyTriflesAssets.I_ENTER_COURTYARD_AFFAIRS, destination=page_courtyard_affairs)
+page_courtyard_affairs.link(button=G.I_BACK_YOLLOW, destination=page_main)
 # 商店 mall
-page_mall = Page(check_button=[G.I_CHECK_MALL, DailyTriflesAssets.I_ROOM_GIFT])
-page_mall.additional = [G.I_AD_CLOSE_RED, G.I_BACK_Y, G.I_DLC_CLOSE]
-page_mall.link(button=G.I_BACK_BLUE, destination=page_main)
-page_main.link(button=G.I_MAIN_GOTO_MALL, destination=page_mall)
+page_mall = Page(check_button=G.I_CHECK_MALL)
+page_mall.additional = [G.I_AD_CLOSE_RED, G.I_DLC_CLOSE]
+page_mall.link(button=G.I_BACK_Y, destination=page_main)
+# 商店推荐页面
+page_mall_recommend = Page(check_button=G.I_CHECK_MALL_RECOMMEND)
+page_mall_recommend.additional = [G.I_AD_CLOSE_RED, G.I_DLC_CLOSE]
+page_mall_recommend.link(button=G.I_BACK_YOLLOW, destination=page_mall)
+page_main.link(button=G.I_MAIN_GOTO_MALL, destination=page_mall_recommend)
 # 阴阳寮 guild
 page_guild = Page(G.I_CHECK_GUILD)
 page_guild.additional = [KekkaiUtilizeAssets.I_PLANT_TREE_CLOSE]
