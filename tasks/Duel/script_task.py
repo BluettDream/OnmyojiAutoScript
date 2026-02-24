@@ -13,7 +13,7 @@ from module.base.timer import Timer
 from tasks.Component.GeneralBattle.general_battle import GeneralBattle
 from tasks.Component.SwitchOnmyoji.switch_onmyoji import SwitchOnmyoji
 from tasks.GameUi.game_ui import GameUi
-from tasks.GameUi.page import page_duel, page_onmyodo, random_click, page_reward, page_failed
+from tasks.GameUi.page import page_duel, page_onmyodo, random_click
 from tasks.Duel.config import Duel
 from tasks.Duel.assets import DuelAssets
 from tasks.Component.SwitchSoul.switch_soul import SwitchSoul
@@ -59,10 +59,6 @@ class ScriptTask(GameUi, GeneralBattle, SwitchSoul, DuelAssets, SwitchOnmyoji):
 
     def prepare_duel(self):
         """斗技准备工作(切换御魂or阴阳师...), 最后回到斗技主界面"""
-        page_reward.links.clear()
-        page_failed.links.clear()
-        page_reward.link(button=random_click(ltrb=(True, True, False, True)), destination=page_duel)
-        page_failed.link(button=random_click(ltrb=(True, True, False, True)), destination=page_duel)
         self.ui_goto_page(page_main)
         self.switch_soul()
         if self.conf.duel_config.switch_enabled:

@@ -32,12 +32,11 @@ from tasks.ActivityShikigami.assets import ActivityShikigamiAssets
 class GameUi(BaseTask, GameUiAssets):
     ui_current: Page = None
     ui_close = [GameUiAssets.I_BACK_MALL, GeneralBattleAssets.I_CONFIRM,
-                BaseTask.I_UI_BACK_RED, ActivityShikigamiAssets.I_SKIP_BUTTON,
+                BaseTask.I_UI_BACK_RED, BaseTask.I_UI_BACK_YELLOW,
                 GameUiAssets.I_BACK_FRIENDS, GameUiAssets.I_BACK_DAILY,
-                GameUiAssets.I_REALM_RAID_GOTO_EXPLORATION, BaseTask.I_UI_BACK_YELLOW,
+                GameUiAssets.I_REALM_RAID_GOTO_EXPLORATION,
                 GameUiAssets.I_SIX_GATES_GOTO_EXPLORATION, SixRealmsAssets.I_EXIT_SIXREALMS,
-                ActivityShikigamiAssets.I_RED_EXIT, BaseTask.I_UI_BACK_BLUE,
-                ActivityShikigamiAssets.I_RED_EXIT_2]
+                ActivityShikigamiAssets.I_SKIP_BUTTON, ActivityShikigamiAssets.I_RED_EXIT, BaseTask.I_UI_BACK_BLUE]
 
     def __init__(self, config, device):
         super().__init__(config, device)
@@ -152,6 +151,16 @@ class GameUi(BaseTask, GameUiAssets):
         logger.critical("Please switch to a supported page before starting oas")
         raise GamePageUnknownError
 
+    def ui_button_interval_reset(self, button):
+        """
+        Reset interval of some button to avoid mistaken clicks
+
+        Args:
+            button (Button):
+        """
+        if getattr(button, 'name', None) and button.name in self.interval_timer:
+            self.interval_timer[button.name].reset()
+
     def build_reverse_path_dict(self, destination: Page) -> dict[Page, list[Page]]:
         """
         构建从每个页面到目标页面的最短路径（反向 BFS）
@@ -186,7 +195,7 @@ class GameUi(BaseTask, GameUiAssets):
     def ui_goto_page(self, dest_page: Page, confirm_wait=0, skip_first_screenshot=True, timeout: int = 60) -> bool:
         """前往指定page, 自动调用获取当前页面方法, 其他参数同ui_goto
         """
-        self.ui_get_current_page(skip_first_screenshot)
+        self.ui_get_current_page()
         return self.ui_goto(dest_page, confirm_wait, skip_first_screenshot, timeout)
 
     def ui_goto(self, destination: Page, confirm_wait=0, skip_first_screenshot=True, timeout: int = 60) -> bool:
@@ -272,14 +281,19 @@ class GameUi(BaseTask, GameUiAssets):
                 continue
             # 跳转页面
             max_wait_timer = Timer(6).start()
-            logger.info(f'Wait appear and operate {button} on {current_page}')
             while not max_wait_timer.reached():
                 if timeout_timer.reached():
                     return False
+                if isinstance(button, list):
+                    exec_operates = [self.appear_then_operate(btn, interval=0.8, skip_first_screenshot=False)
+                                     for btn in button]
+                    if exec_operates[0]:  # 只要第一个成功就跳出
+                        break
                 if self.appear_then_operate(button, interval=0.8, skip_first_screenshot=False):
                     break
+                logger.warning(f"[{max_wait_timer.current():.1f}s]Failed click {button} on {current_page}, retry...")
+                sleep(0.8)
             else:
-                logger.warning(f'Failed recognize {button} on {current_page}')
                 self.ui_get_current_page(skip_first_screenshot=False)
                 # 当前页面不是对应路径的页面, 则尝试下一个页面
                 if self.ui_current != current_page:
