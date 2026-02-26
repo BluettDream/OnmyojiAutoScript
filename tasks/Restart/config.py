@@ -19,7 +19,12 @@ class LoginCharacterConfig(BaseModel):
     character: str = Field(default="")
 
 
+class RestartConfig(ConfigBase):
+    enable_daily: bool = Field(default=True, description='是否重启之后启动每日琐事任务')
+
+
 class Restart(ConfigBase):
     scheduler: RestartScheduler = Field(default_factory=RestartScheduler)
+    restart_config: RestartConfig = Field(default_factory=RestartConfig)
     tasks_config_reset: TasksReset = Field(default_factory=TasksReset)
     login_character_config: LoginCharacterConfig = Field(default_factory=LoginCharacterConfig)
