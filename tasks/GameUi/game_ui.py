@@ -116,7 +116,6 @@ class GameUi(BaseTask, GameUiAssets):
             self.device.get_orientation()
 
         timeout = Timer(10, count=20).start()
-        close_unknown_timer = Timer(2, count=20).start()
         while 1:
             self.maybe_screenshot(skip_first_screenshot)
             skip_first_screenshot = False
@@ -132,9 +131,8 @@ class GameUi(BaseTask, GameUiAssets):
                     self.ui_current = page
                     return page
             # Try to close unknown page
-            if close_unknown_timer.reached() and self.try_close_unknown_page():
+            if self.try_close_unknown_page():
                 timeout.reset()
-                close_unknown_timer.reset()
             # wait to ui
             sleep(0.3)
             app_check()
