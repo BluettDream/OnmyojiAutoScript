@@ -437,6 +437,7 @@ class ScriptTask(GameUi, GeneralBattle, DemonEncounterAssets, SwitchSoul):
 
             if self.click(target_click, interval=1):
                 continue
+        self.current_count = 0
         if self.run_general_battle():
             logger.info('Battle End')
 
@@ -452,6 +453,7 @@ class ScriptTask(GameUi, GeneralBattle, DemonEncounterAssets, SwitchSoul):
 
             if self.click(target_click, interval=1):
                 continue
+        self.current_count = 0
         if self.run_general_battle():
             logger.info('Battle End')
 
