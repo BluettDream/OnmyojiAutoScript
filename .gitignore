@@ -42,14 +42,11 @@ oas-backend.bat
 .eslintignore
 .eslintrc.js
 .prettierrc.js
-
-
-
-
-
-
-
-
+# ai
+AGENTS.md
+CLAUDE.md
+.codex/
+.claude/
 
 
 # Created by .ignore support plugin (hsz.mobi)
