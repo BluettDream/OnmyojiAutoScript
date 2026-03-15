@@ -21,8 +21,10 @@ from module.atom.image import RuleImage
 from module.atom.click import RuleClick
 from module.device.screenshot import Screenshot
 
+
 class NoTicket(Exception):
     pass
+
 
 class ScriptTask(GameUi, QuizAssets, ActivityShikigamiAssets, Debugger):
 
@@ -170,11 +172,6 @@ class ScriptTask(GameUi, QuizAssets, ActivityShikigamiAssets, Debugger):
         self.answer_cnt += 1
         logger.info(f'Question count: {self.answer_cnt}')
 
-        # questions = self.O_QUESTION.detect_and_ocr(self.device.image)
-        # question = ''.join([q.ocr_text for q in questions])
-        # question = question.replace('?', '').replace('？', '').replace(' ', '').replace(',', '，')
-        # question = remove_symbols(question)
-
         index = self.anwser.answer_one(question=question,  options=[answer_1, answer_2, answer_3, answer_4])
         if index is None:
             logger.error('Now question has no answer, please check')
@@ -187,7 +184,7 @@ class ScriptTask(GameUi, QuizAssets, ActivityShikigamiAssets, Debugger):
             index_options = {1, 2, 3, 4}
             index_options.remove(index)
             index = random.choice(list(index_options))
-        logger.info(f'Question: {question}, Answer: {index}{[answer_1, answer_2, answer_3, answer_4]}')
+        logger.attr(index, 'Answer')
         self.click(self.click_options[index-1], interval=1)
         time.sleep(0.5)
         if index == 1:
@@ -204,10 +201,6 @@ class ScriptTask(GameUi, QuizAssets, ActivityShikigamiAssets, Debugger):
     def detect_question_and_answers(self) -> tuple:
         results = self.O_QUESTION.detect_and_ocr(self.device.image)
         question = ''
-        answer_1 = ''
-        answer_2 = ''
-        answer_3 = ''
-        answer_4 = ''
         answer_1 = remove_symbols(self.O_ANSWER1.ocr(self.device.image))
         answer_2 = remove_symbols(self.O_ANSWER2.ocr(self.device.image))
         answer_3 = remove_symbols(self.O_ANSWER3.ocr(self.device.image))
@@ -224,9 +217,6 @@ class ScriptTask(GameUi, QuizAssets, ActivityShikigamiAssets, Debugger):
                 question += text
         
         return question, answer_1, answer_2, answer_3, answer_4
-
-
-
 
 
 if __name__ == '__main__':
